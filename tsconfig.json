@@ -1,3 +1,20 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "allowSvg": true,
+    "include": ["src","declaration.d.ts"],
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"],
+      "@components/*": ["components/*"],
+      "@screens/*": ["screens/*"],
+      "@navigation/*": ["navigation/*"],
+      "@assets/*": ["assets/*"],
+      "@lib/*": ["lib/*"],
+      "@types/*": ["types/*"],
+      "@hooks/*": ["hooks/*"],
+    }
+  },
+  "extends": "@tsconfig/react-native/tsconfig.json",
 }
