@@ -13,8 +13,10 @@
       "@assets/*": ["assets/*"],
       "@lib/*": ["lib/*"],
       "@types/*": ["types/*"],
-      "@hooks/*": ["hooks/*"],
-    }
+      "@hooks/*": ["hooks/*"]
+    },
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true
   },
   "extends": "@tsconfig/react-native/tsconfig.json",
 }
