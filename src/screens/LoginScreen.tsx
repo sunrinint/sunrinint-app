@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text } from 'react-native';
 import { Column } from '@components/atomic';
 import IntLogo from '@assets/icons/logo.svg';
 import GoogleLogo from '@assets/icons/google.svg';
-import Typography from 'components/typography';
+import Typography from '@components/typography';
 import { light } from '@/theme';
 import styled from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

@@ -4,7 +4,7 @@ import Logo from '@assets/icons/logo.svg';
 import Back from '@assets/icons/leftarrow.svg';
 import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 import { Row } from '@components/atomic';
-import Typography from 'components/typography';
+import Typography from '@components/typography';
 import { useTheme } from 'styled-components';
 
 interface HeaderProps {
