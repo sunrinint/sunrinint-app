@@ -1,6 +1,6 @@
 import Palette from '@/theme/types/Palette';
 
-const dark: Palette = <Palette>{
+const dark: Palette = {
   gray10: '#1B1B21',
   gray20: '#15151B',
   gray30: '#777693',
@@ -10,6 +10,10 @@ const dark: Palette = <Palette>{
   gray70: '#E4E8F2',
   gray80: '#EBEBF2',
   highlight: '#3671C2',
+  logo1: '#FFFFFF',
+  logo2: '#E1E5EB',
+  logo3: '#CED5E0',
+  red: '#F83E3E',
 };
 
 export default dark;
