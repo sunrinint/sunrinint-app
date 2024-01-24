@@ -3,8 +3,8 @@ import styled from 'styled-components/native';
 import Logo from '@assets/icons/logo.svg';
 import Back from '@assets/icons/leftarrow.svg';
 import { SafeAreaView, TouchableOpacity, View } from 'react-native';
-import { Row } from '@components/base/Atomic/Container';
-import Typography from '@components/base/Typography';
+import { Row } from '@components/atomic';
+import Typography from 'components/typography';
 import { useTheme } from 'styled-components';
 
 interface HeaderProps {
@@ -35,20 +35,20 @@ const LayoutWithHeader = ({
       }}
     >
       <Container>
-        <Row alignItems={'center'}>
+        <Row $alignItems={'center'}>
           {logo && <Logo />}
           {showBack && (
-            <Row alignItems={'center'} gap={12}>
+            <Row $alignItems={'center'} $gap={12}>
               <TouchableOpacity onPress={onBackPress}>
                 <Back />
               </TouchableOpacity>
-              <Typography.Title color={theme.colors.gray80}>
+              <Typography.Title $color={theme.colors.gray80}>
                 {title}
               </Typography.Title>
             </Row>
           )}
         </Row>
-        <Row alignItems={'center'} justifyContent={'center'}>
+        <Row $alignItems={'center'} $justifyContent={'center'}>
           {FirstChild && (
             <TouchableOpacity onPress={onFirstChildPress}>
               <FirstChild />

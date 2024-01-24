@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Text } from '@components/base/Atomic';
+import { Text } from '@components/atomic';
 
 const Regular = styled(Text)`
   font-weight: 400;

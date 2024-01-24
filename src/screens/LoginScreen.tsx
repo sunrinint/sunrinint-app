@@ -1,9 +1,9 @@
 import React from 'react';
 import { SafeAreaView, View, Text } from 'react-native';
-import { Column } from '@components/base/Atomic/Container';
+import { Column } from '@components/atomic';
 import IntLogo from '@assets/icons/logo.svg';
 import GoogleLogo from '@assets/icons/google.svg';
-import Typography from '@components/base/Typography';
+import Typography from 'components/typography';
 import { light } from '@/theme';
 import styled from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -25,9 +25,9 @@ const LoginScreen = ({ navigation }) => {
           alignItems: 'center',
         }}
       >
-        <Column alignItems={'center'} gap={24}>
+        <Column $alignItems={'center'} $gap={24}>
           <IntLogo width={170} height={64} />
-          <Typography.SemiLabel color={colors.gray60}>
+          <Typography.SemiLabel $color={colors.gray60}>
             선린인트와 함께 선린생활하기
           </Typography.SemiLabel>
         </Column>
@@ -55,7 +55,7 @@ const LoginScreen = ({ navigation }) => {
           </SecondButton>
           <SignInButton onPress={() => navigation.navigate('Tab')}>
             <GoogleLogo />
-            <Typography.SemiLabel color={'white'}>
+            <Typography.SemiLabel $color={'white'}>
               학교 구글 계정으로 로그인
             </Typography.SemiLabel>
           </SignInButton>

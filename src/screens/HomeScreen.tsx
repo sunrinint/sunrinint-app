@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated, SafeAreaView } from 'react-native';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import styled from 'styled-components/native';
-import Typography from '@components/base/Typography';
+import Typography from 'components/typography';
 import { light } from '@/theme';
 import NoticeIcon from '@/assets/icons/notice.svg';
 
@@ -19,13 +19,13 @@ const HomeScreen = () => {
         </NoticeCard>
         <MealCard>
           <Typography.SemiLabel>시간표</Typography.SemiLabel>
-          <Typography.Body color={colors.gray60}>
+          <Typography.Body $color={colors.gray60}>
             오늘의 시간표 정보가 존재하지 않습니다.
           </Typography.Body>
         </MealCard>
         <MealCard>
           <Typography.SemiLabel>오늘의 급식</Typography.SemiLabel>
-          <Typography.Body color={colors.gray60}>
+          <Typography.Body $color={colors.gray60}>
             오늘의 급식이 없습니다.
           </Typography.Body>
         </MealCard>
