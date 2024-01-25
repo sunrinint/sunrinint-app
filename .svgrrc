@@ -4,5 +4,7 @@
     "#3671C2" : "{props.fill}",
     "#222B38" : "{props.fill}",
     "#B5B5CB" : "{props.fill}",
+    "#1C232E"  : "{props.fill}",
+    "#2B3647" : "{props.fill}",
   }
 }
