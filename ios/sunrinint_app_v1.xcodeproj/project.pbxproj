@@ -45,7 +45,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = sunrinint_app_v1/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-sunrinint_app_v1-sunrinint_app_v1Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sunrinint_app_v1-sunrinint_app_v1Tests.release.xcconfig"; path = "Target Support Files/Pods-sunrinint_app_v1-sunrinint_app_v1Tests/Pods-sunrinint_app_v1-sunrinint_app_v1Tests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F579E317B45C49BAAD8ACDEF /* SUIT-Variable.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Variable.ttf"; path = "../assets/fonts/SUIT-Variable.ttf"; sourceTree = "<group>"; };
+		F579E317B45C49BAAD8ACDEF /* SUIT-Variable.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Variable.ttf"; path = "../assets/fonts/SUIT-Variable.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +114,7 @@
 				F579E317B45C49BAAD8ACDEF /* SUIT-Variable.ttf */,
 			);
 			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
