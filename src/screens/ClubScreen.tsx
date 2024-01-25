@@ -71,6 +71,7 @@ const ClubScreen = () => {
             gap: 12,
             alignSelf: 'stretch',
           }}
+          showsVerticalScrollIndicator={false}
         >
           {club.map((club) => (
             <ClubCard
