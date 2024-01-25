@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { Text } from '@components/atomic';
 
 const Regular = styled(Text)`
-  font-weight: 400;
+  font-weight: 500;
 `;
 
 export const Label = styled(Regular)`
