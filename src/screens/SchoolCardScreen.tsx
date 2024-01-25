@@ -5,12 +5,19 @@ import SchoolCard from '@components/common/school-card';
 import Typography from '@components/typography';
 import styled, { useTheme } from 'styled-components/native';
 import { SvgXml } from 'react-native-svg';
+import Setting from '@assets/icons/setting.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const SchoolCardScreen = () => {
+  const navigation = useNavigation<any>();
   const { colors } = useTheme();
   const [isBack, setIsBack] = useState(false);
   return (
-    <LayoutWithHeader logo>
+    <LayoutWithHeader
+      logo
+      FirstChild={Setting}
+      onFirstChildPress={() => navigation.navigate('Setting')}
+    >
       <Column $padding={[53, 0]} $alignItems={'center'} $gap={8}>
         <SchoolCard isBack={isBack} />
         <Button onPress={() => setIsBack(!isBack)}>
