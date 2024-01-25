@@ -22,6 +22,12 @@ DerivedData
 *.xcuserstate
 ios/.xcode.env.local
 
+# @react-native-esbuild's local cache directory for development environment
+.rne
+
+# swc plugins
+.swc
+
 # Android/IntelliJ
 #
 build/
