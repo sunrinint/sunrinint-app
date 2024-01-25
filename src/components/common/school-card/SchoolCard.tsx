@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled, { useTheme } from 'styled-components/native';
-import { Animated, Easing } from 'react-native';
+import styled from 'styled-components/native';
+import { Animated } from 'react-native';
 import { BackCard, FrontCard } from '@components/common/school-card';
 
 interface SchoolCardProps {
@@ -8,7 +8,6 @@ interface SchoolCardProps {
 }
 
 const SchoolCard = ({ isBack }: SchoolCardProps) => {
-  const { colors } = useTheme();
   const mounted = useRef(false);
   const frontAnimation = useRef(new Animated.Value(0)).current;
   const backAnimation = useRef(new Animated.Value(0)).current;
@@ -28,7 +27,7 @@ const SchoolCard = ({ isBack }: SchoolCardProps) => {
       frontAnimation.removeAllListeners();
       backAnimation.removeAllListeners();
     };
-  }, [isBackState]);
+  }, [backAnimation, frontAnimation, isBackState]);
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
@@ -61,7 +60,7 @@ const SchoolCard = ({ isBack }: SchoolCardProps) => {
         }),
       ]).start();
     }
-  }, [isBack, isBackState]);
+  }, [backAnimation, frontAnimation, isBack, isBackState]);
   return (
     <Wrapper>
       {!isBackState ? (
