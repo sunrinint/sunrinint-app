@@ -40,7 +40,7 @@ const LayoutWithHeader = ({
           {showBack && (
             <Row $alignItems={'center'} $gap={12}>
               <TouchableOpacity onPress={onBackPress}>
-                <Back />
+                <Back fill={theme.colors.gray80} />
               </TouchableOpacity>
               <Typography.Title $color={theme.colors.gray80}>
                 {title}

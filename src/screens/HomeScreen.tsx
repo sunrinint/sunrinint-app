@@ -13,7 +13,7 @@ const HomeScreen = () => {
       <Container>
         <NoticeCard>
           <IconBox>
-            <NoticeIcon />
+            <NoticeIcon fill={colors.highlight} />
           </IconBox>
           <Typography.SemiBody>2023 선린제 개최 및 안내</Typography.SemiBody>
         </NoticeCard>
