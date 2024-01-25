@@ -7,6 +7,7 @@ import { useTheme } from 'styled-components/native';
 import HomeIcon from '@/assets/icons/home_icon.svg';
 import ClubIcon from '@/assets/icons/club_icon.svg';
 import SchoolCardIcon from '@/assets/icons/school-card_icon.svg';
+import SchoolCardScreen from '@screens/SchoolCardScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +23,7 @@ const BottomNavigation = () => {
       />
       <Tab.Navigator
         tabBar={(props) => <BottomTabBar {...props} />}
-        initialRouteName="Home"
+        initialRouteName="SchoolCard"
         screenOptions={{
           headerShown: false,
           tabBarInactiveTintColor: theme.colors.gray30,
@@ -47,7 +48,7 @@ const BottomNavigation = () => {
         />
         <Tab.Screen
           name="SchoolCard"
-          component={HomeScreen}
+          component={SchoolCardScreen}
           options={{
             tabBarLabel: '학생증',
             tabBarIcon: ({ color }) => <SchoolCardIcon fill={color} />,
