@@ -8,6 +8,7 @@ import HomeIcon from '@/assets/icons/home_icon.svg';
 import ClubIcon from '@/assets/icons/club_icon.svg';
 import SchoolCardIcon from '@/assets/icons/school-card_icon.svg';
 import SchoolCardScreen from '@screens/SchoolCardScreen';
+import ClubScreen from '@screens/ClubScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,7 +33,7 @@ const BottomNavigation = () => {
       >
         <Tab.Screen
           name="Club"
-          component={HomeScreen}
+          component={ClubScreen}
           options={{
             tabBarLabel: '동아리',
             tabBarIcon: ({ color }) => <ClubIcon fill={color} />,
