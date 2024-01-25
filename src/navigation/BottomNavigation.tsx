@@ -23,7 +23,7 @@ const BottomNavigation = () => {
       />
       <Tab.Navigator
         tabBar={(props) => <BottomTabBar {...props} />}
-        initialRouteName="SchoolCard"
+        initialRouteName="Home"
         screenOptions={{
           headerShown: false,
           tabBarInactiveTintColor: theme.colors.gray30,
