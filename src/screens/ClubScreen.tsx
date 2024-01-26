@@ -1,13 +1,26 @@
-import React from 'react';
-import { ScrollView, View } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Animated,
+  Modal,
+  ScrollView,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import { Row } from '@components/atomic';
 import Typography from '@components/typography';
 import styled, { useTheme } from 'styled-components/native';
 import ArrowDown from '@assets/icons/arrow_down.svg';
 import ClubCard from '@components/ClubCard';
+import useBottomSheet from '@components/common/BottomSheet';
+import Club from '@assets/icons/club_icon.svg';
+import { Spacer } from '@components/atomic/Spacer';
+import Radio from '@components/common/Radio';
 
 const ClubScreen = () => {
+  const { isVisible, showBottomSheet, hideBottomSheet, translateY } =
+    useBottomSheet();
+  const [department, setDepartment] = useState('소프트웨어과');
   const club = [
     {
       name: 'v.friends',
@@ -55,9 +68,9 @@ const ClubScreen = () => {
       >
         <Row $alignItems={'center'} $fill={true} $gap={4} $padding={[0, 4]}>
           <Typography.Title $color={colors.gray80}>
-            콘텐츠디자인과
+            {department}
           </Typography.Title>
-          <IconBox>
+          <IconBox onPress={() => showBottomSheet()}>
             <ArrowDown />
           </IconBox>
         </Row>
@@ -87,9 +100,63 @@ const ClubScreen = () => {
           ))}
         </ScrollView>
       </View>
+      <Modal
+        visible={isVisible}
+        animationType="fade"
+        transparent={true}
+        statusBarTranslucent={true}
+      >
+        <Overlay>
+          <TouchableWithoutFeedback onPress={hideBottomSheet}>
+            <View style={{ flex: 1 }} />
+          </TouchableWithoutFeedback>
+          <BottomSheet style={{ transform: [{ translateY }] }}>
+            <Row
+              $padding={[8, 0]}
+              $alignItems={'center'}
+              $justifyContent={'space-between'}
+              $fill={true}
+            >
+              <Typography.SemiLabel $color={colors.gray80}>
+                학과 선택
+              </Typography.SemiLabel>
+              <Club fill={colors.gray50} />
+            </Row>
+            <Radio
+              data={[
+                '정보보호과',
+                '소프트웨어과',
+                'IT경영과',
+                '콘텐츠디자인과',
+              ]}
+              onChange={setDepartment}
+              onConfirm={hideBottomSheet}
+            />
+            <Spacer $height={37} />
+          </BottomSheet>
+        </Overlay>
+      </Modal>
     </LayoutWithHeader>
   );
 };
+
+const BottomSheet = styled(Animated.View)`
+  display: flex;
+  padding: 16px 20px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 8px 8px 0 0;
+  background: #fff;
+`;
+
+const Overlay = styled.View`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.4);
+`;
 
 const IconBox = styled.TouchableOpacity`
   width: 24px;
