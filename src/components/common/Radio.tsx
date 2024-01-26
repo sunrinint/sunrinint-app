@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import Typography from '@components/typography';
@@ -7,21 +7,29 @@ import Check from '@assets/icons/check.svg';
 
 interface RadioProps {
   data: string[];
-  onChange: Dispatch<SetStateAction<string>>;
+  setSelectDepartment: Dispatch<SetStateAction<string>>;
+  selectIndex: number;
+  setSelectIndex: Dispatch<SetStateAction<number>>;
   onConfirm: () => void;
 }
 
-const Radio = ({ data, onChange, onConfirm }: RadioProps) => {
-  const [selectIndex, setSelectIndex] = useState(0);
+const Radio = ({
+  data,
+  setSelectDepartment,
+  selectIndex,
+  setSelectIndex,
+  onConfirm,
+}: RadioProps) => {
   const { colors } = useTheme();
+
   return (
     <FlatList
       data={data}
       renderItem={({ item, index }) => (
         <Container
           onPress={() => {
+            setSelectDepartment(item);
             setSelectIndex(index);
-            onChange(item);
             onConfirm();
           }}
         >

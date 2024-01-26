@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Animated,
   Modal,
+  PanResponder,
   ScrollView,
   TouchableWithoutFeedback,
   View,
@@ -18,9 +19,16 @@ import { Spacer } from '@components/atomic/Spacer';
 import Radio from '@components/common/Radio';
 
 const ClubScreen = () => {
-  const { isVisible, showBottomSheet, hideBottomSheet, translateY } =
-    useBottomSheet();
-  const [department, setDepartment] = useState('소프트웨어과');
+  const {
+    isVisible,
+    showBottomSheet,
+    hideBottomSheet,
+    translateY,
+    resetBottomSheet,
+    panY,
+  } = useBottomSheet();
+  const [selectDepartment, setSelectDepartment] = useState('콘텐츠디자인과');
+  const [selectIndex, setSelectIndex] = useState(3);
   const club = [
     {
       name: 'v.friends',
@@ -32,28 +40,48 @@ const ClubScreen = () => {
       instagram: 'https://www.instagram.com/v.friends/',
       facebook: 'https://www.facebook.com/v.friends.kr',
     },
-    {
-      name: 'v.friends',
-      kind: '디자인 교육 봉사 동아리',
-      description:
-        '브이프렌즈는 선린인터넷고등학교의 유일한 디자인 교육봉사 동아리로, 그래픽 디자인, UI/UX, 모션 그래픽, 영상 기획 등 다양한 분야를 배우고 여러 프로젝트를 수행하며 실력과 아이디어를 발휘할 수 있는 동아리입니다.',
-      room: '432실',
-      website: 'https://vfriends.kr/',
-      instagram: 'https://www.instagram.com/v.friends/',
-      facebook: 'https://www.facebook.com/v.friends.kr',
-    },
-    {
-      name: 'v.friends',
-      kind: '디자인 교육 봉사 동아리',
-      description:
-        '브이프렌즈는 선린인터넷고등학교의 유일한 디자인 교육봉사 동아리로, 그래픽 디자인, UI/UX, 모션 그래픽, 영상 기획 등 다양한 분야를 배우고 여러 프로젝트를 수행하며 실력과 아이디어를 발휘할 수 있는 동아리입니다.',
-      room: '432실',
-      website: 'https://vfriends.kr/',
-      instagram: 'https://www.instagram.com/v.friends/',
-      facebook: 'https://www.facebook.com/v.friends.kr',
-    },
+    // {
+    //   name: 'v.friends',
+    //   kind: '디자인 교육 봉사 동아리',
+    //   description:
+    //     '브이프렌즈는 선린인터넷고등학교의 유일한 디자인 교육봉사 동아리로, 그래픽 디자인, UI/UX, 모션 그래픽, 영상 기획 등 다양한 분야를 배우고 여러 프로젝트를 수행하며 실력과 아이디어를 발휘할 수 있는 동아리입니다.',
+    //   room: '432실',
+    //   website: 'https://vfriends.kr/',
+    //   instagram: 'https://www.instagram.com/v.friends/',
+    //   facebook: 'https://www.facebook.com/v.friends.kr',
+    // },
+    // {
+    //   name: 'v.friends',
+    //   kind: '디자인 교육 봉사 동아리',
+    //   description:
+    //     '브이프렌즈는 선린인터넷고등학교의 유일한 디자인 교육봉사 동아리로, 그래픽 디자인, UI/UX, 모션 그래픽, 영상 기획 등 다양한 분야를 배우고 여러 프로젝트를 수행하며 실력과 아이디어를 발휘할 수 있는 동아리입니다.',
+    //   room: '432실',
+    //   website: 'https://vfriends.kr/',
+    //   instagram: 'https://www.instagram.com/v.friends/',
+    //   facebook: 'https://www.facebook.com/v.friends.kr',
+    // },
   ];
   const { colors } = useTheme();
+  const panResponders = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: () => false,
+      onPanResponderMove: (event, gestureState) => {
+        panY.setValue(gestureState.dy);
+      },
+      onPanResponderRelease: (event, gestureState) => {
+        const swipe = 30;
+        if (gestureState.dy > swipe) {
+          hideBottomSheet();
+        } else if (gestureState.dy < -swipe) {
+          showBottomSheet();
+        } else {
+          resetBottomSheet.start();
+        }
+      },
+    }),
+  ).current;
+
   return (
     <LayoutWithHeader logo>
       <View
@@ -68,7 +96,7 @@ const ClubScreen = () => {
       >
         <Row $alignItems={'center'} $fill={true} $gap={4} $padding={[0, 4]}>
           <Typography.Title $color={colors.gray80}>
-            {department}
+            {selectDepartment}
           </Typography.Title>
           <IconBox onPress={() => showBottomSheet()}>
             <ArrowDown />
@@ -110,7 +138,10 @@ const ClubScreen = () => {
           <TouchableWithoutFeedback onPress={hideBottomSheet}>
             <View style={{ flex: 1 }} />
           </TouchableWithoutFeedback>
-          <BottomSheet style={{ transform: [{ translateY }] }}>
+          <BottomSheet
+            style={{ transform: [{ translateY }] }}
+            {...panResponders.panHandlers}
+          >
             <Bar />
             <Container>
               <Row
@@ -131,7 +162,9 @@ const ClubScreen = () => {
                   'IT경영과',
                   '콘텐츠디자인과',
                 ]}
-                onChange={setDepartment}
+                setSelectDepartment={setSelectDepartment}
+                selectIndex={selectIndex}
+                setSelectIndex={setSelectIndex}
                 onConfirm={hideBottomSheet}
               />
               <Spacer $height={37} />
@@ -143,7 +176,7 @@ const ClubScreen = () => {
   );
 };
 
-const Bar = styled.Pressable`
+const Bar = styled.View`
   width: 88px;
   height: 4px;
   border-radius: 10px;
