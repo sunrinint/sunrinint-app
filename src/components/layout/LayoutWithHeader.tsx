@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components/native';
 // import Logo from '@assets/icons/logo.svg';
-// import Back from '@assets/icons/leftarrow.svg';
+import Back from '@assets/icons/leftarrow.svg';
 import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 import { Row } from '@components/atomic';
 import Typography from '@components/typography';
