@@ -8,6 +8,12 @@ import { SvgXml } from 'react-native-svg';
 import Setting from '@assets/icons/setting.svg';
 import { useNavigation } from '@react-navigation/native';
 import { Spacer } from '@components/atomic/Spacer';
+import {
+  Directions,
+  FlingGestureHandler,
+  State,
+} from 'react-native-gesture-handler';
+import { View } from 'react-native';
 
 const SchoolCardScreen = () => {
   const navigation = useNavigation<any>();
@@ -27,7 +33,23 @@ const SchoolCardScreen = () => {
           flex: 1,
         }}
       >
-        <SchoolCard isBack={isBack} />
+        <FlingGestureHandler
+          /* eslint-disable-next-line no-bitwise */
+          direction={Directions.RIGHT | Directions.LEFT}
+          onHandlerStateChange={({ nativeEvent }) => {
+            if (nativeEvent.state === State.ACTIVE) {
+              setIsBack(!isBack);
+            }
+          }}
+        >
+          <View
+            style={{
+              width: '100%',
+            }}
+          >
+            <SchoolCard isBack={isBack} />
+          </View>
+        </FlingGestureHandler>
         <Button onPress={() => setIsBack(!isBack)}>
           <Typography.Body $color={colors.gray80}>
             학생증 {isBack ? '앞면' : '뒷면'} 보기
