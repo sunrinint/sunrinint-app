@@ -17,13 +17,6 @@ const SettingScreen = () => {
   const theme = useTheme();
   const [enabled, setEnabled] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const changeEnabled = (): void => {
-    if (enabled) {
-      setEnabled(false);
-    } else {
-      setEnabled(true);
-    }
-  };
   return (
     <>
       <LayoutWithHeader
@@ -79,7 +72,10 @@ const SettingScreen = () => {
                   <Typography.SemiLabel $color={theme.colors.gray80}>
                     다크모드
                   </Typography.SemiLabel>
-                  <Switch enabled={enabled} onClick={changeEnabled} />
+                  <Switch
+                    value={enabled}
+                    onChange={() => setEnabled(!enabled)}
+                  />
                 </Row>
               </InfoContainer>
               <InfoContainer>
