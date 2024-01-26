@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Animated,
   Modal,
+  PanResponder,
   ScrollView,
   TouchableWithoutFeedback,
   View,
@@ -54,6 +55,17 @@ const ClubScreen = () => {
     },
   ];
   const { colors } = useTheme();
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: () => {},
+      onPanResponderRelease: (_event, gestureState) => {
+        if (gestureState.dy < -50) {
+          hideBottomSheet();
+        }
+      },
+    }),
+  ).current;
   return (
     <LayoutWithHeader logo>
       <View
@@ -106,7 +118,7 @@ const ClubScreen = () => {
         transparent={true}
         statusBarTranslucent={true}
       >
-        <Overlay>
+        <Overlay {...panResponder.panHandlers}>
           <TouchableWithoutFeedback onPress={hideBottomSheet}>
             <View style={{ flex: 1 }} />
           </TouchableWithoutFeedback>

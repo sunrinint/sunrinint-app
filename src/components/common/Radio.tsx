@@ -1,7 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import {
-  FlatList,
-} from 'react-native';
+import { FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import Typography from '@components/typography';
 import { useTheme } from 'styled-components';
