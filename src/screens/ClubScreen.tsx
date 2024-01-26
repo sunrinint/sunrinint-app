@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Animated,
   Modal,
-  PanResponder,
   ScrollView,
   TouchableWithoutFeedback,
   View,
@@ -55,17 +54,6 @@ const ClubScreen = () => {
     },
   ];
   const { colors } = useTheme();
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: () => {},
-      onPanResponderRelease: (_event, gestureState) => {
-        if (gestureState.dy < -50) {
-          hideBottomSheet();
-        }
-      },
-    }),
-  ).current;
   return (
     <LayoutWithHeader logo>
       <View
@@ -118,33 +106,36 @@ const ClubScreen = () => {
         transparent={true}
         statusBarTranslucent={true}
       >
-        <Overlay {...panResponder.panHandlers}>
+        <Overlay>
           <TouchableWithoutFeedback onPress={hideBottomSheet}>
             <View style={{ flex: 1 }} />
           </TouchableWithoutFeedback>
           <BottomSheet style={{ transform: [{ translateY }] }}>
-            <Row
-              $padding={[8, 0]}
-              $alignItems={'center'}
-              $justifyContent={'space-between'}
-              $fill={true}
-            >
-              <Typography.SemiLabel $color={colors.gray80}>
-                학과 선택
-              </Typography.SemiLabel>
-              <Club fill={colors.gray50} />
-            </Row>
-            <Radio
-              data={[
-                '정보보호과',
-                '소프트웨어과',
-                'IT경영과',
-                '콘텐츠디자인과',
-              ]}
-              onChange={setDepartment}
-              onConfirm={hideBottomSheet}
-            />
-            <Spacer $height={37} />
+            <Bar />
+            <Container>
+              <Row
+                $padding={[8, 0]}
+                $alignItems={'center'}
+                $justifyContent={'space-between'}
+                $fill={true}
+              >
+                <Typography.SemiLabel $color={colors.gray80}>
+                  학과 선택
+                </Typography.SemiLabel>
+                <Club fill={colors.gray50} />
+              </Row>
+              <Radio
+                data={[
+                  '정보보호과',
+                  '소프트웨어과',
+                  'IT경영과',
+                  '콘텐츠디자인과',
+                ]}
+                onChange={setDepartment}
+                onConfirm={hideBottomSheet}
+              />
+              <Spacer $height={37} />
+            </Container>
           </BottomSheet>
         </Overlay>
       </Modal>
@@ -152,7 +143,14 @@ const ClubScreen = () => {
   );
 };
 
-const BottomSheet = styled(Animated.View)`
+const Bar = styled.Pressable`
+  width: 88px;
+  height: 4px;
+  border-radius: 10px;
+  background: #fff;
+`;
+
+const Container = styled(Animated.View)`
   display: flex;
   padding: 16px 20px;
   flex-direction: column;
@@ -161,6 +159,13 @@ const BottomSheet = styled(Animated.View)`
   align-self: stretch;
   border-radius: 8px 8px 0 0;
   background: #fff;
+`;
+
+const BottomSheet = styled(Animated.View)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 `;
 
 const Overlay = styled.View`
