@@ -1,16 +1,15 @@
 import React from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 import { Column } from '@components/atomic';
-import IntLogo from '@assets/icons/logo.svg';
 import GoogleLogo from '@assets/icons/google.svg';
 import Typography from '@components/typography';
-import { light } from '@/theme';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SvgXml } from 'react-native-svg';
 
 const LoginScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
-  const colors = light;
+  const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   return (
     <>
@@ -28,7 +27,25 @@ const LoginScreen = ({ navigation }) => {
           }}
         >
           <Column $alignItems={'center'} $gap={24}>
-            <IntLogo width={170} height={64} />
+            <SvgXml
+              xml={`
+                <svg width="171" height="64" viewBox="0 0 171 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21.5001 0H0.166748V21.3333H21.5001V0Z" fill="${colors.logo1}"/>
+                  <path d="M21.5001 21.3333H0.166809V42.6666H21.5001V21.3333Z" fill="${colors.logo2}"/>
+                  <path d="M21.5001 42.6666H0.166809V64H21.5001V42.6666Z" fill="${colors.logo3}"/>
+                  <path d="M53.5001 0H32.1668V21.3333H53.5001V0Z" fill="${colors.logo1}"/>
+                  <path d="M53.5001 21.3333H32.1668V42.6666H53.5001V21.3333Z" fill="${colors.logo2}"/>
+                  <path d="M32.1668 42.6666H53.5001V64" fill="${colors.logo3}"/>
+                  <path d="M74.8321 42.6666H53.5001V21.3333" fill="${colors.logo3}"/>
+                  <path d="M96.1666 21.3333H74.8333V0" fill="${colors.logo3}"/>
+                  <path d="M96.1666 21.3333H74.8333V42.6666H96.1666V21.3333Z" fill="${colors.logo2}"/>
+                  <path d="M96.1666 42.6666H74.8333V64H96.1666V42.6666Z" fill="${colors.logo1}"/>
+                  <path d="M170.833 0H106.833V21.3333H170.833V0Z" fill="${colors.logo1}"/>
+                  <path d="M149.5 21.3333H128.167V42.6666H149.5V21.3333Z" fill="${colors.logo2}"/>
+                  <path d="M149.5 42.6666H128.167V64H149.5V42.6666Z" fill="${colors.logo3}"/>
+                </svg>
+              `}
+            />
             <Typography.SemiLabel $color={colors.gray60}>
               선린인트와 함께 선린생활하기
             </Typography.SemiLabel>
