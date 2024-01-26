@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components/native';
-import { Animated } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import { BackCard, FrontCard } from '@components/common/school-card';
 
 interface SchoolCardProps {
@@ -76,25 +76,39 @@ const SchoolCard = ({ isBack }: SchoolCardProps) => {
                 },
               ],
             },
+            style.shadow,
           ]}
         />
       ) : (
         <BackCard
-          style={{
-            transform: [
-              {
-                rotateY: backAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['90deg', '0deg'],
-                }),
-              },
-            ],
-          }}
+          style={[
+            {
+              transform: [
+                {
+                  rotateY: backAnimation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['90deg', '0deg'],
+                  }),
+                },
+              ],
+            },
+            style.shadow,
+          ]}
         />
       )}
     </Wrapper>
   );
 };
+const style = StyleSheet.create({
+  shadow: {
+    shadowColor: '#1C232E',
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 12 },
+    elevation: 8,
+  },
+});
+
 const Wrapper = styled.View`
   display: flex;
   flex-direction: column;

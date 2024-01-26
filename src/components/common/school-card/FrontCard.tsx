@@ -63,7 +63,7 @@ const FrontCard = ({ style }: { style?: any }) => {
 const Container = styled(Animated.View)`
   display: flex;
   flex-direction: column;
-  // background: ${(props) => props.theme.colors.gray10};
+  background: ${(props) => props.theme.colors.gray10};
   width: 100%;
   max-width: 380px;
   border-radius: 8px;
