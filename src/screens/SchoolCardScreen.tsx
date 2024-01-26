@@ -7,6 +7,7 @@ import styled, { useTheme } from 'styled-components/native';
 import { SvgXml } from 'react-native-svg';
 import Setting from '@assets/icons/setting.svg';
 import { useNavigation } from '@react-navigation/native';
+import { Spacer } from '@components/atomic/Spacer';
 
 const SchoolCardScreen = () => {
   const navigation = useNavigation<any>();
@@ -18,7 +19,14 @@ const SchoolCardScreen = () => {
       FirstChild={Setting}
       onFirstChildPress={() => navigation.navigate('Setting')}
     >
-      <Column $padding={[53, 0]} $alignItems={'center'} $gap={8}>
+      <Column
+        $alignItems={'center'}
+        $justifyContent={'center'}
+        $gap={8}
+        style={{
+          flex: 1,
+        }}
+      >
         <SchoolCard isBack={isBack} />
         <Button onPress={() => setIsBack(!isBack)}>
           <Typography.Body $color={colors.gray80}>
@@ -38,6 +46,7 @@ const SchoolCardScreen = () => {
           />
         </Button>
       </Column>
+      <Spacer $height={80} />
     </LayoutWithHeader>
   );
 };
