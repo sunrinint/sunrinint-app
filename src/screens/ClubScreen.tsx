@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Animated,
   Modal,
-  PanResponder,
   ScrollView,
   TouchableWithoutFeedback,
   View,
@@ -13,22 +12,23 @@ import Typography from '@components/typography';
 import styled, { useTheme } from 'styled-components/native';
 import ArrowDown from '@assets/icons/arrow_down.svg';
 import ClubCard from '@components/ClubCard';
-import useBottomSheet from '@components/common/BottomSheet';
-import Club from '@assets/icons/club_icon.svg';
 import { Spacer } from '@components/atomic/Spacer';
 import Radio from '@components/common/Radio';
+import useBottomSheet from '@hooks/useBottomSheet';
+import Club from '@assets/icons/club_icon.svg';
 
 const ClubScreen = () => {
   const {
     isVisible,
     showBottomSheet,
     hideBottomSheet,
+    panResponders,
     translateY,
-    resetBottomSheet,
-    panY,
   } = useBottomSheet();
+  const { colors } = useTheme();
   const [selectDepartment, setSelectDepartment] = useState('콘텐츠디자인과');
   const [selectIndex, setSelectIndex] = useState(3);
+
   const club = [
     {
       name: 'v.friends',
@@ -40,44 +40,8 @@ const ClubScreen = () => {
       instagram: 'https://www.instagram.com/v.friends/',
       facebook: 'https://www.facebook.com/v.friends.kr',
     },
-    // {
-    //   name: 'v.friends',
-    //   kind: '디자인 교육 봉사 동아리',
-    //   description:
-    //     '브이프렌즈는 선린인터넷고등학교의 유일한 디자인 교육봉사 동아리로, 그래픽 디자인, UI/UX, 모션 그래픽, 영상 기획 등 다양한 분야를 배우고 여러 프로젝트를 수행하며 실력과 아이디어를 발휘할 수 있는 동아리입니다.',
-    //   room: '432실',
-    //   website: 'https://vfriends.kr/',
-    //   instagram: 'https://www.instagram.com/v.friends/',
-    //   facebook: 'https://www.facebook.com/v.friends.kr',
-    // },
-    // {
-    //   name: 'v.friends',
-    //   kind: '디자인 교육 봉사 동아리',
-    //   description:
-    //     '브이프렌즈는 선린인터넷고등학교의 유일한 디자인 교육봉사 동아리로, 그래픽 디자인, UI/UX, 모션 그래픽, 영상 기획 등 다양한 분야를 배우고 여러 프로젝트를 수행하며 실력과 아이디어를 발휘할 수 있는 동아리입니다.',
-    //   room: '432실',
-    //   website: 'https://vfriends.kr/',
-    //   instagram: 'https://www.instagram.com/v.friends/',
-    //   facebook: 'https://www.facebook.com/v.friends.kr',
-    // },
+    // More club data can be added here
   ];
-  const { colors } = useTheme();
-  const panResponders = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: () => false,
-      onPanResponderMove: (event, gestureState) => {
-        panY.setValue(gestureState.dy);
-      },
-      onPanResponderRelease: (event, gestureState) => {
-        if (gestureState.dy > 0 && gestureState.vy > 1) {
-          hideBottomSheet();
-        } else {
-          resetBottomSheet.start();
-        }
-      },
-    }),
-  ).current;
 
   return (
     <LayoutWithHeader logo>
