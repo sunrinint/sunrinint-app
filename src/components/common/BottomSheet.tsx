@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Animated, Dimensions, PanResponder } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 
 const useBottomSheet = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +30,7 @@ const useBottomSheet = () => {
   const hideBottomSheet = () => {
     closeBottomSheet.start(() => {
       setIsVisible(false);
-      panY.setValue(screenHeight); // Reset panY value
+      panY.setValue(screenHeight);
     });
   };
 

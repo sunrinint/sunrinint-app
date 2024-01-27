@@ -70,11 +70,8 @@ const ClubScreen = () => {
         panY.setValue(gestureState.dy);
       },
       onPanResponderRelease: (event, gestureState) => {
-        const swipe = 30;
-        if (gestureState.dy > swipe) {
+        if (gestureState.dy > 0 && gestureState.vy > 1) {
           hideBottomSheet();
-        } else if (gestureState.dy < -swipe) {
-          showBottomSheet();
         } else {
           resetBottomSheet.start();
         }
@@ -94,14 +91,14 @@ const ClubScreen = () => {
           paddingTop: 24,
         }}
       >
-        <Row $alignItems={'center'} $fill={true} $gap={4} $padding={[0, 4]}>
-          <Typography.Title $color={colors.gray80}>
-            {selectDepartment}
-          </Typography.Title>
-          <IconBox onPress={() => showBottomSheet()}>
+        <PressableBox onPress={() => showBottomSheet()}>
+          <Row $alignItems={'center'} $fill={true} $gap={8} $padding={[0, 4]}>
+            <Typography.Title $color={colors.gray80}>
+              {selectDepartment}
+            </Typography.Title>
             <ArrowDown />
-          </IconBox>
-        </Row>
+          </Row>
+        </PressableBox>
         <ScrollView
           style={{
             flex: 1,
@@ -176,6 +173,12 @@ const ClubScreen = () => {
   );
 };
 
+const PressableBox = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+`;
+
 const Bar = styled.View`
   width: 88px;
   height: 4px;
@@ -199,6 +202,7 @@ const BottomSheet = styled(Animated.View)`
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  padding-top: 12px;
 `;
 
 const Overlay = styled.View`
@@ -206,13 +210,6 @@ const Overlay = styled.View`
   flex: 1;
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.4);
-`;
-
-const IconBox = styled.TouchableOpacity`
-  width: 24px;
-  height: 24px;
-  align-items: center;
-  justify-content: center;
 `;
 
 export default ClubScreen;
