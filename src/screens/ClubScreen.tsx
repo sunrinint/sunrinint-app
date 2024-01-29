@@ -16,8 +16,11 @@ import { Spacer } from '@components/atomic/Spacer';
 import Radio from '@components/common/Radio';
 import useBottomSheet from '@hooks/useBottomSheet';
 import Club from '@assets/icons/club_icon.svg';
+import Setting from '@assets/icons/setting.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const ClubScreen = () => {
+  const navigation = useNavigation<any>();
   const {
     isVisible,
     showBottomSheet,
@@ -40,11 +43,14 @@ const ClubScreen = () => {
       instagram: 'https://www.instagram.com/v.friends/',
       facebook: 'https://www.facebook.com/v.friends.kr',
     },
-    // More club data can be added here
   ];
 
   return (
-    <LayoutWithHeader logo>
+    <LayoutWithHeader
+      logo
+      FirstChild={Setting}
+      onFirstChildPress={() => navigation.navigate('Setting')}
+    >
       <View
         style={{
           flex: 1,
