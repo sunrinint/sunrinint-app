@@ -75,7 +75,7 @@ const ClubCard = ({
             alignItems: 'center',
           }}
         >
-          <WebsiteIcon fill={facebook ? colors.gray70 : colors.gray30} />
+          <WebsiteIcon fill={facebook ? colors.gray80 : colors.gray40} />
         </TouchableOpacity>
         <TouchableOpacity
           disabled={!instagram}
@@ -88,7 +88,7 @@ const ClubCard = ({
             alignItems: 'center',
           }}
         >
-          <InstagramIcon fill={facebook ? colors.gray70 : colors.gray30} />
+          <InstagramIcon fill={facebook ? colors.gray80 : colors.gray40} />
         </TouchableOpacity>
         <TouchableOpacity
           disabled={!facebook}
@@ -101,7 +101,7 @@ const ClubCard = ({
             alignItems: 'center',
           }}
         >
-          <FacebookIcon fill={facebook ? colors.gray70 : colors.gray30} />
+          <FacebookIcon fill={facebook ? colors.gray80 : colors.gray40} />
         </TouchableOpacity>
       </View>
     </ClubCardLayout>
@@ -112,6 +112,7 @@ const ClubCardLayout = styled.View`
   padding: 8px;
   background-color: #fff;
   border-radius: 8px;
+  border: 1px solid #e7eaef;
   align-self: stretch;
 `;
 

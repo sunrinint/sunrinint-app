@@ -14,7 +14,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		5EA888117E9F47DB8AF2B99A /* SUIT-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F579E317B45C49BAAD8ACDEF /* SUIT-Variable.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-sunrinint_app_v1-sunrinint_app_v1Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-sunrinint_app_v1-sunrinint_app_v1Tests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		FCED666F2B6814A200756722 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCED666E2B6814A200756722 /* BootSplash.storyboard */; };
+		FCED66712B6814DD00756722 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCED66702B6814DD00756722 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +43,11 @@
 		5709B34CF0A7D63546082F79 /* Pods-sunrinint_app_v1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sunrinint_app_v1.release.xcconfig"; path = "Target Support Files/Pods-sunrinint_app_v1/Pods-sunrinint_app_v1.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-sunrinint_app_v1-sunrinint_app_v1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sunrinint_app_v1-sunrinint_app_v1Tests.debug.xcconfig"; path = "Target Support Files/Pods-sunrinint_app_v1-sunrinint_app_v1Tests/Pods-sunrinint_app_v1-sunrinint_app_v1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-sunrinint_app_v1.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sunrinint_app_v1.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = sunrinint_app_v1/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-sunrinint_app_v1-sunrinint_app_v1Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sunrinint_app_v1-sunrinint_app_v1Tests.release.xcconfig"; path = "Target Support Files/Pods-sunrinint_app_v1-sunrinint_app_v1Tests/Pods-sunrinint_app_v1-sunrinint_app_v1Tests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F579E317B45C49BAAD8ACDEF /* SUIT-Variable.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Variable.ttf"; path = "../assets/fonts/SUIT-Variable.ttf"; sourceTree = "<group>"; };
+		FCED666E2B6814A200756722 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = sunrinint_app_v1/BootSplash.storyboard; sourceTree = "<group>"; };
+		FCED66702B6814DD00756722 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,9 +92,10 @@
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				FCED666E2B6814A200756722 /* BootSplash.storyboard */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
+				FCED66702B6814DD00756722 /* Colors.xcassets */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = sunrinint_app_v1;
@@ -252,9 +255,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				FCED66712B6814DD00756722 /* Colors.xcassets in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				5EA888117E9F47DB8AF2B99A /* SUIT-Variable.ttf in Resources */,
+				FCED666F2B6814A200756722 /* BootSplash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,7 +482,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6N4XWB3QSL;
+				DEVELOPMENT_TEAM = 6U62KX7862;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = sunrinint_app_v1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -491,7 +495,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = in.sunrin.app;
 				PRODUCT_NAME = sunrinint_app_v1;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -506,7 +510,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6N4XWB3QSL;
+				DEVELOPMENT_TEAM = 6U62KX7862;
 				INFOPLIST_FILE = sunrinint_app_v1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -518,7 +522,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = in.sunrin.app;
 				PRODUCT_NAME = sunrinint_app_v1;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
