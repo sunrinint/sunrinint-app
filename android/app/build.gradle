@@ -74,9 +74,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.sunrinint_app_v1"
+    namespace "in.sunrin.app"
     defaultConfig {
-        applicationId "com.sunrinint_app_v1"
+        applicationId "in.sunrin.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

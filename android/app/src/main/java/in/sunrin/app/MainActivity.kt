@@ -1,4 +1,4 @@
-package com.sunrinint_app_v1
+package `in`.sunrin.app
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
