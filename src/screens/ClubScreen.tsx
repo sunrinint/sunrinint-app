@@ -104,32 +104,30 @@ const ClubScreen = () => {
             {...panResponders.panHandlers}
           >
             <Bar />
-            <Container>
-              <Row
-                $padding={[8, 0]}
-                $alignItems={'center'}
-                $justifyContent={'space-between'}
-                $fill={true}
-              >
-                <Typography.SemiLabel $color={colors.gray80}>
-                  학과 선택
-                </Typography.SemiLabel>
-                <Club fill={colors.gray50} />
-              </Row>
-              <Radio
-                data={[
-                  '정보보호과',
-                  '소프트웨어과',
-                  'IT경영과',
-                  '콘텐츠디자인과',
-                ]}
-                setSelectDepartment={setSelectDepartment}
-                selectIndex={selectIndex}
-                setSelectIndex={setSelectIndex}
-                onConfirm={hideBottomSheet}
-              />
-              <Spacer $height={37} />
-            </Container>
+            <Row
+              $padding={[8, 0]}
+              $alignItems={'center'}
+              $justifyContent={'space-between'}
+              $fill={true}
+            >
+              <Typography.SemiLabel $color={colors.gray80}>
+                학과 선택
+              </Typography.SemiLabel>
+              <Club fill={colors.gray50} />
+            </Row>
+            <Radio
+              data={[
+                '정보보호과',
+                '소프트웨어과',
+                'IT경영과',
+                '콘텐츠디자인과',
+              ]}
+              setSelectDepartment={setSelectDepartment}
+              selectIndex={selectIndex}
+              setSelectIndex={setSelectIndex}
+              onConfirm={hideBottomSheet}
+            />
+            <Spacer $height={37} />
           </BottomSheet>
         </Overlay>
       </Modal>
@@ -144,29 +142,19 @@ const PressableBox = styled.TouchableOpacity`
 `;
 
 const Bar = styled.View`
-  width: 88px;
+  width: 64px;
   height: 4px;
   border-radius: 10px;
-  background: #fff;
-`;
-
-const Container = styled(Animated.View)`
-  display: flex;
-  padding: 16px 20px;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  align-self: stretch;
-  border-radius: 8px 8px 0 0;
-  background: #fff;
+  background: #e7eaef;
 `;
 
 const BottomSheet = styled(Animated.View)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding-top: 12px;
+  padding: 16px 20px;
+  border-radius: 8px 8px 0 0;
+  background: #fff;
 `;
 
 const Overlay = styled.View`
