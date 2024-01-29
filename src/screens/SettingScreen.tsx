@@ -202,7 +202,7 @@ const GrayButton = styled.TouchableOpacity`
   gap: 8px;
   flex: 1 0 0;
   border-radius: 4px;
-  background: #f0f2f5;
+  background: #e7eaef;
 `;
 
 const ModalOverlay = styled.View`
@@ -240,6 +240,7 @@ const InfoContainer = styled.View`
   align-items: flex-start;
   align-self: stretch;
   border-radius: 8px;
+  border: 1px solid #e7eaef;
   background: #fff;
 `;
 
@@ -252,6 +253,7 @@ const RoundButton = styled.TouchableOpacity`
   gap: 8px;
   flex: 1 0 0;
   border-radius: 96px;
+  border: 1px solid #e7eaef;
   background: #fff;
 `;
 
