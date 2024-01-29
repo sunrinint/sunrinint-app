@@ -1,15 +1,21 @@
 import React from 'react';
-import { Animated, SafeAreaView } from 'react-native';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import styled from 'styled-components/native';
 import Typography from '@components/typography';
 import { light } from '@/theme';
 import NoticeIcon from '@/assets/icons/notice.svg';
+import Setting from '@assets/icons/setting.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
+  const navigation = useNavigation<any>();
   const colors = light;
   return (
-    <LayoutWithHeader logo>
+    <LayoutWithHeader
+      logo
+      FirstChild={Setting}
+      onFirstChildPress={() => navigation.navigate('Setting')}
+    >
       <Container>
         <NoticeCard>
           <IconBox>
