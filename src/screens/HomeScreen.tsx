@@ -45,12 +45,13 @@ const IconBox = styled.View`
 const NoticeCard = styled.View`
   display: flex;
   flex-direction: row;
-  padding: 16px;
+  padding: 20px;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
   align-self: stretch;
   border-radius: 8px;
+  border: 1px solid #e7eaef;
   background: #ffffff;
 `;
 
@@ -62,6 +63,7 @@ const MealCard = styled.View`
   gap: 8px;
   align-self: stretch;
   border-radius: 8px;
+  border: 1px solid #e7eaef;
   background: #fff;
 `;
 
