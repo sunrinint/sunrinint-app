@@ -7,11 +7,12 @@ interface Palette {
   gray60: string;
   gray70: string;
   gray80: string;
+  gray90: string;
+  red: string;
   highlight: string;
   logo1: string;
   logo2: string;
   logo3: string;
-  red: string;
 }
 
 export default Palette;

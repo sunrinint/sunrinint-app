@@ -3,17 +3,18 @@ import Palette from '@/theme/types/Palette';
 const light: Palette = {
   gray10: '#FFFFFF',
   gray20: '#F0F2F5',
-  gray30: '#B5B5CB',
-  gray40: '#8C94A5',
-  gray50: '#767F94',
-  gray60: '#4F5D70',
-  gray70: '#222B38',
-  gray80: '#1C232E',
+  gray30: '#E7EAEF',
+  gray40: '#B5BECB',
+  gray50: '#98A1AE',
+  gray60: '#7B8798',
+  gray70: '#4F5D70',
+  gray80: '#222B38',
+  gray90: '#1C242E',
+  red: '#F83E3E',
   highlight: '#3671C2',
   logo1: '#1C232E',
   logo2: '#222B38',
   logo3: '#2B3647',
-  red: '#F83E3E',
 };
 
 export default light;
