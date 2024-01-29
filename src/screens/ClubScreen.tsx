@@ -60,7 +60,7 @@ const ClubScreen = () => {
             <Typography.Title $color={colors.gray80}>
               {selectDepartment}
             </Typography.Title>
-            <ArrowDown />
+            <ArrowDown fill={colors.gray60} />
           </Row>
         </PressableBox>
         <ScrollView
