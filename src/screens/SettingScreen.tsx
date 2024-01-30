@@ -25,7 +25,7 @@ const SettingScreen = () => {
         title={'설정'}
       >
         <ScrollView>
-          <Column $padding={[19, 20]} $alignItems={'center'}>
+          <Column $padding={[20, 12]} $alignItems={'center'}>
             <ImageContainer />
             <Spacer $height={24} />
             <Column $alignItems={'center'} $gap={16}>

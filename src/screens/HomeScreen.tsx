@@ -76,7 +76,7 @@ const MealCard = styled.View`
 const Container = styled.View`
   display: flex;
   width: 100%;
-  padding: 8px 20px;
+  padding: 8px 12px;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;

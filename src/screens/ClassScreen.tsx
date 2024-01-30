@@ -16,7 +16,7 @@ const ClassScreen = () => {
       onBackPress={() => navigation.pop()}
       title={'학년 · 반 · 번호'}
     >
-      <Column $gap={24} $padding={[8, 20]}>
+      <Column $gap={24} $padding={[8, 12]}>
         <Row $gap={8}>
           <Button>
             <Typography.Body $color={theme.colors.gray40}>학년</Typography.Body>

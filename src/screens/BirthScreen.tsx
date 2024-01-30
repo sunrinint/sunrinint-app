@@ -16,7 +16,7 @@ const BirthScreen = () => {
       onBackPress={() => navigation.pop()}
       title={'생년월일'}
     >
-      <Column $gap={24} $padding={[8, 20]}>
+      <Column $gap={24} $padding={[8, 12]}>
         <Row $gap={8}>
           <Button>
             <Typography.Body $color={theme.colors.gray40}>

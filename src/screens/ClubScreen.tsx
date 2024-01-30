@@ -54,15 +54,15 @@ const ClubScreen = () => {
       <View
         style={{
           flex: 1,
-          paddingHorizontal: 20,
+          paddingHorizontal: 12,
           justifyContent: 'center',
           alignItems: 'center',
           gap: 12,
-          paddingTop: 24,
+          paddingTop: 12,
         }}
       >
         <PressableBox onPress={() => showBottomSheet()}>
-          <Row $alignItems={'center'} $fill={true} $gap={8} $padding={[0, 4]}>
+          <Row $alignItems={'center'} $fill={true} $gap={8} $padding={[4, 4]}>
             <Typography.Title $color={colors.gray80}>
               {selectDepartment}
             </Typography.Title>
