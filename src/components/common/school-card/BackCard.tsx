@@ -3,33 +3,33 @@ import { Column, Row } from '@components/atomic';
 import Typography from '@components/typography';
 import { SvgXml } from 'react-native-svg';
 import React from 'react';
-import { Animated, View } from 'react-native';
+import { Animated } from 'react-native';
 
 const BackCard = ({ style }: { style?: any }) => {
   const { colors } = useTheme();
   return (
     <Container style={style}>
-      <Typography.Body $color={colors.gray60}>
+      <Typography.Body $color={colors.gray70}>
         선린인터넷고등학교 모바일 학생증
       </Typography.Body>
       <ImageContainer />
       <Column $alignItems={'center'} $gap={8}>
-        <Typography.Name $color={colors.gray80}>{'유도윤'}</Typography.Name>
+        <Typography.Name $color={colors.gray90}>{'유도윤'}</Typography.Name>
         <Row $gap={6}>
-          <Typography.SemiLabel $color={colors.gray60}>
+          <Typography.SemiLabel $color={colors.gray70}>
             생년월일
           </Typography.SemiLabel>
-          <Typography.Label $color={colors.gray60}>
+          <Typography.Label $color={colors.gray70}>
             {'2007.01.09'}
           </Typography.Label>
         </Row>
       </Column>
       <Line />
       <Column $alignItems={'center'} $gap={4}>
-        <Typography.SemiBody $color={colors.gray60}>
+        <Typography.SemiBody $color={colors.gray70}>
           위 사람은 본교 학생임을 증명함.
         </Typography.SemiBody>
-        <Typography.Body $color={colors.gray60}>
+        <Typography.Body $color={colors.gray70}>
           {'2023.03.02'} ~ {'2026.02.28'}
         </Typography.Body>
       </Column>
