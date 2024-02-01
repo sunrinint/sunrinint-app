@@ -27,8 +27,8 @@ const BottomNavigation = () => {
         initialRouteName="Home"
         screenOptions={{
           headerShown: false,
-          tabBarInactiveTintColor: theme.colors.gray30,
-          tabBarActiveTintColor: theme.colors.gray20,
+          tabBarInactiveTintColor: theme.colors.gray40,
+          tabBarActiveTintColor: theme.colors.gray10,
         }}
       >
         <Tab.Screen
