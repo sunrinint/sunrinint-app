@@ -160,7 +160,7 @@ const SignInButton = styled.TouchableOpacity`
   height: 56px;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   flex: 1;
   width: 100%;
   padding: 0 20px;
