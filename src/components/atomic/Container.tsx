@@ -35,3 +35,18 @@ export const Column = styled(base)`
 export const Row = styled(base)`
   flex-direction: row;
 `;
+
+interface WrapperProps {
+  $padding?: [number, number] | [number];
+  $fill?: boolean;
+}
+
+export const Wrapper = styled.View<WrapperProps>`
+  display: flex;
+  flex-direction: column;
+  padding: ${(props) =>
+    `${props.$padding ? props.$padding[0] : 0}px ${
+      props.$padding ? props.$padding[1] ?? props.$padding[0] : 0
+    }px`};
+  width: ${(props) => (props.$fill ? '100%' : 'auto')};
+`;
