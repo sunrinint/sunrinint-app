@@ -8,10 +8,12 @@ import { Pressable, StyleSheet, View } from 'react-native';
 interface Props {
   onConfirm: (_: { year: number; month: number; day: number }) => void;
   onCancel: () => void;
+  initValue?: { year: number; month: number; day: number };
 }
 
-const BrithPickerModal = ({ onConfirm, onCancel }: Props) => {
+const BrithPickerModal = ({ initValue, onConfirm, onCancel }: Props) => {
   const { colors } = useTheme();
+
   const [year, setYear] = useState(0);
   const [month, setMonth] = useState(0);
   const [day, setDay] = useState(0);
@@ -41,6 +43,7 @@ const BrithPickerModal = ({ onConfirm, onCancel }: Props) => {
             </Row>
             <Row $padding={[0, 24]} $gap={4} $fill>
               <WheelPicker
+                initValue={initValue?.year ?? new Date().getFullYear()}
                 data={Array.from({ length: 100 }, (_, i) => {
                   const _year = new Date().getFullYear();
                   return _year - 99 + i;
@@ -48,10 +51,12 @@ const BrithPickerModal = ({ onConfirm, onCancel }: Props) => {
                 onChange={setYear}
               />
               <WheelPicker
+                initValue={initValue?.month ?? new Date().getMonth() + 1}
                 data={Array.from({ length: 12 }, (_, i) => i + 1)}
                 onChange={setMonth}
               />
               <WheelPicker
+                initValue={initValue?.day ?? new Date().getDate()}
                 data={Array.from({ length: maxDdy }, (_, i) => i + 1)}
                 onChange={setDay}
               />
