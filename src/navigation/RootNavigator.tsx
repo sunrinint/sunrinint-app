@@ -2,8 +2,6 @@ import * as React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import BootSplash from "react-native-bootsplash";
-
 import BottomNavigation from './BottomNavigation';
 import LoginScreen from '@screens/LoginScreen';
 import SettingScreen from '@screens/SettingScreen';
@@ -13,16 +11,11 @@ import ClassScreen from '@screens/ClassScreen';
 const Stack = createStackNavigator();
 
 const RootNavigator = () => {
-  const onReady = () => {
-    BootSplash.hide();
-  };
-
   return (
     <Stack.Navigator
       initialRouteName="Login"
       screenOptions={{
         headerShown: false,
-        gestureEnabled: false,
       }}
     >
       <Stack.Screen
@@ -30,6 +23,7 @@ const RootNavigator = () => {
         component={BottomNavigation}
         options={{
           headerShown: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -37,6 +31,7 @@ const RootNavigator = () => {
         component={LoginScreen}
         options={{
           headerShown: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen name={'Setting'} component={SettingScreen} />

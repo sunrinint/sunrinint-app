@@ -110,9 +110,9 @@ const ClubCard = ({
 
 const ClubCardLayout = styled.View`
   padding: 8px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.gray10};
   border-radius: 8px;
-  border: 1px solid #e7eaef;
+  border: 1px solid ${(props) => props.theme.colors.gray30};
   align-self: stretch;
 `;
 

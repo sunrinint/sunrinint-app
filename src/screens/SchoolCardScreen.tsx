@@ -77,7 +77,7 @@ const Button = styled.Pressable`
   background-color: ${(props) => props.theme.colors.gray10};
   padding: 8px 16px;
   border-radius: 96px;
-  border: 1px solid #e7eaef;
+  border: 1px solid ${(props) => props.theme.colors.gray30};
   width: 160px;
   height: 44px;
   display: flex;

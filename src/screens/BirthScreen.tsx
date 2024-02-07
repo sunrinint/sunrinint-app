@@ -19,26 +19,20 @@ const BirthScreen = () => {
       <Column $gap={24} $padding={[8, 12]}>
         <Row $gap={8}>
           <Button>
-            <Typography.Body $color={theme.colors.gray40}>
-              년
-            </Typography.Body>
+            <Typography.Body $color={theme.colors.gray40}>년</Typography.Body>
             <Down />
           </Button>
           <Button>
-            <Typography.Body $color={theme.colors.gray40}>
-              월
-            </Typography.Body>
+            <Typography.Body $color={theme.colors.gray40}>월</Typography.Body>
             <Down />
           </Button>
           <Button>
-            <Typography.Body $color={theme.colors.gray40}>
-              일
-            </Typography.Body>
+            <Typography.Body $color={theme.colors.gray40}>일</Typography.Body>
             <Down />
           </Button>
         </Row>
         <Typography.Caption $color={theme.colors.gray50}>
-          위 정보는 학생증 뒷면 표시를 위해 입력할 수 있으며, 다른 용도 로
+          위 정보는 학생증 뒷면 표시를 위해 입력할 수 있으며, 다른 용도로
           사용되지 않습니다.
         </Typography.Caption>
       </Column>

@@ -26,12 +26,12 @@ const LayoutWithHeader = ({
   onFirstChildPress,
   children,
 }: HeaderProps) => {
-  const theme = useTheme();
+  const { colors } = useTheme();
   return (
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: '#F0F2F5',
+        backgroundColor: colors.gray20,
       }}
     >
       <Container>
@@ -40,19 +40,19 @@ const LayoutWithHeader = ({
             <SvgXml
               xml={`
                 <svg width="53" height="20" viewBox="0 0 53 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.625 0H0V6.66664H6.625V0Z" fill="${theme.colors.logo1}"/>
-                  <path d="M6.625 6.6665H0V13.3331H6.625V6.6665Z" fill="${theme.colors.logo2}"/>
-                  <path d="M6.625 13.3335H0V20.0001H6.625V13.3335Z" fill="${theme.colors.logo3}"/>
-                  <path d="M16.5625 0H9.9375V6.66664H16.5625V0Z" fill="${theme.colors.logo1}"/>
-                  <path d="M16.5625 6.6665H9.9375V13.3331H16.5625V6.6665Z" fill="${theme.colors.logo2}"/>
-                  <path d="M9.9375 13.3335H16.5625V20.0001" fill="${theme.colors.logo3}"/>
-                  <path d="M23.1875 13.3331H16.5625V6.6665" fill="${theme.colors.logo3}"/>
-                  <path d="M29.8125 6.66664H23.1875V0" fill="${theme.colors.logo3}"/>
-                  <path d="M29.8125 6.6665H23.1875V13.3331H29.8125V6.6665Z" fill="${theme.colors.logo2}"/>
-                  <path d="M29.8125 13.3335H23.1875V20.0001H29.8125V13.3335Z" fill="${theme.colors.logo1}"/>
-                  <path d="M53 0H33.125V6.66664H53V0Z" fill="${theme.colors.logo1}"/>
-                  <path d="M46.3751 6.6665H39.7501V13.3331H46.3751V6.6665Z" fill="${theme.colors.logo2}"/>
-                  <path d="M46.3751 13.3335H39.7501V20.0001H46.3751V13.3335Z" fill="${theme.colors.logo3}"/>
+                  <path d="M6.625 0H0V6.66664H6.625V0Z" fill="${colors.logo1}"/>
+                  <path d="M6.625 6.6665H0V13.3331H6.625V6.6665Z" fill="${colors.logo2}"/>
+                  <path d="M6.625 13.3335H0V20.0001H6.625V13.3335Z" fill="${colors.logo3}"/>
+                  <path d="M16.5625 0H9.9375V6.66664H16.5625V0Z" fill="${colors.logo1}"/>
+                  <path d="M16.5625 6.6665H9.9375V13.3331H16.5625V6.6665Z" fill="${colors.logo2}"/>
+                  <path d="M9.9375 13.3335H16.5625V20.0001" fill="${colors.logo3}"/>
+                  <path d="M23.1875 13.3331H16.5625V6.6665" fill="${colors.logo3}"/>
+                  <path d="M29.8125 6.66664H23.1875V0" fill="${colors.logo3}"/>
+                  <path d="M29.8125 6.6665H23.1875V13.3331H29.8125V6.6665Z" fill="${colors.logo2}"/>
+                  <path d="M29.8125 13.3335H23.1875V20.0001H29.8125V13.3335Z" fill="${colors.logo1}"/>
+                  <path d="M53 0H33.125V6.66664H53V0Z" fill="${colors.logo1}"/>
+                  <path d="M46.3751 6.6665H39.7501V13.3331H46.3751V6.6665Z" fill="${colors.logo2}"/>
+                  <path d="M46.3751 13.3335H39.7501V20.0001H46.3751V13.3335Z" fill="${colors.logo3}"/>
                 </svg>
               `}
             />
@@ -60,9 +60,9 @@ const LayoutWithHeader = ({
           {showBack && (
             <Row $alignItems={'center'} $gap={12}>
               <TouchableOpacity onPress={onBackPress}>
-                <Back fill={theme.colors.gray80} />
+                <Back fill={colors.gray80} />
               </TouchableOpacity>
-              <Typography.Title $color={theme.colors.gray80}>
+              <Typography.Title $color={colors.gray80}>
                 {title}
               </Typography.Title>
             </Row>

@@ -68,12 +68,12 @@ const Wrapper = styled.View`
 const Container = styled.View`
   width: 212px;
   height: 64px;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.gray10};
   border-radius: 60px;
   display: flex;
   padding: 8px;
   flex-direction: row;
-  border: 1px solid ${(props) => props.theme.colors.gray20};
+  border: 1px solid ${(props) => props.theme.colors.gray30};
 `;
 
 const AnimateTab = Animated.createAnimatedComponent(Pressable);
