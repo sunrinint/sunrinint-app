@@ -4,15 +4,18 @@ import { useTheme } from 'styled-components/native';
 
 interface Props {
   data: number[];
+  initValue?: number;
   onChange: (value: number) => void;
 }
 
-const WheelPicker = ({ data, onChange }: Props) => {
+const WheelPicker = ({ data, initValue, onChange }: Props) => {
   const { colors } = useTheme();
   const itemHeight = 32;
   const selectedItemHeight = 40;
   const scrollY = useRef(new Animated.Value(0)).current;
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(
+    initValue ? data.indexOf(initValue) : 0,
+  );
 
   useEffect(() => {
     if (selectedIndex > 0 && selectedIndex < data.length) {
@@ -23,6 +26,7 @@ const WheelPicker = ({ data, onChange }: Props) => {
   return (
     <View style={[{ height: itemHeight * 2 + selectedItemHeight, flex: 1 }]}>
       <Animated.FlatList
+        initialScrollIndex={selectedIndex}
         data={['', ...data, '']}
         snapToInterval={itemHeight}
         onScroll={(e) => {
