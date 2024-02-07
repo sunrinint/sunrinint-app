@@ -11,10 +11,11 @@ import Switch from '@components/common/Switch';
 import Next from '@assets/icons/next.svg';
 import { Spacer } from '@components/atomic/Spacer';
 import { ScrollView, View } from 'react-native';
+import Button from '@/components/common/Button';
 
 const SettingScreen = () => {
   const navigation = useNavigation<any>();
-  const theme = useTheme();
+  const { colors } = useTheme();
   const [enabled, setEnabled] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -34,30 +35,34 @@ const SettingScreen = () => {
                 $alignItems={'center'}
                 $gap={4}
               >
-                <Typography.LargeTitle $color={theme.colors.gray80}>
+                <Typography.LargeTitle $color={colors.gray80}>
                   이정우
                 </Typography.LargeTitle>
-                <Typography.Body $color={theme.colors.gray60}>
+                <Typography.Body $color={colors.gray60}>
                   23sunrin078@sunrint.hs.kr
                 </Typography.Body>
               </Column>
               <Row $justifyContent={'center'} $gap={8}>
-                <RoundButton
+                <Button
+                  fullWidth
+                  height={44}
+                  radius={999}
+                  level={10}
                   onPress={() => {
                     setModalVisible(true);
                   }}
                 >
-                  <Typography.Body $color={theme.colors.gray70}>
+                  <Typography.Body $color={colors.gray70}>
                     로그아웃
                   </Typography.Body>
-                  <Logout />
-                </RoundButton>
-                <RoundButton>
-                  <Typography.Body $color={theme.colors.gray70}>
+                  <Logout fill={colors.gray80} />
+                </Button>
+                <Button fullWidth height={44} radius={999} level={10}>
+                  <Typography.Body $color={colors.gray70}>
                     사진 수정
                   </Typography.Body>
-                  <Edit />
-                </RoundButton>
+                  <Edit fill={colors.gray80} />
+                </Button>
               </Row>
             </Column>
             <Spacer $height={36} />
@@ -69,7 +74,7 @@ const SettingScreen = () => {
                   $justifyContent={'space-between'}
                   $fill={true}
                 >
-                  <Typography.SemiLabel $color={theme.colors.gray80}>
+                  <Typography.SemiLabel $color={colors.gray80}>
                     다크모드
                   </Typography.SemiLabel>
                   <Switch
@@ -80,27 +85,27 @@ const SettingScreen = () => {
               </InfoContainer>
               <InfoContainer>
                 <Card>
-                  <Typography.SemiLabel $color={theme.colors.gray80}>
+                  <Typography.SemiLabel $color={colors.gray80}>
                     내 정보
                   </Typography.SemiLabel>
                 </Card>
                 <TouchableCard onPress={() => navigation.navigate('Birth')}>
-                  <Typography.Body $color={theme.colors.gray80}>
+                  <Typography.Body $color={colors.gray80}>
                     생년월일
                   </Typography.Body>
                   <Row $gap={8} $alignItems={'center'}>
-                    <Typography.Body $color={theme.colors.gray60}>
+                    <Typography.Body $color={colors.gray60}>
                       2007년 10월 30일
                     </Typography.Body>
                     <Next />
                   </Row>
                 </TouchableCard>
                 <TouchableCard onPress={() => navigation.navigate('Class')}>
-                  <Typography.Body $color={theme.colors.gray80}>
+                  <Typography.Body $color={colors.gray80}>
                     학년 · 반 · 번호
                   </Typography.Body>
                   <Row $gap={8} $alignItems={'center'}>
-                    <Typography.Body $color={theme.colors.gray60}>
+                    <Typography.Body $color={colors.gray60}>
                       1학년 04반 18번
                     </Typography.Body>
                     <Next />
@@ -109,25 +114,23 @@ const SettingScreen = () => {
               </InfoContainer>
               <InfoContainer>
                 <Card>
-                  <Typography.SemiLabel $color={theme.colors.gray80}>
+                  <Typography.SemiLabel $color={colors.gray80}>
                     서비스 정보
                   </Typography.SemiLabel>
                 </Card>
                 <Card>
-                  <Typography.Body $color={theme.colors.gray80}>
+                  <Typography.Body $color={colors.gray80}>
                     빌드 날짜
                   </Typography.Body>
-                  <Typography.Body $color={theme.colors.gray60}>
+                  <Typography.Body $color={colors.gray60}>
                     2023년 9월 4일
                   </Typography.Body>
                 </Card>
                 <Card>
-                  <Typography.Body $color={theme.colors.gray80}>
+                  <Typography.Body $color={colors.gray80}>
                     Int 버전
                   </Typography.Body>
-                  <Typography.Body $color={theme.colors.gray60}>
-                    v1
-                  </Typography.Body>
+                  <Typography.Body $color={colors.gray60}>v1</Typography.Body>
                 </Card>
               </InfoContainer>
             </Column>
@@ -155,22 +158,22 @@ const SettingScreen = () => {
               }}
             >
               <Column $gap={12} $padding={[4, 4]} $alignItems={'flex-start'}>
-                <Typography.Title $color={theme.colors.gray80}>
+                <Typography.Title $color={colors.gray80}>
                   로그아웃 하시겠어요?
                 </Typography.Title>
-                <Typography.Body $color={theme.colors.gray60}>
-                  로그아웃 하시면 다시 로그인 할 때 까지 IntPass를 사용하지
+                <Typography.Body $color={colors.gray60}>
+                  로그아웃 하시면 다시 로그인 할 때 까지IntPass를 사용하지
                   못하게 됩니다.
                 </Typography.Body>
               </Column>
               <Row $gap={8}>
                 <GrayButton onPress={() => setModalVisible(false)}>
-                  <Typography.SemiLabel $color={theme.colors.gray80}>
+                  <Typography.SemiLabel $color={colors.gray80}>
                     취소
                   </Typography.SemiLabel>
                 </GrayButton>
                 <RedButton onPress={() => setModalVisible(false)}>
-                  <Typography.SemiLabel $color={theme.colors.gray10}>
+                  <Typography.SemiLabel $color={colors.gray10}>
                     로그아웃
                   </Typography.SemiLabel>
                 </RedButton>
@@ -191,7 +194,7 @@ const RedButton = styled.TouchableOpacity`
   gap: 8px;
   flex: 1 0 0;
   border-radius: 4px;
-  background: #f83e3e;
+  background: ${(props) => props.theme.colors.red};
 `;
 
 const GrayButton = styled.TouchableOpacity`
@@ -240,21 +243,8 @@ const InfoContainer = styled.View`
   align-items: flex-start;
   align-self: stretch;
   border-radius: 8px;
-  border: 1px solid #e7eaef;
-  background: #fff;
-`;
-
-const RoundButton = styled.TouchableOpacity`
-  display: flex;
-  flex-direction: row;
-  height: 44px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  flex: 1 0 0;
-  border-radius: 96px;
-  border: 1px solid #e7eaef;
-  background: #fff;
+  border: 1px solid ${(props) => props.theme.colors.gray30};
+  background: ${(props) => props.theme.colors.gray10};
 `;
 
 const ImageContainer = styled.View`

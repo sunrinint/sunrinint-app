@@ -6,6 +6,7 @@ import Typography from '@components/typography';
 import styled, { useTheme } from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SvgXml } from 'react-native-svg';
+import Button from '@/components/common/Button';
 
 const LoginScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -16,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: 'white',
+          backgroundColor: colors.gray20,
         }}
       >
         <View
@@ -69,19 +70,31 @@ const LoginScreen = ({ navigation }) => {
               gap: 12,
             }}
           >
-            <SecondButton
+            <Button
+              level={20}
+              width={186}
+              height={44}
+              radius={96}
               onPress={() => {
                 setModalVisible(true);
               }}
             >
-              <Typography.Body>로그인에 문제가 있나요?</Typography.Body>
-            </SecondButton>
-            <SignInButton onPress={() => navigation.navigate('Tab')}>
+              <Typography.Body $color={colors.gray80}>
+                로그인에 문제가 있나요?
+              </Typography.Body>
+            </Button>
+            <Button
+              fullWidth
+              height={56}
+              radius={12}
+              level={80}
+              onPress={() => navigation.navigate('Tab')}
+            >
               <GoogleLogo />
-              <Typography.SemiLabel $color={'white'}>
+              <Typography.SemiLabel $color={colors.gray10}>
                 학교 구글 계정으로 로그인
               </Typography.SemiLabel>
-            </SignInButton>
+            </Button>
           </View>
         </View>
       </SafeAreaView>
@@ -98,7 +111,7 @@ const LoginScreen = ({ navigation }) => {
             <View
               style={{
                 width: '100%',
-                backgroundColor: 'white',
+                backgroundColor: colors.gray10,
                 borderRadius: 8,
                 padding: 16,
                 gap: 20,
@@ -120,23 +133,18 @@ const LoginScreen = ({ navigation }) => {
                   </Typography.Body>
                 </Column>
               </Column>
-              <TouchableOpacity
+              <Button
+                level={80}
+                radius={4}
                 onPress={() => {
                   setModalVisible(false);
                 }}
-                style={{
-                  height: 56,
-                  width: '100%',
-                  borderRadius: 4,
-                  backgroundColor: colors.gray80,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
+                height={56}
               >
-                <Typography.SemiLabel $color={'white'}>
+                <Typography.SemiLabel $color={colors.gray10}>
                   시도해볼게요!
                 </Typography.SemiLabel>
-              </TouchableOpacity>
+              </Button>
             </View>
           </View>
         </ModalOverlay>

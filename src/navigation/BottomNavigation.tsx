@@ -13,7 +13,7 @@ import ClubScreen from '@screens/ClubScreen';
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
-  const theme = useTheme();
+  const { colors } = useTheme();
 
   return (
     <>
@@ -27,8 +27,8 @@ const BottomNavigation = () => {
         initialRouteName="Home"
         screenOptions={{
           headerShown: false,
-          tabBarInactiveTintColor: theme.colors.gray40,
-          tabBarActiveTintColor: theme.colors.gray10,
+          tabBarInactiveTintColor: colors.gray40,
+          tabBarActiveTintColor: colors.gray10,
         }}
       >
         <Tab.Screen

@@ -2,7 +2,7 @@
  * @format
  */
 
-import { AppRegistry } from 'react-native';
+import { AppRegistry, useColorScheme } from 'react-native';
 import { name as appName } from './app.json';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,9 +10,8 @@ import { RecoilRoot } from 'recoil';
 import RootNavigator from './src/navigation/RootNavigator';
 import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
-import { light } from '@/theme';
+import { light, dark } from '@/theme';
 import BootSplash from 'react-native-bootsplash';
-
 
 const queryClient = new QueryClient();
 
@@ -21,13 +20,12 @@ const App = () => {
     BootSplash.hide();
   };
 
-  const theme = { colors: light };
+  const theme = { colors: useColorScheme() === 'light' ? light : dark };
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-          <NavigationContainer
-          onReady={onReady}>
+          <NavigationContainer onReady={onReady}>
             <RootNavigator />
           </NavigationContainer>
         </ThemeProvider>
