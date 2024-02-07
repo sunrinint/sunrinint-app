@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BottomNavigation from './BottomNavigation';
 import LoginScreen from '@screens/LoginScreen';
 import SettingScreen from '@screens/SettingScreen';
-import BirthScreen from '@screens/BirthScreen';
 import ClassScreen from '@screens/ClassScreen';
 
 const Stack = createStackNavigator();
@@ -35,7 +34,6 @@ const RootNavigator = () => {
         }}
       />
       <Stack.Screen name={'Setting'} component={SettingScreen} />
-      <Stack.Screen name={'Birth'} component={BirthScreen} />
       <Stack.Screen name={'Class'} component={ClassScreen} />
     </Stack.Navigator>
   );
