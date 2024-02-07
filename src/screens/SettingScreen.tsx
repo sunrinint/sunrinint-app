@@ -12,12 +12,19 @@ import Next from '@assets/icons/next.svg';
 import { Spacer } from '@components/atomic/Spacer';
 import { ScrollView, View } from 'react-native';
 import Button from '@/components/common/Button';
+import BrithPickerModal from '@components/common/BrithPickerModal';
 
 const SettingScreen = () => {
   const navigation = useNavigation<any>();
   const { colors } = useTheme();
   const [enabled, setEnabled] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [brithModalVisible, setBrithModalVisible] = useState(false);
+  const [brith, setBrith] = useState<{
+    year: number;
+    month: number;
+    day: number;
+  } | null>(null);
   return (
     <>
       <LayoutWithHeader
@@ -89,13 +96,15 @@ const SettingScreen = () => {
                     내 정보
                   </Typography.SemiLabel>
                 </Card>
-                <TouchableCard onPress={() => navigation.navigate('Birth')}>
+                <TouchableCard onPress={() => setBrithModalVisible(true)}>
                   <Typography.Body $color={colors.gray80}>
                     생년월일
                   </Typography.Body>
                   <Row $gap={8} $alignItems={'center'}>
                     <Typography.Body $color={colors.gray60}>
-                      2007년 10월 30일
+                      {brith
+                        ? `${brith.year}년 ${brith.month}월 ${brith.day}일`
+                        : '설정되지않음'}
                     </Typography.Body>
                     <Next />
                   </Row>
@@ -138,6 +147,18 @@ const SettingScreen = () => {
           <Spacer $height={154} />
         </ScrollView>
       </LayoutWithHeader>
+      {brithModalVisible && (
+        <BrithPickerModal
+          initValue={brith}
+          onConfirm={({ year, month, day }) => {
+            setBrith({ year, month, day });
+            setBrithModalVisible(false);
+          }}
+          onCancel={() => {
+            setBrithModalVisible(false);
+          }}
+        />
+      )}
       {modalVisible && (
         <ModalOverlay>
           <View
@@ -185,7 +206,6 @@ const SettingScreen = () => {
     </>
   );
 };
-
 const RedButton = styled.TouchableOpacity`
   display: flex;
   height: 56px;
