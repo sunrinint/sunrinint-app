@@ -8,10 +8,11 @@ import { useTheme } from 'styled-components';
 import Logout from '@assets/icons/logout.svg';
 import Edit from '@assets/icons/edit.svg';
 import Switch from '@components/common/Switch';
-import Next from '@assets/icons/next.svg';
 import { Spacer } from '@components/atomic/Spacer';
 import { ScrollView, View } from 'react-native';
 import Button from '@/components/common/Button';
+import PressibleCard from '@components/common/setting-card/PressibleCard';
+import Card from '@components/common/setting-card/Card';
 import BrithPickerModal from '@components/common/BrithPickerModal';
 
 const SettingScreen = () => {
@@ -32,7 +33,7 @@ const SettingScreen = () => {
         onBackPress={() => navigation.pop()}
         title={'설정'}
       >
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Column $padding={[20, 12]} $alignItems={'center'}>
             <ImageContainer />
             <Spacer $height={24} />
@@ -74,7 +75,7 @@ const SettingScreen = () => {
             </Column>
             <Spacer $height={36} />
             <Column $gap={12} $alignItems={'center'}>
-              <InfoContainer>
+              <InfoCard>
                 <Row
                   $padding={[7, 12]}
                   $alignItems={'center'}
@@ -89,62 +90,30 @@ const SettingScreen = () => {
                     onChange={() => setEnabled(!enabled)}
                   />
                 </Row>
-              </InfoContainer>
-              <InfoContainer>
-                <Card>
+              </InfoCard>
+              <InfoCard>
+                <Box>
                   <Typography.SemiLabel $color={colors.gray80}>
                     내 정보
                   </Typography.SemiLabel>
-                </Card>
-                <TouchableCard onPress={() => setBrithModalVisible(true)}>
-                  <Typography.Body $color={colors.gray80}>
-                    생년월일
-                  </Typography.Body>
-                  <Row $gap={8} $alignItems={'center'}>
-                    <Typography.Body $color={colors.gray60}>
-                      {brith
-                        ? `${brith.year}년 ${brith.month}월 ${brith.day}일`
-                        : '설정되지않음'}
-                    </Typography.Body>
-                    <Next />
-                  </Row>
-                </TouchableCard>
-                <TouchableCard onPress={() => navigation.navigate('Class')}>
-                  <Typography.Body $color={colors.gray80}>
-                    학년 · 반 · 번호
-                  </Typography.Body>
-                  <Row $gap={8} $alignItems={'center'}>
-                    <Typography.Body $color={colors.gray60}>
-                      1학년 04반 18번
-                    </Typography.Body>
-                    <Next />
-                  </Row>
-                </TouchableCard>
-              </InfoContainer>
-              <InfoContainer>
-                <Card>
+                </Box>
+                <PressibleCard title={'생년월일'} context={'2007년 10월 30일'} />
+                <PressibleCard title={'학년 · 반 · 번호'} context={'1학년 04반 18번'} />
+              </InfoCard>
+              <InfoCard>
+                <Box>
                   <Typography.SemiLabel $color={colors.gray80}>
-                    서비스 정보
+                  서비스 정보
                   </Typography.SemiLabel>
-                </Card>
-                <Card>
-                  <Typography.Body $color={colors.gray80}>
-                    빌드 날짜
-                  </Typography.Body>
-                  <Typography.Body $color={colors.gray60}>
-                    2023년 9월 4일
-                  </Typography.Body>
-                </Card>
-                <Card>
-                  <Typography.Body $color={colors.gray80}>
-                    Int 버전
-                  </Typography.Body>
-                  <Typography.Body $color={colors.gray60}>v1</Typography.Body>
+                </Box>
+                <Card title={'빌드 날짜'} context={'23년 9월 4일'} />
+                <Card title={'Int 버전'} context={'v1'} />
+              </InfoCard>
                 </Card>
               </InfoContainer>
+           
             </Column>
           </Column>
-          <Spacer $height={154} />
         </ScrollView>
       </LayoutWithHeader>
       {brithModalVisible && (
@@ -206,6 +175,15 @@ const SettingScreen = () => {
     </>
   );
 };
+
+const Box = styled.View`
+  display: flex;
+  padding: 12px;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+`;
+
 const RedButton = styled.TouchableOpacity`
   display: flex;
   height: 56px;
@@ -237,25 +215,7 @@ const ModalOverlay = styled.View`
   background: rgba(0, 0, 0, 0.4);
 `;
 
-const TouchableCard = styled.TouchableOpacity`
-  display: flex;
-  flex-direction: row;
-  padding: 12px;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-`;
-
-const Card = styled.View`
-  display: flex;
-  flex-direction: row;
-  padding: 12px;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-`;
-
-const InfoContainer = styled.View`
+const InfoCard = styled.View`
   display: flex;
   flex-direction: column;
   padding: 8px;
