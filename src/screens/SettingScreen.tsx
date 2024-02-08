@@ -13,12 +13,19 @@ import { ScrollView, View } from 'react-native';
 import Button from '@/components/common/Button';
 import PressibleCard from '@components/common/setting-card/PressibleCard';
 import Card from '@components/common/setting-card/Card';
+import BrithPickerModal from '@components/common/BrithPickerModal';
 
 const SettingScreen = () => {
   const navigation = useNavigation<any>();
   const { colors } = useTheme();
   const [enabled, setEnabled] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [brithModalVisible, setBrithModalVisible] = useState(false);
+  const [brith, setBrith] = useState<{
+    year: number;
+    month: number;
+    day: number;
+  } | null>(null);
   return (
     <>
       <LayoutWithHeader
@@ -95,17 +102,32 @@ const SettingScreen = () => {
               </InfoCard>
               <InfoCard>
                 <Box>
-                <Typography.SemiLabel $color={colors.gray80}>
+                  <Typography.SemiLabel $color={colors.gray80}>
                   서비스 정보
-                </Typography.SemiLabel>
+                  </Typography.SemiLabel>
                 </Box>
                 <Card title={'빌드 날짜'} context={'23년 9월 4일'} />
                 <Card title={'Int 버전'} context={'v1'} />
               </InfoCard>
+                </Card>
+              </InfoContainer>
+           
             </Column>
           </Column>
         </ScrollView>
       </LayoutWithHeader>
+      {brithModalVisible && (
+        <BrithPickerModal
+          initValue={brith}
+          onConfirm={({ year, month, day }) => {
+            setBrith({ year, month, day });
+            setBrithModalVisible(false);
+          }}
+          onCancel={() => {
+            setBrithModalVisible(false);
+          }}
+        />
+      )}
       {modalVisible && (
         <ModalOverlay>
           <View
