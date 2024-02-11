@@ -5,6 +5,8 @@ interface TextProps {
   $weight?: number;
   $lineHeight?: number;
   $color?: string;
+  $center?: boolean;
+  $fullSize?: boolean;
 }
 
 export const Text = styled.Text<TextProps>`
@@ -14,4 +16,5 @@ export const Text = styled.Text<TextProps>`
   line-height: ${(props) =>
     props.$lineHeight ? `${props.$lineHeight}px` : 'auto'};
   color: ${(props) => props.$color || '#000000'};
+  text-align: ${(props) => (props.$center ? 'center' : 'left')};
 `;
