@@ -2,8 +2,9 @@ import React from 'react';
 import styled, { useTheme } from 'styled-components/native';
 // import Logo from '@assets/icons/logo.svg';
 import Back from '@assets/icons/leftarrow.svg';
-import { SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Row } from '@components/atomic';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Typography from '@components/typography';
 import { SvgXml } from 'react-native-svg';
 
@@ -33,6 +34,7 @@ const LayoutWithHeader = ({
         flex: 1,
         backgroundColor: colors.gray20,
       }}
+      edges={['top']}
     >
       <Container>
         <Row $alignItems={'center'}>
@@ -60,7 +62,7 @@ const LayoutWithHeader = ({
           {showBack && (
             <Row $alignItems={'center'} $gap={12}>
               <TouchableOpacity onPress={onBackPress}>
-                <Back fill={colors.gray80} />
+                <Back fill={colors.gray70} />
               </TouchableOpacity>
               <Typography.Title $color={colors.gray80}>
                 {title}
