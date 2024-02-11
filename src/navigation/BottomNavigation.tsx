@@ -19,11 +19,7 @@ const BottomNavigation = () => {
 
   return (
     <>
-      <StatusBar
-        translucent
-        backgroundColor="transparent"
-        barStyle="dark-content"
-      />
+      <StatusBar translucent backgroundColor="transparent" />
       <Tab.Navigator
         tabBar={(props) => <BottomTabBar {...props} />}
         initialRouteName="Home"
