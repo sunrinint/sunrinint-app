@@ -1,38 +1,32 @@
 import React, { useState } from 'react';
-import {
-  Animated,
-  Modal,
-  ScrollView,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { ScrollView, View } from 'react-native';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import { Row } from '@components/atomic';
 import Typography from '@components/typography';
 import styled, { useTheme } from 'styled-components/native';
 import ArrowDown from '@assets/icons/arrow_down.svg';
-import ClubCard from '@components/ClubCard';
-import { Spacer } from '@components/atomic/Spacer';
-import Radio from '@components/common/Radio';
-import useBottomSheet from '@hooks/useBottomSheet';
-import Club from '@assets/icons/club_icon.svg';
+import ClubCard from '@/components/common/ClubCard';
 import Setting from '@assets/icons/setting.svg';
-import { useNavigation } from '@react-navigation/native';
+import useOverlay from '@/hooks/useOverlay';
+import CategorySelectBottomSheet from '@/components/common/CategorySelectBottomSheet';
+import { clubCatogory } from '@/constants/clubCategory';
 
-const ClubScreen = () => {
-  const navigation = useNavigation<any>();
-  const {
-    isVisible,
-    showBottomSheet,
-    hideBottomSheet,
-    panResponders,
-    translateY,
-  } = useBottomSheet();
+const ClubScreen = ({ navigation }) => {
   const { colors } = useTheme();
-  const [selectDepartment, setSelectDepartment] = useState('콘텐츠디자인과');
-  const [selectIndex, setSelectIndex] = useState(3);
+  const [category, setCategory] = useState(0);
+  const overlay = useOverlay();
 
-  const club = [
+  const openBottomSheet = () => {
+    overlay.open(
+      <CategorySelectBottomSheet
+        onClose={overlay.close}
+        category={category}
+        setCategory={setCategory}
+      />,
+    );
+  };
+
+  const clubList = [
     {
       name: 'v.friends',
       kind: '디자인 교육 봉사 동아리',
@@ -61,10 +55,10 @@ const ClubScreen = () => {
           paddingTop: 12,
         }}
       >
-        <PressableBox onPress={() => showBottomSheet()}>
+        <PressableBox onPress={() => openBottomSheet()}>
           <Row $alignItems={'center'} $fill={true} $gap={8} $padding={[4, 4]}>
             <Typography.Title $color={colors.gray80}>
-              {selectDepartment}
+              {clubCatogory[category]}
             </Typography.Title>
             <ArrowDown fill={colors.gray60} />
           </Row>
@@ -81,62 +75,11 @@ const ClubScreen = () => {
           }}
           showsVerticalScrollIndicator={false}
         >
-          {club.map((club) => (
-            <ClubCard
-              key={club.name}
-              name={club.name}
-              kind={club.kind}
-              description={club.description}
-              room={club.room}
-              website={club.website}
-              instagram={club.instagram}
-              facebook={club.facebook}
-            />
+          {clubList.map((club) => (
+            <ClubCard key={club.name} {...club} />
           ))}
         </ScrollView>
       </View>
-      <Modal
-        visible={isVisible}
-        animationType="fade"
-        transparent={true}
-        statusBarTranslucent={true}
-      >
-        <Overlay>
-          <TouchableWithoutFeedback onPress={hideBottomSheet}>
-            <View style={{ flex: 1 }} />
-          </TouchableWithoutFeedback>
-          <BottomSheet
-            style={{ transform: [{ translateY }] }}
-            {...panResponders.panHandlers}
-          >
-            <Bar />
-            <Row
-              $padding={[8, 0]}
-              $alignItems={'center'}
-              $justifyContent={'space-between'}
-              $fill={true}
-            >
-              <Typography.SemiLabel $color={colors.gray80}>
-                학과 선택
-              </Typography.SemiLabel>
-              <Club fill={colors.gray50} />
-            </Row>
-            <Radio
-              data={[
-                '정보보호과',
-                '소프트웨어과',
-                'IT경영과',
-                '콘텐츠디자인과',
-              ]}
-              setSelectDepartment={setSelectDepartment}
-              selectIndex={selectIndex}
-              setSelectIndex={setSelectIndex}
-              onConfirm={hideBottomSheet}
-            />
-            <Spacer $height={37} />
-          </BottomSheet>
-        </Overlay>
-      </Modal>
     </LayoutWithHeader>
   );
 };
@@ -145,29 +88,6 @@ const PressableBox = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-`;
-
-const Bar = styled.View`
-  width: 64px;
-  height: 4px;
-  border-radius: 10px;
-  background: #e7eaef;
-`;
-
-const BottomSheet = styled(Animated.View)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 16px 20px;
-  border-radius: 8px 8px 0 0;
-  background: #fff;
-`;
-
-const Overlay = styled.View`
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  background-color: rgba(0, 0, 0, 0.4);
 `;
 
 export default ClubScreen;
