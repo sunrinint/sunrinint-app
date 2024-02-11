@@ -479,10 +479,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-sunrinint_app_v1.debug.xcconfig */;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6N4XWB3QSL;
+				DEVELOPMENT_TEAM = 6U62KX7862;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = sunrinint_app_v1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -507,10 +508,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-sunrinint_app_v1.release.xcconfig */;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6N4XWB3QSL;
+				DEVELOPMENT_TEAM = 6U62KX7862;
 				INFOPLIST_FILE = sunrinint_app_v1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

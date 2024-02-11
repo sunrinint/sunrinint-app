@@ -109,9 +109,6 @@ const SettingScreen = () => {
                 <Card title={'빌드 날짜'} context={'23년 9월 4일'} />
                 <Card title={'Int 버전'} context={'v1'} />
               </InfoCard>
-                </Card>
-              </InfoContainer>
-           
             </Column>
           </Column>
         </ScrollView>
