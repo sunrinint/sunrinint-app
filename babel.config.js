@@ -25,6 +25,7 @@ module.exports = {
           '@lib': './src/lib',
           '@types': './src/types',
           '@hooks': './src/hooks',
+          '@constants': './src/constants',
         },
       },
     ],

@@ -7,19 +7,12 @@ import Check from '@assets/icons/check.svg';
 
 interface RadioProps {
   data: string[];
-  setSelectDepartment: Dispatch<SetStateAction<string>>;
-  selectIndex: number;
-  setSelectIndex: Dispatch<SetStateAction<number>>;
+  value: number;
+  setValue: Dispatch<SetStateAction<number>>;
   onConfirm: () => void;
 }
 
-const Radio = ({
-  data,
-  setSelectDepartment,
-  selectIndex,
-  setSelectIndex,
-  onConfirm,
-}: RadioProps) => {
+const Radio = ({ data, value, setValue, onConfirm }: RadioProps) => {
   const { colors } = useTheme();
 
   return (
@@ -28,13 +21,12 @@ const Radio = ({
       renderItem={({ item, index }) => (
         <Container
           onPress={() => {
-            setSelectDepartment(item);
-            setSelectIndex(index);
+            setValue(index);
             onConfirm();
           }}
         >
           <Typography.Body $color={colors.gray80}>{item}</Typography.Body>
-          <Check fill={index === selectIndex ? colors.highlight : 'none'} />
+          <Check fill={index === value ? colors.highlight : 'none'} />
         </Container>
       )}
     />

@@ -3,36 +3,18 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "allowSvg": true,
-    "include": [
-      "src",
-      "declaration.d.ts"
-    ],
+    "include": ["src", "declaration.d.ts"],
     "baseUrl": "./src",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@screens/*": [
-        "screens/*"
-      ],
-      "@navigation/*": [
-        "navigation/*"
-      ],
-      "@assets/*": [
-        "assets/*"
-      ],
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@types/*": [
-        "types/*"
-      ],
-      "@hooks/*": [
-        "hooks/*"
-      ]
+      "@/*": ["./*"],
+      "@components/*": ["components/*"],
+      "@screens/*": ["screens/*"],
+      "@navigation/*": ["navigation/*"],
+      "@assets/*": ["assets/*"],
+      "@lib/*": ["lib/*"],
+      "@types/*": ["types/*"],
+      "@hooks/*": ["hooks/*"],
+      "@constans/*": ["constants/*"]
     },
     "jsx": "react",
     "allowSyntheticDefaultImports": true
