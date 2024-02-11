@@ -4,11 +4,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '@screens/HomeScreen';
 import BottomTabBar from '@components/layout/BottomTabBar';
 import { useTheme } from 'styled-components/native';
-import HomeIcon from '@/assets/icons/home_icon.svg';
-import ClubIcon from '@/assets/icons/club_icon.svg';
-import SchoolCardIcon from '@/assets/icons/school-card_icon.svg';
 import SchoolCardScreen from '@screens/SchoolCardScreen';
 import ClubScreen from '@screens/ClubScreen';
+import {
+  ClubIcon,
+  HomeIcon,
+  SchoolCardIcon,
+} from '@components/icons/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +38,9 @@ const BottomNavigation = () => {
           component={ClubScreen}
           options={{
             tabBarLabel: '동아리',
-            tabBarIcon: ({ color }) => <ClubIcon fill={color} />,
+            tabBarIcon: ({ color, focused }) => (
+              <ClubIcon color={color} fill={focused} />
+            ),
           }}
         />
         <Tab.Screen
@@ -44,7 +48,9 @@ const BottomNavigation = () => {
           component={HomeScreen}
           options={{
             tabBarLabel: '홈',
-            tabBarIcon: ({ color }) => <HomeIcon fill={color} />,
+            tabBarIcon: ({ color, focused }) => (
+              <HomeIcon color={color} fill={focused} />
+            ),
           }}
         />
         <Tab.Screen
@@ -52,7 +58,9 @@ const BottomNavigation = () => {
           component={SchoolCardScreen}
           options={{
             tabBarLabel: '학생증',
-            tabBarIcon: ({ color }) => <SchoolCardIcon fill={color} />,
+            tabBarIcon: ({ color, focused }) => (
+              <SchoolCardIcon color={color} fill={focused} />
+            ),
           }}
         />
       </Tab.Navigator>

@@ -29,7 +29,7 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
           };
           return (
             <ItemContainer key={index} onPress={onPress} $active={isFocused}>
-              <Icon color={color} />
+              <Icon color={color} focused={isFocused} />
               {isFocused && (
                 <Typography.SemiBody $color={color}>
                   {label}
@@ -87,7 +87,7 @@ const ItemContainer = styled(AnimateTab)<{ $active: boolean }>`
   flex: ${(props) => (props.$active ? 1 : 'none')};
   padding: 12px;
   background-color: ${(props) =>
-    props.$active ? props.theme.colors.gray80 : 'transparent'};
+    props.$active ? props.theme.colors.gray90 : 'transparent'};
   border-radius: 50px;
 `;
 
