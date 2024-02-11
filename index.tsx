@@ -12,6 +12,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { light, dark } from '@/theme';
 import BootSplash from 'react-native-bootsplash';
+import OverlayContext from '@/lib/overlay/OverlayContext';
 
 const queryClient = new QueryClient();
 
@@ -25,9 +26,11 @@ const App = () => {
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-          <NavigationContainer onReady={onReady}>
-            <RootNavigator />
-          </NavigationContainer>
+          <OverlayContext>
+            <NavigationContainer onReady={onReady}>
+              <RootNavigator />
+            </NavigationContainer>
+          </OverlayContext>
         </ThemeProvider>
       </QueryClientProvider>
     </RecoilRoot>
