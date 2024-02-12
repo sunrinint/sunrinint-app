@@ -10,7 +10,17 @@ import MealScreen from '@/screens/MealScreen';
 import TimeTableScreen from '@/screens/TimeTableScreen';
 import NoticeScreen from '@/screens/NoticeScreen';
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Login: undefined;
+  Tab: undefined;
+  Setting: undefined;
+  Class: undefined;
+  Meal: undefined;
+  TimeTable: undefined;
+  Notice: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   return (
