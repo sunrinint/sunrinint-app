@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { Column } from '@components/atomic';
 import GoogleLogo from '@assets/icons/google.svg';
 import Typography from '@components/typography';
@@ -162,31 +162,6 @@ const ModalOverlay = styled.View`
   flex: 1;
   z-index: 9;
   background: rgba(0, 0, 0, 0.4);
-`;
-
-const SignInButton = styled.TouchableOpacity`
-  display: flex;
-  flex-direction: row;
-  height: 56px;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  flex: 1;
-  width: 100%;
-  padding: 0 20px;
-  border-radius: 11px;
-  background: #1c232e;
-`;
-
-const SecondButton = styled.TouchableOpacity`
-  display: flex;
-  height: 44px;
-  padding: 0 20px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 96px;
-  background: #f0f2f5;
 `;
 
 export default LoginScreen;
