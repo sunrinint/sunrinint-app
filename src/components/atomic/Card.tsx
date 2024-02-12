@@ -1,21 +1,53 @@
-import { ViewProps } from 'react-native';
 import React from 'react';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
+import ArrowRight from '@assets/icons/arrow_right.svg';
 
-interface CardProps extends ViewProps {
-  children: React.ReactNode;
-}
-
-const Card = ({ children }: CardProps) => {
-  return <CardLayout>{children}</CardLayout>;
-};
-
-const CardLayout = styled.View`
+const CardContainer = styled.View`
   padding: 20px;
   border-radius: 8px;
   border: 1px solid ${(props) => props.theme.colors.gray30};
   background: ${(props) => props.theme.colors.gray10};
   align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `;
 
-export default Card;
+interface CardTopProps {
+  children: React.ReactNode;
+  onClick: () => void;
+}
+
+const CardTop = ({ children, onClick }: CardTopProps) => {
+  const { colors } = useTheme();
+  return (
+    <CardTopLayout>
+      {children}
+      <IconBox onPress={onClick}>
+        <ArrowRight fill={colors.gray60} />
+      </IconBox>
+    </CardTopLayout>
+  );
+};
+
+const IconBox = styled.TouchableOpacity`
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CardTopLayout = styled.View`
+  align-self: stretch;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const CardMain = {};
+
+export const Card = Object.assign(CardMain, {
+  CardContainer,
+  CardTop,
+});
