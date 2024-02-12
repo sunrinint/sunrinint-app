@@ -7,6 +7,7 @@ import { Row } from '@components/atomic';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Typography from '@components/typography';
 import { SvgXml } from 'react-native-svg';
+import { useNavigation } from '@react-navigation/native';
 
 interface HeaderProps {
   title?: string;
@@ -27,6 +28,7 @@ const LayoutWithHeader = ({
   onFirstChildPress,
   children,
 }: HeaderProps) => {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   return (
     <SafeAreaView
@@ -61,7 +63,11 @@ const LayoutWithHeader = ({
           )}
           {showBack && (
             <Row $alignItems={'center'} $gap={12}>
-              <TouchableOpacity onPress={onBackPress}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
                 <Back fill={colors.gray70} />
               </TouchableOpacity>
               <Typography.Title $color={colors.gray80}>
