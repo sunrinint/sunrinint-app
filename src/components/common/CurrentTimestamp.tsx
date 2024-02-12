@@ -1,27 +1,37 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components/native';
 import Typography from '../typography';
-import Card from '../atomic/Card';
+import { Card } from '../atomic/Card';
+import { useNavigation } from '@react-navigation/native';
 
 export default function () {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   return (
-    <Card>
-      <TimestampColumn>
-        <TimestampRow>
-          <Typography.Caption $color={colors.gray80}>3교시</Typography.Caption>
-          <Typography.Caption $color={colors.gray40}>
-            10:40 ~ 11:30
-          </Typography.Caption>
-        </TimestampRow>
-        <Typography.Title $color={colors.gray90}>
-          지금은{' '}
-          <Typography.Title $color={colors.highlight}>
-            시각 디자인
-          </Typography.Title>{' '}
-          시간
-        </Typography.Title>
-      </TimestampColumn>
+    <Card.CardContainer>
+      <Card.CardTop
+        onClick={() => {
+          navigation.navigate('TimeTable');
+        }}
+      >
+        <TimestampColumn>
+          <TimestampRow>
+            <Typography.Caption $color={colors.gray80}>
+              3교시
+            </Typography.Caption>
+            <Typography.Caption $color={colors.gray40}>
+              10:40 ~ 11:30
+            </Typography.Caption>
+          </TimestampRow>
+          <Typography.Title $color={colors.gray90}>
+            지금은{' '}
+            <Typography.Title $color={colors.highlight}>
+              시각 디자인
+            </Typography.Title>{' '}
+            시간
+          </Typography.Title>
+        </TimestampColumn>
+      </Card.CardTop>
       <ScheduleColumn>
         <ScheduleRow>
           <ScheduleItem>
@@ -108,7 +118,7 @@ export default function () {
           </ScheduleItem>
         </ScheduleRow>
       </ScheduleColumn>
-    </Card>
+    </Card.CardContainer>
   );
 }
 
@@ -158,16 +168,4 @@ const TimestampRow = styled.View`
   align-items: flex-start;
   gap: 4px;
   align-self: stretch;
-`;
-
-const CurrentTimestampLayout = styled.View`
-  padding: 20px;
-  background-color: ${(props) => props.theme.colors.gray10};
-  border-width: 1px;
-  border-color: ${(props) => props.theme.colors.gray30};
-  border-radius: 8px;
-  align-self: stretch;
-  gap: 12px;
-  flex-direction: column;
-  display: flex;
 `;
