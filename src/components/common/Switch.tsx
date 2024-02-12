@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useRef } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { Animated, Pressable } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
 
@@ -14,6 +14,31 @@ const Switch = ({ value, onChange, disabled }: SwitchProps) => {
   const widthAnimation = useRef(new Animated.Value(0)).current;
   const rightAnimation = useRef(new Animated.Value(0)).current;
   const backgroundAnimation = useRef(new Animated.Value(value ? 1 : 0)).current;
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(positionAnimation, {
+        toValue: value ? 0 : 1,
+        duration: 200,
+        useNativeDriver: false,
+      }),
+      Animated.timing(backgroundAnimation, {
+        toValue: value ? 0 : 1,
+        delay: 50,
+        duration: 150,
+        useNativeDriver: false,
+      }),
+      Animated.timing(widthAnimation, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: false,
+      }),
+      Animated.timing(rightAnimation, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  }, [value]);
   return (
     <Container
       $enabled={value}
@@ -25,7 +50,7 @@ const Switch = ({ value, onChange, disabled }: SwitchProps) => {
             useNativeDriver: false,
           }),
           Animated.timing(rightAnimation, {
-            toValue: value ? 1 : 0,
+            toValue: value ? 0 : 1,
             duration: 250,
             useNativeDriver: false,
           }),
@@ -34,29 +59,6 @@ const Switch = ({ value, onChange, disabled }: SwitchProps) => {
       onPressOut={() => {
         console.log('onPressOut');
         onChange(!value);
-        Animated.parallel([
-          Animated.timing(positionAnimation, {
-            toValue: value ? 0 : 1,
-            duration: 200,
-            useNativeDriver: false,
-          }),
-          Animated.timing(backgroundAnimation, {
-            toValue: value ? 0 : 1,
-            delay: 50,
-            duration: 150,
-            useNativeDriver: false,
-          }),
-          Animated.timing(widthAnimation, {
-            toValue: 0,
-            duration: 250,
-            useNativeDriver: false,
-          }),
-          Animated.timing(rightAnimation, {
-            toValue: 0,
-            duration: 250,
-            useNativeDriver: false,
-          }),
-        ]).start();
       }}
       onPress={() => {}}
       disabled={disabled}
