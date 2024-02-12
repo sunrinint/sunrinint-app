@@ -4,9 +4,13 @@ import styled, { useTheme } from 'styled-components/native';
 import Typography from '../typography';
 import { Card } from '../atomic/Card';
 import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '@/navigation/RootNavigator';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
 const NoticeCard = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<tabScreenProp>();
   const { colors } = useTheme();
   return (
     <Card.CardContainer>
