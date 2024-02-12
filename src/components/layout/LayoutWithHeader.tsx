@@ -23,7 +23,6 @@ const LayoutWithHeader = ({
   title,
   logo,
   showBack,
-  onBackPress,
   FirstChild,
   onFirstChildPress,
   children,
