@@ -10,10 +10,10 @@ interface SwitchProps {
 
 const Switch = ({ value, onChange, disabled }: SwitchProps) => {
   const theme = useTheme();
-  const positionAnimation = useRef(new Animated.ValueXY()).current;
+  const positionAnimation = useRef(new Animated.Value(value ? 1 : 0)).current;
   const widthAnimation = useRef(new Animated.Value(0)).current;
   const rightAnimation = useRef(new Animated.Value(0)).current;
-  const backgroundAnimation = useRef(new Animated.Value(0)).current;
+  const backgroundAnimation = useRef(new Animated.Value(value ? 1 : 0)).current;
   return (
     <Container
       $enabled={value}
@@ -36,10 +36,7 @@ const Switch = ({ value, onChange, disabled }: SwitchProps) => {
         onChange(!value);
         Animated.parallel([
           Animated.timing(positionAnimation, {
-            toValue: {
-              x: value ? 0 : 24,
-              y: 0,
-            },
+            toValue: value ? 0 : 1,
             duration: 200,
             useNativeDriver: false,
           }),
@@ -73,7 +70,16 @@ const Switch = ({ value, onChange, disabled }: SwitchProps) => {
     >
       <Circle
         style={[
-          { transform: [{ translateX: positionAnimation.x }] },
+          {
+            transform: [
+              {
+                translateX: positionAnimation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 24],
+                }),
+              },
+            ],
+          },
           {
             width: widthAnimation.interpolate({
               inputRange: [0, 1],
