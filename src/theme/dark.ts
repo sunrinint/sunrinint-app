@@ -1,14 +1,14 @@
 import Palette from '@/theme/types/Palette';
 
 const dark: Palette = {
-  gray10: '#1B1D20',
-  gray20: '#16181A',
-  gray30: '#26282C',
-  gray40: '#7B838E',
-  gray50: '#9EA4AC',
-  gray60: '#B3B8BE',
-  gray70: '#D1D3D7',
-  gray80: '#E9EBED',
+  gray10: '#191D23',
+  gray20: '#14171C',
+  gray30: '#22282F',
+  gray40: '#718198',
+  gray50: '#97A3B3',
+  gray60: '#ADB7C4',
+  gray70: '#CDD3DB',
+  gray80: '#E7EAEE',
   gray90: '#FFFFFF',
   red: '#F83E3E',
   highlight: '#5F90D3',
