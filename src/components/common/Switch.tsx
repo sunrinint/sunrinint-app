@@ -56,11 +56,7 @@ const Switch = ({ value, onChange, disabled }: SwitchProps) => {
           }),
         ]).start();
       }}
-      onPressOut={() => {
-        console.log('onPressOut');
-        onChange(!value);
-      }}
-      onPress={() => {}}
+      onPressOut={() => onChange(!value)}
       disabled={disabled}
       style={{
         backgroundColor: backgroundAnimation.interpolate({
