@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 interface OverlayContextProps {
   open: (overlayElement: React.ReactNode) => void;
@@ -28,10 +29,12 @@ const OverlayContext = ({ children }: OverlayProviderProps) => {
   };
 
   return (
-    <OverlayDispatchContext.Provider value={dispatch}>
-      {children}
-      {overlayElement}
-    </OverlayDispatchContext.Provider>
+    <SafeAreaProvider>
+      <OverlayDispatchContext.Provider value={dispatch}>
+        {children}
+        {overlayElement}
+      </OverlayDispatchContext.Provider>
+    </SafeAreaProvider>
   );
 };
 
