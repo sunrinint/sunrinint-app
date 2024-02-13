@@ -8,15 +8,15 @@ const Regular = styled(Text)`
 
 export const Label = styled(Regular)`
   font-size: ${getFontSize(17)}px;
-  line-height: 24px;
+  line-height: ${getFontSize(24)}px;
 `;
 
 export const Body = styled(Regular)`
   font-size: ${getFontSize(15)}px;
-  line-height: 24px;
+  line-height: ${getFontSize(24)}px;
 `;
 
 export const Caption = styled(Regular)`
   font-size: ${getFontSize(13)}px;
-  line-height: 20px;
+  line-height: ${getFontSize(20)}px;
 `;

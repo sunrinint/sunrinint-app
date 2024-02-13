@@ -66,12 +66,13 @@ const Wrapper = styled.View`
 `;
 
 const Container = styled.View`
-  width: 212px;
+  width: 232px;
   height: 64px;
   background-color: ${(props) => props.theme.colors.gray10};
   border-radius: 60px;
   display: flex;
   padding: 8px;
+  gap: 6px;
   flex-direction: row;
   border: 1px solid ${(props) => props.theme.colors.gray30};
 `;
@@ -81,11 +82,12 @@ const AnimateTab = Animated.createAnimatedComponent(Pressable);
 const ItemContainer = styled(AnimateTab)<{ $active: boolean }>`
   display: flex;
   flex-direction: row;
-  gap: 4px;
+  gap: 12px;
+  ${(props) => props.$active && 'width: 108px'};
   justify-content: center;
   align-items: center;
   flex: ${(props) => (props.$active ? 1 : 'none')};
-  padding: 12px;
+  padding: 0 12px;
   background-color: ${(props) =>
     props.$active ? props.theme.colors.gray90 : 'transparent'};
   border-radius: 50px;

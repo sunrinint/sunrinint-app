@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import { useNavigation } from '@react-navigation/native';
 import { Column, Row } from '@components/atomic';
@@ -7,18 +7,18 @@ import Typography from '@components/typography';
 import { useTheme } from 'styled-components';
 import Logout from '@assets/icons/logout.svg';
 import Edit from '@assets/icons/edit.svg';
-import Switch from '@components/common/Switch';
+import { Switch } from 'react-native';
 import { Spacer } from '@components/atomic/Spacer';
-import { ScrollView, View } from 'react-native';
+import { Appearance, ScrollView, View } from 'react-native';
 import Button from '@/components/common/Button';
 import PressibleCard from '@components/common/setting-card/PressibleCard';
 import Card from '@components/common/setting-card/Card';
 import BrithPickerModal from '@components/common/BrithPickerModal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SettingScreen = () => {
   const navigation = useNavigation<any>();
   const { colors } = useTheme();
-  const [enabled, setEnabled] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [brithModalVisible, setBrithModalVisible] = useState(false);
   const [brith, setBrith] = useState<{
@@ -26,6 +26,25 @@ const SettingScreen = () => {
     month: number;
     day: number;
   } | null>(null);
+
+  const [mode, setMode] = useState<string | null>();
+
+  const colorScheme = Appearance.getColorScheme();
+
+  const getMode = () => {
+    return AsyncStorage.getItem('theme').then((value) => {
+      console.log(value, colorScheme);
+      return value || colorScheme;
+    });
+  };
+
+  useEffect(() => {
+    getMode().then((value) => {
+      setMode(value);
+      console.log(mode);
+    });
+  }, []);
+
   return (
     <>
       <LayoutWithHeader
@@ -86,8 +105,14 @@ const SettingScreen = () => {
                     다크모드
                   </Typography.SemiLabel>
                   <Switch
-                    value={enabled}
-                    onChange={() => setEnabled(!enabled)}
+                    value={mode === 'dark'}
+                    onChange={() => {
+                      setMode(mode === 'dark' ? 'light' : 'dark');
+                      AsyncStorage.setItem(
+                        'theme',
+                        mode === 'dark' ? 'light' : 'dark',
+                      );
+                    }}
                   />
                 </Row>
               </InfoCard>
@@ -97,13 +122,20 @@ const SettingScreen = () => {
                     내 정보
                   </Typography.SemiLabel>
                 </Box>
-                <PressibleCard title={'생년월일'} context={'2007년 10월 30일'} />
-                <PressibleCard title={'학년 · 반 · 번호'} context={'1학년 04반 18번'} />
+                <PressibleCard
+                  onPress={() => setBrithModalVisible(true)}
+                  title={'생년월일'}
+                  context={'2007년 10월 30일'}
+                />
+                <PressibleCard
+                  title={'학년 · 반 · 번호'}
+                  context={'1학년 04반 18번'}
+                />
               </InfoCard>
               <InfoCard>
                 <Box>
                   <Typography.SemiLabel $color={colors.gray80}>
-                  서비스 정보
+                    서비스 정보
                   </Typography.SemiLabel>
                 </Box>
                 <Card title={'빌드 날짜'} context={'23년 9월 4일'} />

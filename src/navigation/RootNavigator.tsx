@@ -6,8 +6,21 @@ import BottomNavigation from './BottomNavigation';
 import LoginScreen from '@screens/LoginScreen';
 import SettingScreen from '@screens/SettingScreen';
 import ClassScreen from '@screens/ClassScreen';
+import MealScreen from '@/screens/MealScreen';
+import TimeTableScreen from '@/screens/TimeTableScreen';
+import NoticeScreen from '@/screens/NoticeScreen';
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Login: undefined;
+  Tab: undefined;
+  Setting: undefined;
+  Class: undefined;
+  Meal: undefined;
+  TimeTable: undefined;
+  Notice: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   return (
@@ -35,6 +48,9 @@ const RootNavigator = () => {
       />
       <Stack.Screen name={'Setting'} component={SettingScreen} />
       <Stack.Screen name={'Class'} component={ClassScreen} />
+      <Stack.Screen name={'Meal'} component={MealScreen} />
+      <Stack.Screen name={'TimeTable'} component={TimeTableScreen} />
+      <Stack.Screen name={'Notice'} component={NoticeScreen} />
     </Stack.Navigator>
   );
 };

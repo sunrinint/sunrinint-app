@@ -1,5 +1,5 @@
 import React from 'react';
-import { Column, Row } from '@components/atomic';
+import { Row } from '@components/atomic';
 import { View } from 'react-native';
 import VfriendsLogo from '@assets/icons/club/vfriends.svg';
 import Typography from '@components/typography';
