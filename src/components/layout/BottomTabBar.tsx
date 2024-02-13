@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import { Animated, Pressable, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Spacer } from '@components/atomic/Spacer';
@@ -7,6 +7,7 @@ import Typography from '@components/typography';
 
 const BottomTabBar = ({ state, descriptors, navigation }: any) => {
   const { bottom } = useSafeAreaInsets();
+  const { colors } = useTheme();
   return (
     <Wrapper>
       <Container style={style.shadow}>
@@ -28,7 +29,18 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
             }
           };
           return (
-            <ItemContainer key={index} onPress={onPress} $active={isFocused}>
+            <ItemContainer
+              key={index}
+              onPress={onPress}
+              $active={isFocused}
+              style={({ pressed }) => ({
+                backgroundColor: isFocused
+                  ? colors.gray90
+                  : pressed
+                    ? colors.gray20
+                    : colors.gray10,
+              })}
+            >
               <Icon color={color} focused={isFocused} />
               {isFocused && (
                 <Typography.SemiBody $color={color}>
@@ -79,7 +91,7 @@ const Container = styled.View`
 
 const AnimateTab = Animated.createAnimatedComponent(Pressable);
 
-const ItemContainer = styled(AnimateTab)<{ $active: boolean }>`
+const ItemContainer = styled.Pressable<{ $active: boolean }>`
   display: flex;
   flex-direction: row;
   gap: 12px;
