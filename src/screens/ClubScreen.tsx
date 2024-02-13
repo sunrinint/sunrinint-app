@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import { Row } from '@components/atomic';
 import Typography from '@components/typography';
@@ -8,20 +8,30 @@ import ArrowDown from '@assets/icons/arrow_down.svg';
 import ClubCard from '@/components/common/ClubCard';
 import Setting from '@assets/icons/setting.svg';
 import useOverlay from '@/hooks/useOverlay';
-import CategorySelectBottomSheet from '@/components/common/CategorySelectBottomSheet';
-import { clubCatogory } from '@/constants/clubCategory';
+import SelectBottomSheet from '@components/common/bottom-sheets/select/SelectBottomSheet';
 
 const ClubScreen = ({ navigation }) => {
   const { colors } = useTheme();
-  const [category, setCategory] = useState(0);
+  const [category, setCategory] = useState('정보보호과');
   const overlay = useOverlay();
 
   const openBottomSheet = () => {
     overlay.open(
-      <CategorySelectBottomSheet
-        onClose={overlay.close}
-        category={category}
-        setCategory={setCategory}
+      <SelectBottomSheet
+        title={'분류'}
+        value={category}
+        onChange={setCategory}
+        onConfirm={() => {
+          console.log('confirm');
+        }}
+        data={[
+          '정보보호과',
+          '소프트웨어과',
+          'IT경영과',
+          '콘텐츠디자인과',
+          '일반동아리',
+          '자율동아리',
+        ]}
       />,
     );
   };
@@ -58,7 +68,7 @@ const ClubScreen = ({ navigation }) => {
         <PressableBox onPress={() => openBottomSheet()}>
           <Row $alignItems={'center'} $fill={true} $gap={8} $padding={[4, 4]}>
             <Typography.Title $color={colors.gray80}>
-              {clubCatogory[category]}
+              {category}
             </Typography.Title>
             <ArrowDown fill={colors.gray60} />
           </Row>
