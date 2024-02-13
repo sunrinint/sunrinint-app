@@ -8,9 +8,7 @@ const Item = ({ value, selected }) => {
   const { colors } = useTheme();
   return (
     <Row $justifyContent={'space-between'} $alignItems={'center'} $fill>
-      <Typography.Body $color={selected ? 'primary' : 'gray90'}>
-        {value}
-      </Typography.Body>
+      <Typography.Body $color={colors.gray90}>{value}</Typography.Body>
       {selected && (
         <SvgXml
           xml={`
