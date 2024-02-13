@@ -117,16 +117,31 @@ const Handler = () => {
   const { colors } = useTheme();
   const { handler } = useContext(BottomSheetContext);
   return (
-    <View
-      style={{
-        width: 64,
-        height: 4,
-        alignSelf: 'center',
-        borderRadius: 10,
-        backgroundColor: colors.gray30,
-      }}
-      {...handler.panHandlers}
-    />
+    <>
+      <View
+        style={{
+          display: 'flex',
+          alignSelf: 'center',
+          paddingHorizontal: 12,
+          paddingVertical: 12,
+          position: 'absolute',
+          top: 4,
+          zIndex: 100,
+        }}
+        {...handler.panHandlers}
+      >
+        <View
+          style={{
+            width: 64,
+            height: 4,
+            alignSelf: 'center',
+            borderRadius: 10,
+            backgroundColor: colors.gray30,
+          }}
+        />
+      </View>
+      <Spacer $height={4} />
+    </>
   );
 };
 
