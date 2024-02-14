@@ -5,7 +5,13 @@ import { FlatList } from 'react-native';
 
 interface Props {
   title: string;
-  data: string[];
+  data: Array<
+    | string
+    | {
+        label: string;
+        value: string;
+      }
+  >;
   value: string;
   onChange: (value: string) => void;
   onConfirm?: () => void;
@@ -34,7 +40,8 @@ const SelectBottomSheet = ({
           data={data}
           renderItem={({ item }) => (
             <BottomSheet.Item
-              value={item}
+              label={typeof item === 'string' ? item : item.label}
+              value={typeof item === 'string' ? item : item.value}
               as={(props) => <Item {...props} />}
             />
           )}

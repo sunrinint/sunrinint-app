@@ -4,11 +4,17 @@ import Typography from '@components/typography';
 import { SvgXml } from 'react-native-svg';
 import React from 'react';
 
-const Item = ({ value, selected }) => {
+interface Props {
+  label?: string;
+  value: string;
+  selected: boolean;
+}
+
+const Item = ({ label, value, selected }: Props) => {
   const { colors } = useTheme();
   return (
     <Row $justifyContent={'space-between'} $alignItems={'center'} $fill>
-      <Typography.Body $color={colors.gray90}>{value}</Typography.Body>
+      <Typography.Body $color={colors.gray90}>{label ?? value}</Typography.Body>
       {selected && (
         <SvgXml
           xml={`

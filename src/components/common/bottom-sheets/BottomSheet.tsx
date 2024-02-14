@@ -155,12 +155,13 @@ const MenuContainer = styled.View`
 `;
 
 interface ItemProps {
+  label?: string;
   value: string;
-  as?: (_: { value: string; selected: boolean }) => ReactNode;
+  as?: (_: { label?: string; value: string; selected: boolean }) => ReactNode;
   children?: ReactNode;
 }
 
-const Item = ({ value, as, children }: ItemProps) => {
+const Item = ({ label, value, as, children }: ItemProps) => {
   const {
     value: contextValue,
     onChange,
@@ -179,7 +180,7 @@ const Item = ({ value, as, children }: ItemProps) => {
         backgroundColor: state.pressed ? colors.gray20 : colors.gray10,
       })}
     >
-      {as ? as({ value, selected: contextValue === value }) : children}
+      {as ? as({ label, value, selected: contextValue === value }) : children}
     </Pressable>
   );
 };
