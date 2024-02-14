@@ -7,14 +7,17 @@ import Typography from '@components/typography';
 import { useTheme } from 'styled-components';
 import Logout from '@assets/icons/logout.svg';
 import Edit from '@assets/icons/edit.svg';
-import { Switch } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import { Spacer } from '@components/atomic/Spacer';
-import { Appearance, ScrollView, View } from 'react-native';
 import Button from '@/components/common/Button';
 import PressibleCard from '@components/common/setting-card/PressibleCard';
 import Card from '@components/common/setting-card/Card';
 import BrithPickerModal from '@components/common/BrithPickerModal';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import useOverlay from '@hooks/useOverlay';
+import SelectBottomSheet from '../components/common/bottom-sheets/select/SelectBottomSheet';
+import useAppTheme from '@hooks/useAppTheme';
+import Next from '@assets/icons/next.svg';
+import ThemeMode from '@lib/type/ThemeMode';
 
 const SettingScreen = () => {
   const navigation = useNavigation<any>();
@@ -27,23 +30,34 @@ const SettingScreen = () => {
     day: number;
   } | null>(null);
 
-  const [mode, setMode] = useState<string | null>();
-
-  const colorScheme = Appearance.getColorScheme();
-
-  const getMode = () => {
-    return AsyncStorage.getItem('theme').then((value) => {
-      console.log(value, colorScheme);
-      return value || colorScheme;
-    });
+  const overlay = useOverlay();
+  const { themeMode, setTheme } = useAppTheme();
+  const convertThemeName = (theme: ThemeMode) => {
+    switch (theme) {
+      case 'system':
+        return '시스템과 동일';
+      case 'light':
+        return '라이트';
+      case 'dark':
+        return '다크';
+    }
   };
-
-  useEffect(() => {
-    getMode().then((value) => {
-      setMode(value);
-      console.log(mode);
-    });
-  }, []);
+  const openBottomSheet = () => {
+    overlay.open(
+      <SelectBottomSheet
+        title={'테마 선택'}
+        data={[
+          { label: '시스템과 동일', value: 'system' },
+          { label: '라이트', value: 'light' },
+          { label: '다크', value: 'dark' },
+        ]}
+        value={themeMode}
+        onChange={(value: ThemeMode) => {
+          setTheme(value);
+        }}
+      />,
+    );
+  };
 
   return (
     <>
@@ -93,7 +107,7 @@ const SettingScreen = () => {
               </Row>
             </Column>
             <Spacer $height={36} />
-            <Column $gap={12} $alignItems={'center'}>
+            <Column $gap={12} $alignItems={'center'} $fill>
               <InfoCard>
                 <Row
                   $padding={[7, 12]}
@@ -101,19 +115,17 @@ const SettingScreen = () => {
                   $justifyContent={'space-between'}
                   $fill={true}
                 >
-                  <Typography.SemiLabel $color={colors.gray80}>
-                    다크모드
+                  <Typography.SemiLabel $color={colors.gray90}>
+                    테마 설정
                   </Typography.SemiLabel>
-                  <Switch
-                    value={mode === 'dark'}
-                    onChange={() => {
-                      setMode(mode === 'dark' ? 'light' : 'dark');
-                      AsyncStorage.setItem(
-                        'theme',
-                        mode === 'dark' ? 'light' : 'dark',
-                      );
-                    }}
-                  />
+                  <Pressable onPress={openBottomSheet}>
+                    <Row $gap={8} $alignItems={'center'}>
+                      <Typography.Body $color={colors.gray70}>
+                        {convertThemeName(themeMode)}
+                      </Typography.Body>
+                      <Next />
+                    </Row>
+                  </Pressable>
                 </Row>
               </InfoCard>
               <InfoCard>
@@ -248,6 +260,7 @@ const InfoCard = styled.View`
   display: flex;
   flex-direction: column;
   padding: 8px;
+  width: 100%;
   justify-content: center;
   align-items: flex-start;
   align-self: stretch;
