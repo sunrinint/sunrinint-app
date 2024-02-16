@@ -19,7 +19,6 @@ const Barcode = ({ value, format = 'CODE128' }: BarcodeProps) => {
     const encoded = new barcodes[format](value, {}).encode();
     setBars(binaryToSvg(encoded));
     setWidth(encoded.data.length * 2);
-    console.log(bars);
   }, [format, value]);
   return (
     <View
