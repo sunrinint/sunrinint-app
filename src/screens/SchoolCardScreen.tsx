@@ -45,6 +45,7 @@ const SchoolCardScreen = () => {
           <View
             style={{
               width: '100%',
+              alignItems: 'center',
             }}
           >
             <SchoolCard isBack={isBack} />

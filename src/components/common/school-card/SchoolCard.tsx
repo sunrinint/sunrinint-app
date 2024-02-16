@@ -112,6 +112,7 @@ const style = StyleSheet.create({
 const Wrapper = styled.View`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   padding: 8px 24px;
 `;
