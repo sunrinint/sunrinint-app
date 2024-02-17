@@ -4,6 +4,9 @@
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+
+             <!-- Make status & navigation bar translucent -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
     <style name="BootTheme" parent="Theme.BootSplash">
