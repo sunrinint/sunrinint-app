@@ -42,21 +42,23 @@ const LayoutWithHeader = ({
           {logo && (
             <SvgXml
               xml={`
-                <svg width="53" height="20" viewBox="0 0 53 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.625 0H0V6.66664H6.625V0Z" fill="${colors.logo1}"/>
-                  <path d="M6.625 6.6665H0V13.3331H6.625V6.6665Z" fill="${colors.logo2}"/>
-                  <path d="M6.625 13.3335H0V20.0001H6.625V13.3335Z" fill="${colors.logo3}"/>
-                  <path d="M16.5625 0H9.9375V6.66664H16.5625V0Z" fill="${colors.logo1}"/>
-                  <path d="M16.5625 6.6665H9.9375V13.3331H16.5625V6.6665Z" fill="${colors.logo2}"/>
-                  <path d="M9.9375 13.3335H16.5625V20.0001" fill="${colors.logo3}"/>
-                  <path d="M23.1875 13.3331H16.5625V6.6665" fill="${colors.logo3}"/>
-                  <path d="M29.8125 6.66664H23.1875V0" fill="${colors.logo3}"/>
-                  <path d="M29.8125 6.6665H23.1875V13.3331H29.8125V6.6665Z" fill="${colors.logo2}"/>
-                  <path d="M29.8125 13.3335H23.1875V20.0001H29.8125V13.3335Z" fill="${colors.logo1}"/>
-                  <path d="M53 0H33.125V6.66664H53V0Z" fill="${colors.logo1}"/>
-                  <path d="M46.3751 6.6665H39.7501V13.3331H46.3751V6.6665Z" fill="${colors.logo2}"/>
-                  <path d="M46.3751 13.3335H39.7501V20.0001H46.3751V13.3335Z" fill="${colors.logo3}"/>
-                </svg>
+              <svg width="54" height="20" viewBox="0 0 54 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_3031_8406)">
+              <path d="M6.66667 0H0V7.03333H6.66667V0Z" fill="${colors.logo1}"/>
+              <path d="M6.66667 12.9331H0V19.9998H6.66667V12.9331Z" fill="${colors.logo3}"/>
+              <path d="M6.66667 6.6665H0V13.3332H6.66667V6.6665Z" fill="${colors.logo2}"/>
+              <path d="M16.6667 0H10V7.03333H16.6667V0Z" fill="${colors.logo1}"/>
+              <path d="M10 13.3333V12.8833H16.6667V13.3333V20" fill="${colors.logo3}"/>
+              <path d="M23.3334 13.3332H16.6667H16.3V6.6665H16.6667" fill="${colors.logo3}"/>
+              <path d="M16.6667 6.6665H10V13.3332H16.6667V6.6665Z" fill="${colors.logo2}"/>
+              <path d="M29.9999 6.66667V7.01667H23.3333V6.66667V0" fill="${colors.logo3}"/>
+              <path d="M29.9999 12.9331H23.3333V19.9998H29.9999V12.9331Z" fill="${colors.logo1}"/>
+              <path d="M29.9999 6.6665H23.3333V13.3332H29.9999V6.6665Z" fill="${colors.logo2}"/>
+              <path d="M53.3333 0H33.3333V6.66667H39.9999V7.16667H46.6666V6.66667H53.3333V0Z" fill="${colors.logo1}"/>
+              <path d="M46.6667 12.8999H40V19.9999H46.6667V12.8999Z" fill="${colors.logo3}"/>
+              <path d="M46.6667 6.6665H40V13.3332H46.6667V6.6665Z" fill="${colors.logo2}"/>
+              </g>
+              </svg>
               `}
             />
           )}
@@ -65,6 +67,12 @@ const LayoutWithHeader = ({
               <TouchableOpacity
                 onPress={() => {
                   navigation.goBack();
+                }}
+                style={{
+                  width: 44,
+                  height: 44,
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
               >
                 <Back fill={colors.gray70} />
@@ -77,7 +85,15 @@ const LayoutWithHeader = ({
         </Row>
         <Row $alignItems={'center'} $justifyContent={'center'}>
           {FirstChild && (
-            <TouchableOpacity onPress={onFirstChildPress}>
+            <TouchableOpacity
+              style={{
+                width: 44,
+                height: 44,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              onPress={onFirstChildPress}
+            >
               <FirstChild />
             </TouchableOpacity>
           )}
