@@ -101,11 +101,11 @@ const SchoolCard = ({ isBack }: SchoolCardProps) => {
 };
 const style = StyleSheet.create({
   shadow: {
-    shadowColor: '#1C232E',
-    shadowOpacity: 0.08,
+    shadowColor: '#1c232e6a',
+    shadowOpacity: 0.1,
     shadowRadius: 16,
     shadowOffset: { width: 0, height: 12 },
-    elevation: 8,
+    elevation: 12,
   },
 });
 

@@ -4,67 +4,67 @@ import { Animated, Pressable, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Spacer } from '@components/atomic/Spacer';
 import Typography from '@components/typography';
+import { Shadow } from 'react-native-shadow-2';
 
 const BottomTabBar = ({ state, descriptors, navigation }: any) => {
   const { bottom } = useSafeAreaInsets();
   const { colors } = useTheme();
   return (
     <Wrapper>
-      <Container style={style.shadow}>
-        {state.routes.map((route: any, index: number) => {
-          const isFocused = state.index === index;
-          const { options } = descriptors[route.key];
-          const label = options.tabBarLabel;
-          const Icon = options.tabBarIcon;
-          const color = isFocused
-            ? options.tabBarActiveTintColor
-            : options.tabBarInactiveTintColor;
-          const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-            });
-            if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name);
-            }
-          };
-          return (
-            <ItemContainer
-              key={index}
-              onPress={onPress}
-              $active={isFocused}
-              style={({ pressed }) => ({
-                backgroundColor: isFocused
-                  ? colors.gray90
-                  : pressed
-                    ? colors.gray20
-                    : colors.gray10,
-              })}
-            >
-              <Icon color={color} focused={isFocused} />
-              {isFocused && (
-                <Typography.SemiBody $color={color}>
-                  {label}
-                </Typography.SemiBody>
-              )}
-            </ItemContainer>
-          );
-        })}
-      </Container>
+      <Shadow
+        distance={10}
+        startColor={colors.shadow1}
+        offset={[0, 12]}
+        style={{
+          borderRadius: 60,
+        }}
+      >
+        <Container>
+          {state.routes.map((route: any, index: number) => {
+            const isFocused = state.index === index;
+            const { options } = descriptors[route.key];
+            const label = options.tabBarLabel;
+            const Icon = options.tabBarIcon;
+            const color = isFocused
+              ? options.tabBarActiveTintColor
+              : options.tabBarInactiveTintColor;
+            const onPress = () => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+              });
+              if (!isFocused && !event.defaultPrevented) {
+                navigation.navigate(route.name);
+              }
+            };
+            return (
+              <ItemContainer
+                key={index}
+                onPress={onPress}
+                $active={isFocused}
+                style={({ pressed }) => ({
+                  backgroundColor: isFocused
+                    ? colors.gray90
+                    : pressed
+                      ? colors.gray20
+                      : colors.gray10,
+                })}
+              >
+                <Icon color={color} focused={isFocused} />
+                {isFocused && (
+                  <Typography.SemiBody $color={color}>
+                    {label}
+                  </Typography.SemiBody>
+                )}
+              </ItemContainer>
+            );
+          })}
+        </Container>
+      </Shadow>
       <Spacer $height={bottom} />
     </Wrapper>
   );
 };
-
-const style = StyleSheet.create({
-  shadow: {
-    shadowColor: '#02066A',
-    shadowOpacity: 0.08,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 12 },
-    elevation: 8,
-  },
-});
 
 const Wrapper = styled.View`
   position: absolute;
