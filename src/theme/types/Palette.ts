@@ -13,6 +13,7 @@ interface Palette {
   logo1: string;
   logo2: string;
   logo3: string;
+  shadow1: string;
 }
 
 export default Palette;

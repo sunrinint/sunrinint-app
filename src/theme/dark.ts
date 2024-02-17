@@ -15,6 +15,7 @@ const dark: Palette = {
   logo1: '#FFFFFF',
   logo2: '#E1E5EB',
   logo3: '#CED5E0',
+  shadow1: '#10131760',
 };
 
 export default dark;

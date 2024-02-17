@@ -15,6 +15,7 @@ const light: Palette = {
   logo1: '#1C232E',
   logo2: '#222B38',
   logo3: '#2B3647',
+  shadow1: '#81818111',
 };
 
 export default light;
