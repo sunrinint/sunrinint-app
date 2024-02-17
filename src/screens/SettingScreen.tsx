@@ -182,7 +182,7 @@ const SettingScreen = () => {
             <View
               style={{
                 width: '100%',
-                backgroundColor: 'white',
+                backgroundColor: colors.gray10,
                 borderRadius: 8,
                 padding: 16,
                 gap: 20,
@@ -204,7 +204,7 @@ const SettingScreen = () => {
                   </Typography.SemiLabel>
                 </GrayButton>
                 <RedButton onPress={() => setModalVisible(false)}>
-                  <Typography.SemiLabel $color={colors.gray10}>
+                  <Typography.SemiLabel $color={colors.gray80}>
                     로그아웃
                   </Typography.SemiLabel>
                 </RedButton>
@@ -244,7 +244,7 @@ const GrayButton = styled.TouchableOpacity`
   gap: 8px;
   flex: 1 0 0;
   border-radius: 4px;
-  background: #e7eaef;
+  background: ${(props) => props.theme.colors.gray30};
 `;
 
 const ModalOverlay = styled.View`
