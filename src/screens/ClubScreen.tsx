@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import { Row } from '@components/atomic';
 import Typography from '@components/typography';
