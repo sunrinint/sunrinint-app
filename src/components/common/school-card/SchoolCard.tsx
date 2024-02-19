@@ -7,6 +7,8 @@ interface SchoolCardProps {
   isBack?: boolean;
 }
 
+const animationDuration = 80;
+
 const SchoolCard = ({ isBack }: SchoolCardProps) => {
   const mounted = useRef(false);
   const frontAnimation = useRef(new Animated.Value(0)).current;
@@ -37,12 +39,12 @@ const SchoolCard = ({ isBack }: SchoolCardProps) => {
       Animated.sequence([
         Animated.timing(frontAnimation, {
           toValue: 1,
-          duration: 100,
+          duration: animationDuration,
           useNativeDriver: false,
         }),
         Animated.timing(backAnimation, {
           toValue: 1,
-          duration: 100,
+          duration: animationDuration,
           useNativeDriver: false,
         }),
       ]).start();
@@ -50,12 +52,12 @@ const SchoolCard = ({ isBack }: SchoolCardProps) => {
       Animated.sequence([
         Animated.timing(backAnimation, {
           toValue: 0,
-          duration: 100,
+          duration: animationDuration,
           useNativeDriver: false,
         }),
         Animated.timing(frontAnimation, {
           toValue: 0,
-          duration: 100,
+          duration: animationDuration,
           useNativeDriver: false,
         }),
       ]).start();
