@@ -12,12 +12,12 @@ const CurrentMeal = () => {
   const navigation = useNavigation<tabScreenProp>();
   const { colors } = useTheme();
   return (
-    <Card.CardContainer>
-      <Card.CardTop
-        onClick={() => {
-          navigation.navigate('Meal');
-        }}
-      >
+    <Card.CardContainer
+      onPress={() => {
+        navigation.navigate('Meal');
+      }}
+    >
+      <Card.CardTop>
         <Typography.SemiLabel $color={colors.gray80}>
           1월 23일 점심
         </Typography.SemiLabel>

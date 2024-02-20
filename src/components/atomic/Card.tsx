@@ -2,7 +2,9 @@ import React from 'react';
 import styled, { useTheme } from 'styled-components/native';
 import ArrowRight from '@assets/icons/arrow_right.svg';
 
-const CardContainer = styled.View`
+const CardContainer = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.6,
+})`
   padding: 20px;
   border-radius: 8px;
   border: 1px solid ${(props) => props.theme.colors.gray30};
@@ -15,22 +17,21 @@ const CardContainer = styled.View`
 
 interface CardTopProps {
   children: React.ReactNode;
-  onClick: () => void;
 }
 
-const CardTop = ({ children, onClick }: CardTopProps) => {
+const CardTop = ({ children }: CardTopProps) => {
   const { colors } = useTheme();
   return (
     <CardTopLayout>
       {children}
-      <IconBox onPress={onClick}>
+      <IconBox>
         <ArrowRight fill={colors.gray60} />
       </IconBox>
     </CardTopLayout>
   );
 };
 
-const IconBox = styled.TouchableOpacity`
+const IconBox = styled.View`
   width: 24px;
   height: 24px;
   justify-content: center;

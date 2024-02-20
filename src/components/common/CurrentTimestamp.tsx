@@ -54,12 +54,12 @@ export default function () {
   const navigation = useNavigation<tabScreenProp>();
   const { colors } = useTheme();
   return (
-    <Card.CardContainer>
-      <Card.CardTop
-        onClick={() => {
-          navigation.navigate('TimeTable');
-        }}
-      >
+    <Card.CardContainer
+      onPress={() => {
+        navigation.navigate('TimeTable');
+      }}
+    >
+      <Card.CardTop>
         <Column $gap={2}>
           <Typography.SemiLabel $color={colors.gray90}>
             {`${data[currentTime].period}교시,`}{' '}

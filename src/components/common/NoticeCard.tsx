@@ -13,12 +13,12 @@ const NoticeCard = () => {
   const navigation = useNavigation<tabScreenProp>();
   const { colors } = useTheme();
   return (
-    <Card.CardContainer>
-      <Card.CardTop
-        onClick={() => {
-          navigation.navigate('Notice');
-        }}
-      >
+    <Card.CardContainer
+      onPress={() => {
+        navigation.navigate('Notice');
+      }}
+    >
+      <Card.CardTop>
         <NoticeRow>
           <IconBox>
             <NoticeIcon fill={colors.gray90} />
