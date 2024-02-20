@@ -189,9 +189,11 @@ const formatTime = (date: Date) => {
   const hours = date.getHours();
   const minutes = date.getMinutes();
 
+  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+
   if (minutes === 0) {
-    return `${hours}시`;
+    return `${formattedHours}시`;
   } else {
-    return `${hours}시 ${minutes}분`;
+    return `${formattedHours}시 ${minutes}분`;
   }
 };
