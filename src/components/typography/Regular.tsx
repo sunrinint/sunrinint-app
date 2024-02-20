@@ -2,8 +2,8 @@ import styled from 'styled-components/native';
 import { Text } from '@components/atomic';
 import { getFontSize } from '@lib/fonts';
 
-const Regular = styled(Text)`
-  font-weight: 500;
+const Regular = styled(Text)<{ $bold?: boolean }>`
+  font-weight: ${({ $bold }) => ($bold ? 600 : 500)};
 `;
 
 export const Label = styled(Regular)`
