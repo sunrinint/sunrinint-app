@@ -2,12 +2,13 @@ import React from 'react';
 import styled, { useTheme } from 'styled-components/native';
 // import Logo from '@assets/icons/logo.svg';
 import Back from '@assets/icons/leftarrow.svg';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { Row } from '@components/atomic';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Typography from '@components/typography';
 import { SvgXml } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
+import IconBox from '../atomic/IconBox';
 
 interface HeaderProps {
   title?: string;
@@ -64,19 +65,13 @@ const LayoutWithHeader = ({
           )}
           {showBack && (
             <Row $alignItems={'center'} $gap={12}>
-              <TouchableOpacity
+              <IconBox
                 onPress={() => {
                   navigation.goBack();
                 }}
-                style={{
-                  width: 44,
-                  height: 44,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
               >
                 <Back fill={colors.gray70} />
-              </TouchableOpacity>
+              </IconBox>
               <Typography.Title $color={colors.gray80}>
                 {title}
               </Typography.Title>
@@ -85,17 +80,9 @@ const LayoutWithHeader = ({
         </Row>
         <Row $alignItems={'center'} $justifyContent={'center'}>
           {FirstChild && (
-            <TouchableOpacity
-              style={{
-                width: 44,
-                height: 44,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              onPress={onFirstChildPress}
-            >
+            <IconBox onPress={onFirstChildPress}>
               <FirstChild />
-            </TouchableOpacity>
+            </IconBox>
           )}
         </Row>
       </Container>
