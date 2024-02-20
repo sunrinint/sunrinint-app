@@ -116,7 +116,7 @@ const Wrapper = styled.View`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 8px 24px;
+  padding: 8px 16px;
 `;
 
 export default SchoolCard;
