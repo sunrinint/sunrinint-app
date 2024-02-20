@@ -42,7 +42,7 @@ const CardTopLayout = styled.View`
   justify-content: space-between;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const CardMain = {};
