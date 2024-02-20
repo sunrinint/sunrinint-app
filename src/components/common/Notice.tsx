@@ -13,7 +13,7 @@ const Notice = ({ title, content, date }: NoticeProps) => {
   const { colors } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <NoticeLayout>
+    <NoticeLayout onPress={() => setIsOpen(!isOpen)}>
       <NoticeTop>
         <NoticeTopLeft>
           <Typography.SemiLabel $color={colors.gray90}>
@@ -21,7 +21,7 @@ const Notice = ({ title, content, date }: NoticeProps) => {
           </Typography.SemiLabel>
           <Typography.Caption $color={colors.gray60}>{date}</Typography.Caption>
         </NoticeTopLeft>
-        <IconBox onPress={() => setIsOpen(!isOpen)}>
+        <IconBox>
           <ArrowDown fill={colors.gray80} />
         </IconBox>
       </NoticeTop>
@@ -42,14 +42,16 @@ const NoticeTopLeft = styled.View`
   gap: 4px;
 `;
 
-const IconBox = styled.TouchableOpacity`
+const IconBox = styled.View`
   width: 24px;
   height: 24px;
   justify-content: center;
   align-items: center;
 `;
 
-const NoticeLayout = styled.View`
+const NoticeLayout = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.6,
+})`
   display: flex;
   padding: 20px;
   flex-direction: column;
