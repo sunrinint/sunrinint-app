@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import { useNavigation } from '@react-navigation/native';
 import { Column, Row } from '@components/atomic';
