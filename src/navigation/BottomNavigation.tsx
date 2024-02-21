@@ -19,6 +19,7 @@ const BottomNavigation = () => {
     <Tab.Navigator
       tabBar={(props) => <BottomTabBar {...props} />}
       initialRouteName="Home"
+      backBehavior={'initialRoute'}
       screenOptions={{
         headerShown: false,
         tabBarInactiveTintColor: colors.gray40,
