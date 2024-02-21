@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 
 import BottomNavigation from './BottomNavigation';
 import LoginScreen from '@screens/LoginScreen';
@@ -9,7 +12,7 @@ import ClassScreen from '@screens/ClassScreen';
 import MealScreen from '@/screens/MealScreen';
 import TimeTableScreen from '@/screens/TimeTableScreen';
 import NoticeScreen from '@/screens/NoticeScreen';
-import { StatusBar } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import useAppTheme from '@/hooks/useAppTheme';
 import { useTheme } from 'styled-components/native';
 
@@ -39,6 +42,17 @@ const RootNavigator = () => {
         initialRouteName="Login"
         screenOptions={{
           headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          transitionSpec: {
+            open: {
+              animation: 'timing',
+              config: { duration: 300 },
+            },
+            close: {
+              animation: 'timing',
+              config: { duration: 300 },
+            },
+          },
         }}
       >
         <Stack.Screen
