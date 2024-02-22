@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components/native';
-import { Animated, Pressable, StyleSheet } from 'react-native';
+import { Animated, Platform, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Spacer } from '@components/atomic/Spacer';
 import Typography from '@components/typography';
@@ -61,6 +61,7 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
           })}
         </Container>
       </Shadow>
+      {Platform.OS === 'android' && <Spacer $height={15} />}
       <Spacer $height={bottom} />
     </Wrapper>
   );
@@ -69,10 +70,9 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
 const Wrapper = styled.View`
   position: absolute;
   width: 100%;
-  height: 100px;
   align-items: center;
   justify-content: center;
-  padding: 8px 0;
+  padding: 8px 0 0 0;
   background-color: transparent;
   bottom: 0;
 `;
