@@ -193,7 +193,7 @@ const SettingScreen = () => {
                   로그아웃 하시겠어요?
                 </Typography.Title>
                 <Typography.Body $color={colors.gray60}>
-                  로그아웃 하시면 다시 로그인 할 때 까지IntPass를 사용하지
+                  로그아웃 하시면 다시 로그인 할 때 까지 SunrinINT를 사용하지
                   못하게 됩니다.
                 </Typography.Body>
               </Column>
