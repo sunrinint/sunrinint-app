@@ -149,6 +149,11 @@ const SettingScreen = () => {
                 <Card title={'빌드 날짜'} context={'23년 9월 4일'} />
                 <Card title={'Int 버전'} context={'v1'} />
               </InfoCard>
+              <InfoCard>
+                <PressibleCard title={'만든 사람들'} />
+                <PressibleCard title={'오픈소스 라이센스'} />
+                <PressibleCard title={'SunrinINT 인스타그램'} />
+              </InfoCard>
             </Column>
           </Wrapper>
           <Spacer $height={20} />

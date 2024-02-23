@@ -8,7 +8,7 @@ import { TouchableOpacityProps } from 'react-native/types';
 
 interface PressibleCardProps extends TouchableOpacityProps {
   title: string;
-  context: string;
+  context?: string;
 }
 
 const PressibleCard = ({ title, context, onPress }: PressibleCardProps) => {
