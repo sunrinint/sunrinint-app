@@ -36,7 +36,6 @@ const LayoutWithHeader = ({
         flex: 1,
         backgroundColor: colors.gray20,
       }}
-      edges={['top']}
     >
       <Container>
         <Row $alignItems={'center'}>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import { useNavigation } from '@react-navigation/native';
-import { Column, Row } from '@components/atomic';
+import { Column, Row, Wrapper } from '@components/atomic';
 import styled from 'styled-components/native';
 import Typography from '@components/typography';
 import { useTheme } from 'styled-components';
@@ -67,22 +67,18 @@ const SettingScreen = () => {
         title={'설정'}
       >
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Column $padding={[20, 12]} $alignItems={'center'}>
-            <ImageContainer />
-            <Spacer $height={24} />
-            <Column $alignItems={'center'} $gap={16}>
-              <Column
-                $justifyContent={'center'}
-                $alignItems={'center'}
-                $gap={4}
-              >
-                <Typography.LargeTitle $color={colors.gray80}>
-                  이정우
-                </Typography.LargeTitle>
-                <Typography.Body $color={colors.gray60}>
-                  23sunrin078@sunrint.hs.kr
-                </Typography.Body>
-              </Column>
+          <Wrapper $padding={[8, 12]}>
+            <Column $padding={[12, 0]} $alignItems={'center'}>
+              <ImageContainer />
+              <Spacer $height={24} />
+              <Typography.LargeTitle $color={colors.gray80}>
+                이정우
+              </Typography.LargeTitle>
+              <Spacer $height={4} />
+              <Typography.Body $color={colors.gray60}>
+                23sunrin078@sunrint.hs.kr
+              </Typography.Body>
+              <Spacer $height={16} />
               <Row $justifyContent={'center'} $gap={8}>
                 <Button
                   fullWidth
@@ -106,14 +102,14 @@ const SettingScreen = () => {
                 </Button>
               </Row>
             </Column>
-            <Spacer $height={36} />
-            <Column $gap={12} $alignItems={'center'} $fill>
+            <Spacer $height={24} />
+            <Column $gap={12}>
               <InfoCard>
                 <Row
                   $padding={[7, 12]}
                   $alignItems={'center'}
                   $justifyContent={'space-between'}
-                  $fill={true}
+                  $fill
                 >
                   <Typography.SemiLabel $color={colors.gray90}>
                     테마 설정
@@ -154,7 +150,8 @@ const SettingScreen = () => {
                 <Card title={'Int 버전'} context={'v1'} />
               </InfoCard>
             </Column>
-          </Column>
+          </Wrapper>
+          <Spacer $height={20} />
         </ScrollView>
       </LayoutWithHeader>
       {brithModalVisible && (
