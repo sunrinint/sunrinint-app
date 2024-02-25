@@ -1,14 +1,14 @@
 import React from 'react';
 import { useTheme } from 'styled-components/native';
-import Typography from '../typography';
-import { Card } from '../atomic/Card';
+import Typography from '../../typography';
+import { Card } from '../../atomic/Card';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '@/navigation/RootNavigator';
+import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
-const CurrentMeal = () => {
+const MealSection = () => {
   const navigation = useNavigation<tabScreenProp>();
   const { colors } = useTheme();
   return (
@@ -31,4 +31,4 @@ const CurrentMeal = () => {
   );
 };
 
-export default CurrentMeal;
+export default MealSection;

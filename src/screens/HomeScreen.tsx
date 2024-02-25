@@ -3,9 +3,11 @@ import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import styled from 'styled-components/native';
 import Setting from '@assets/icons/setting.svg';
 import { useNavigation } from '@react-navigation/native';
-import CurrentTimestamp from '@/components/common/CurrentTimestamp';
-import CurrentMeal from '@/components/common/CurrentMeal';
-import NoticeCard from '@/components/common/NoticeCard';
+import {
+  MealSection,
+  NoticeSection,
+  TimetableSection,
+} from '@components/section/home';
 
 const HomeScreen = () => {
   const navigation = useNavigation<any>();
@@ -17,9 +19,9 @@ const HomeScreen = () => {
       onFirstChildPress={() => navigation.navigate('Setting')}
     >
       <Container>
-        <NoticeCard />
-        <CurrentTimestamp />
-        <CurrentMeal />
+        <NoticeSection />
+        <TimetableSection />
+        <MealSection />
       </Container>
     </LayoutWithHeader>
   );

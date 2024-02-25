@@ -1,15 +1,15 @@
 import React from 'react';
-import NoticeIcon from '@/assets/icons/notice.svg';
+import NoticeIcon from '@assets/icons/notice.svg';
 import styled, { useTheme } from 'styled-components/native';
-import Typography from '../typography';
-import { Card } from '../atomic/Card';
+import Typography from '../../typography';
+import { Card } from '../../atomic/Card';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '@/navigation/RootNavigator';
+import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
-const NoticeCard = () => {
+const NoticeSection = () => {
   const navigation = useNavigation<tabScreenProp>();
   const { colors } = useTheme();
   return (
@@ -47,4 +47,4 @@ const IconBox = styled.View`
   align-items: center;
 `;
 
-export default NoticeCard;
+export default NoticeSection;
