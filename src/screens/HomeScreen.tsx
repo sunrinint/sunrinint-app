@@ -22,7 +22,9 @@ const HomeScreen = () => {
         <Suspense fallback={<NoticeSection.Skeleton />}>
           <NoticeSection />
         </Suspense>
-        <TimetableSection />
+        <Suspense fallback={<TimetableSection.Skeleton />}>
+          <TimetableSection />
+        </Suspense>
         <MealSection />
       </Container>
     </LayoutWithHeader>
