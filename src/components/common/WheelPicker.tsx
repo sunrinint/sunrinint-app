@@ -64,6 +64,7 @@ const WheelPicker = ({ data, initValue, onChange }: Props) => {
             >
               <Animated.Text
                 style={{
+                  fontFamily: 'SUIT Variable',
                   color: scrollY.interpolate({
                     inputRange: [index - 2, index - 1, index],
                     outputRange: [colors.gray40, colors.gray80, colors.gray40],
