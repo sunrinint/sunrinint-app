@@ -33,6 +33,11 @@
 			</array>
 		</dict>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+    <array>
+    	<string>itms-apps</string> <!-- app store -->
+    	<string>instagram</string> <!-- instagram -->
+    </array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
