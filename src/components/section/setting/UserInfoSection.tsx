@@ -50,7 +50,10 @@ const UserInfoSection = () => {
         title={'생년월일'}
         context={user.birthday || '설정되지않음'}
       />
-      <Card title={'학년 · 반 · 번호'} context={'1학년 04반 18번'} />
+      <Card
+        title={'학년 · 반 · 번호'}
+        context={`${user.grade}학년 ${user.class}반 ${user.number}번`}
+      />
     </InfoCard>
   );
 };
