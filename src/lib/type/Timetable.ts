@@ -11,4 +11,18 @@ export interface Timetable {
   timeOfDay: string[];
 }
 
-export default Timetable;
+export interface TimetableWeek {
+  weekday: number;
+  period: number;
+  timetable: [
+    number,
+    [
+      number,
+      ...{
+        teacher: string;
+        subject: string;
+        room?: string;
+      }[],
+    ],
+  ];
+}
