@@ -8,7 +8,10 @@ const useUser = () => {
   });
 
   return {
-    user: data,
+    user: {
+      ...data,
+      birthday: data?.birthday.replace(/-/g, '.'),
+    },
   };
 };
 export default useUser;

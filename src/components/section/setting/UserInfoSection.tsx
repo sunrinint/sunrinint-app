@@ -11,7 +11,7 @@ import useUpdateUser from '@hooks/useUpdateUser';
 
 const UserInfoSection = () => {
   const { user } = useUser();
-  const birthday = user.birthday?.split('-').map((v) => Number(v));
+  const birthday = user.birthday?.split('.').map((v) => Number(v));
   const { updateUser } = useUpdateUser();
 
   const { colors } = useTheme();
