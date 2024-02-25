@@ -29,7 +29,7 @@ authClient.interceptors.response.use(
         await defaultClient
           .get('auth/refresh', {
             headers: {
-              Cookie: `refreshToken=${refreshToken};`,
+              Cookie: `Refresh=${refreshToken};`,
             },
           })
           .then((res) => {

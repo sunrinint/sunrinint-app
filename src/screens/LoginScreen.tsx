@@ -8,7 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SvgXml } from 'react-native-svg';
 import Button from '@/components/common/Button';
 import useOverlay from '@/hooks/useOverlay';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { login } from '@lib/api/auth';
 
 const LoginScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -70,11 +70,11 @@ const LoginScreen = ({ navigation }) => {
     );
   };
 
-  const login = async () => {
-    await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    const token = await GoogleSignin.getTokens();
-  };
+  // const login = async () => {
+  //   // await GoogleSignin.hasPlayServices();
+  //   logisn();
+  //   // console.log(token);
+  // };
 
   return (
     <SafeAreaView
@@ -149,11 +149,10 @@ const LoginScreen = ({ navigation }) => {
             height={56}
             radius={12}
             level={80}
-            onPress={
-              () => navigation.navigate('Tab')
-              // login()
-              //   .then(() => navigation.navigate('Tab'))
-              //   .catch((e) => console.log(e))
+            onPress={() =>
+              login()
+                .then(() => navigation.navigate('Tab'))
+                .catch((e) => console.log(e))
             }
           >
             <GoogleLogo />
