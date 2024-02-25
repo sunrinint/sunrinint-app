@@ -10,7 +10,7 @@ const useAppTheme = () => {
       : Appearance.setColorScheme(theme);
     setThemeMode(theme as ThemeMode);
     AsyncStorage.setItem('theme', theme).then(() => {
-      console.log('theme set', theme);
+      // console.log('theme set', theme);
     });
   };
 
