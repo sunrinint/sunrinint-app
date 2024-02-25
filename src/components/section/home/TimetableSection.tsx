@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import styled, { useTheme } from 'styled-components/native';
-import { Card } from '../atomic/Card';
+import { Card } from '../../atomic/Card';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '@/navigation/RootNavigator';
+import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Column, Row } from '@components/atomic';
 import Typography from '@components/typography';
