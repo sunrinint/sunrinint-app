@@ -15,6 +15,7 @@ const Timetable = () => {
           (rowItem, rowIndex) =>
             typeof rowItem !== 'number' && (
               <Column
+                key={rowIndex}
                 $gap={8}
                 style={{
                   flex: 1,
@@ -28,7 +29,7 @@ const Timetable = () => {
                     <Day key={columnIndex}>{week[rowIndex - 1]}</Day>
                   ) : (
                     columnItem && (
-                      <Item key={columnIndex} $selected={selected}>
+                      <Item key={`${columnIndex}`} $selected={selected}>
                         <Subject $selected={selected}>
                           {columnItem?.subject}
                         </Subject>
