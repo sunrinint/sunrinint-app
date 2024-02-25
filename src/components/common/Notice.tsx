@@ -2,37 +2,77 @@ import React, { useState } from 'react';
 import styled, { useTheme } from 'styled-components/native';
 import Typography from '../typography';
 import ArrowDown from '@assets/icons/down.svg';
+import useNotice from '@hooks/useNotice';
+import { View } from 'react-native';
 
 interface NoticeProps {
-  title: string;
-  content: string;
-  date: string;
+  uuid: string;
 }
 
-const Notice = ({ title, content, date }: NoticeProps) => {
+const Notice = ({ uuid }: NoticeProps) => {
   const { colors } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const { notice } = useNotice(uuid);
   return (
     <NoticeLayout onPress={() => setIsOpen(!isOpen)}>
       <NoticeTop>
         <NoticeTopLeft>
           <Typography.SemiLabel $color={colors.gray90}>
-            {title}
+            {notice.title}
           </Typography.SemiLabel>
-          <Typography.Caption $color={colors.gray60}>{date}</Typography.Caption>
+          <Typography.Caption $color={colors.gray60}>
+            {notice.createdAt.substring(0, 10)}
+          </Typography.Caption>
         </NoticeTopLeft>
         <IconBox>
           <ArrowDown fill={colors.gray80} />
         </IconBox>
       </NoticeTop>
       {isOpen ? (
-        <Typography.Body $color={colors.gray80}>{content}</Typography.Body>
+        <Typography.Body $color={colors.gray80}>
+          {notice.content}
+        </Typography.Body>
       ) : (
         <></>
       )}
     </NoticeLayout>
   );
 };
+
+const Skeleton = () => {
+  const { colors } = useTheme();
+  return (
+    <SkeletonContainer>
+      <View
+        style={{
+          marginVertical: 4,
+          width: '100%',
+          height: 18,
+          backgroundColor: colors.gray20,
+          borderRadius: 100,
+        }}
+      />
+      <View
+        style={{
+          marginVertical: 4,
+          width: 128,
+          height: 12,
+          backgroundColor: colors.gray20,
+          borderRadius: 100,
+        }}
+      />
+    </SkeletonContainer>
+  );
+};
+
+Notice.Skeleton = Skeleton;
+
+const SkeletonContainer = styled.View`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.gray10};
+  padding: 20px;
+  border-radius: 8px;
+`;
 
 const NoticeTopLeft = styled.View`
   display: flex;
