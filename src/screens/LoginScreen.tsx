@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import { Column } from '@components/atomic';
 import GoogleLogo from '@assets/icons/google.svg';
@@ -9,12 +9,21 @@ import { SvgXml } from 'react-native-svg';
 import Button from '@/components/common/Button';
 import useOverlay from '@/hooks/useOverlay';
 import { login } from '@lib/api/auth';
+import { getUser } from '@lib/api/user';
 
 const LoginScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
   const overlay = useOverlay();
+
+  useEffect(() => {
+    getUser().then((user) => {
+      if (user) {
+        navigation.navigate('Tab');
+      }
+    });
+  }, []);
 
   const openModal = () => {
     overlay.open(
