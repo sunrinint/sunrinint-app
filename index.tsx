@@ -16,6 +16,7 @@ import OverlayContext from '@/lib/overlay/OverlayContext';
 import useAppTheme from '@hooks/useAppTheme';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { GOOGLE_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,10 @@ const App = () => {
       webClientId: GOOGLE_CLIENT_ID,
       offlineAccess: true,
     });
+    AsyncStorage.setItem(
+      'access',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxODg2N2ViLWNhMDEtNGI0NC1hN2IzLTBiNjRhOWUxYjEzZCIsImlhdCI6MTcwODgzNjgzMCwiZXhwIjoxNzA4ODQwNDMwfQ.bjgAR_Iq4KCZoOQZ-Wl-Ct88sNXTpwuIXXwZG0NQbFs',
+    ).then(() => console.log('access token set'));
   }, []);
 
   const { theme } = useAppTheme();

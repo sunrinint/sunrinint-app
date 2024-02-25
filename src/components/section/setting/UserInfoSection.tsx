@@ -5,13 +5,14 @@ import useUser from '@hooks/useUser';
 import { useTheme } from 'styled-components/native';
 import useOverlay from '@hooks/useOverlay';
 import BrithPickerModal from '@components/common/BrithPickerModal';
-import { updateUser } from '@lib/api/user';
 import Card from '@components/section/setting/Card';
 import { Box, InfoCard } from '@components/section/setting/styles';
+import useUpdateUser from '@hooks/useUpdateUser';
 
 const UserInfoSection = () => {
   const { user } = useUser();
   const birthday = user.birthday?.split('-').map((v) => Number(v));
+  const { updateUser } = useUpdateUser();
 
   const { colors } = useTheme();
   const overlay = useOverlay();
@@ -28,9 +29,8 @@ const UserInfoSection = () => {
         onConfirm={({ year, month, day }) => {
           updateUser({
             birthday: `${year}-${month}-${day}`,
-          }).then(() => {
-            overlay.close();
           });
+          overlay.close();
         }}
         onCancel={() => {
           overlay.close();

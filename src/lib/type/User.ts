@@ -17,3 +17,8 @@ interface User {
 }
 
 export default User;
+
+export interface UpdateUser {
+  profileImage?: string;
+  birthday?: string;
+}
