@@ -4,23 +4,29 @@ import Typography from '@components/typography';
 import { SvgXml } from 'react-native-svg';
 import React from 'react';
 import { Animated } from 'react-native';
+import useUser from '@hooks/useUser';
+import usePass from '@hooks/usePass';
 
 const BackCard = ({ style }: { style?: any }) => {
   const { colors } = useTheme();
+  const { user } = useUser();
+  const { pass } = usePass();
   return (
     <Container style={style}>
       <Typography.Body $color={colors.gray70}>
         선린인터넷고등학교 모바일 학생증
       </Typography.Body>
-      <ImageContainer />
+      <ImageContainer source={{ uri: user.profileImage }} />
       <Column $alignItems={'center'} $gap={8}>
-        <Typography.Name $color={colors.gray90}>{'유도윤'}</Typography.Name>
+        <Typography.Name $color={colors.gray90}>
+          {user.username}
+        </Typography.Name>
         <Row $gap={6}>
           <Typography.SemiLabel $color={colors.gray70}>
             생년월일
           </Typography.SemiLabel>
           <Typography.Label $color={colors.gray70}>
-            {'2007.01.09'}
+            {user.birthday || '설정되지않음'}
           </Typography.Label>
         </Row>
       </Column>
@@ -29,9 +35,7 @@ const BackCard = ({ style }: { style?: any }) => {
         <Typography.SemiBody $color={colors.gray70}>
           위 사람은 본교 학생임을 증명함.
         </Typography.SemiBody>
-        <Typography.Body $color={colors.gray70}>
-          {'2023.03.02'} ~ {'2026.02.28'}
-        </Typography.Body>
+        <Typography.Body $color={colors.gray70}>{pass.date}</Typography.Body>
       </Column>
       <Svg />
     </Container>
@@ -95,7 +99,7 @@ const Container = styled(Animated.View)`
   justify-content: space-between;
 `;
 
-const ImageContainer = styled.View`
+const ImageContainer = styled.Image`
   width: 128px;
   height: 160px;
   border-radius: 4px;

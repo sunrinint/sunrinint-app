@@ -6,10 +6,14 @@ import { SvgXml } from 'react-native-svg';
 import Barcode from '@components/common/Barcode';
 import { Animated } from 'react-native';
 import useAppTheme from '@/hooks/useAppTheme';
+import useUser from '@hooks/useUser';
+import usePass from '@hooks/usePass';
 
 const FrontCard = ({ style }: { style?: any }) => {
   const { colors } = useTheme();
   const { theme } = useAppTheme();
+  const { pass } = usePass();
+  const { user } = useUser();
 
   const newColors = {
     gray40: theme === 'light' ? colors.gray40 : colors.gray60,
@@ -29,18 +33,16 @@ const FrontCard = ({ style }: { style?: any }) => {
         </Typography.Body>
         <Column $gap={8}>
           <Typography.Name $color={newColors.gray20}>
-            {'유도윤'}
+            {user.username}
           </Typography.Name>
           <Typography.SemiLabel $color={newColors.gray40}>
-            {1}학년 {4}반 {12}번
+            {user.grade}학년 {user.class}반 {user.number}번
           </Typography.SemiLabel>
           <Typography.Body $color={newColors.gray40}>
-            {'23sunrin072@sunrint.hs.kr'}
+            {user.email}
           </Typography.Body>
         </Column>
-        <Typography.Body $color={newColors.gray40}>
-          {'2023.03.02'} ~ {'2026.02.28'}
-        </Typography.Body>
+        <Typography.Body $color={newColors.gray40}>{pass.date}</Typography.Body>
         <SvgXml
           xml={`
                 <svg width="160" height="243" viewBox="0 0 160 243" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +71,7 @@ const FrontCard = ({ style }: { style?: any }) => {
       </InfoContainer>
       <BarcodeContainer>
         <Barcode value={'S2230072'} format={'CODE128'} />
-        <Typography.Body $color={colors.gray90}>{'S2230072'}</Typography.Body>
+        <Typography.Body $color={colors.gray90}>{pass.barcode}</Typography.Body>
       </BarcodeContainer>
     </Container>
   );
@@ -81,6 +83,7 @@ const Container = styled(Animated.View)`
   width: 100%;
   max-width: 380px;
   border-radius: 8px;
+  background-color: ${(props) => props.theme.colors.gray10};
   height: 424px;
 `;
 

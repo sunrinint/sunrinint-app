@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components/native';
-import { Animated, StyleSheet } from 'react-native';
+import { ActivityIndicator, Animated, StyleSheet } from 'react-native';
 import { BackCard, FrontCard } from '@components/common/school-card';
 
 interface SchoolCardProps {
@@ -65,39 +65,41 @@ const SchoolCard = ({ isBack }: SchoolCardProps) => {
   }, [backAnimation, frontAnimation, isBack, isBackState]);
   return (
     <Wrapper>
-      {!isBackState ? (
-        <FrontCard
-          style={[
-            {
-              transform: [
-                {
-                  rotateY: frontAnimation.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: ['0deg', '90deg'],
-                  }),
-                },
-              ],
-            },
-            style.shadow,
-          ]}
-        />
-      ) : (
-        <BackCard
-          style={[
-            {
-              transform: [
-                {
-                  rotateY: backAnimation.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: ['90deg', '0deg'],
-                  }),
-                },
-              ],
-            },
-            style.shadow,
-          ]}
-        />
-      )}
+      <Suspense fallback={<ActivityIndicator />}>
+        {!isBackState ? (
+          <FrontCard
+            style={[
+              {
+                transform: [
+                  {
+                    rotateY: frontAnimation.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ['0deg', '90deg'],
+                    }),
+                  },
+                ],
+              },
+              style.shadow,
+            ]}
+          />
+        ) : (
+          <BackCard
+            style={[
+              {
+                transform: [
+                  {
+                    rotateY: backAnimation.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ['90deg', '0deg'],
+                    }),
+                  },
+                ],
+              },
+              style.shadow,
+            ]}
+          />
+        )}
+      </Suspense>
     </Wrapper>
   );
 };
