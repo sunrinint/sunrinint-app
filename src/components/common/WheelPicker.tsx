@@ -17,8 +17,14 @@ const WheelPicker = ({ data, initValue, onChange }: Props) => {
     initValue ? data.indexOf(initValue) : 0,
   );
 
+  const trySetSelectedIndex = (index: number) => {
+    if (index >= 0 && index < data.length) {
+      setSelectedIndex(index);
+    }
+  };
+
   useEffect(() => {
-    if (selectedIndex > 0 && selectedIndex < data.length) {
+    if (selectedIndex >= 0 && selectedIndex < data.length) {
       onChange(data[selectedIndex]);
     }
   }, [data, selectedIndex, onChange]);
@@ -35,13 +41,13 @@ const WheelPicker = ({ data, initValue, onChange }: Props) => {
           );
           const y = e.nativeEvent.contentOffset.y;
           const index = Math.round(y / itemHeight);
-          setSelectedIndex(index);
+          trySetSelectedIndex(index);
           scrollY.setValue(scrollIndex);
         }}
         onMomentumScrollEnd={(e) => {
           const y = e.nativeEvent.contentOffset.y;
           const index = Math.round(y / itemHeight);
-          setSelectedIndex(index);
+          trySetSelectedIndex(index);
         }}
         getItemLayout={(_, index) => ({
           length: itemHeight,
