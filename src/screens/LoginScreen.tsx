@@ -149,10 +149,11 @@ const LoginScreen = ({ navigation }) => {
             height={56}
             radius={12}
             level={80}
-            onPress={() =>
-              login()
-                .then(() => navigation.navigate('Tab'))
-                .catch((e) => console.log(e))
+            onPress={
+              () => navigation.navigate('Tab')
+              // login()
+              //   .then(() => navigation.navigate('Tab'))
+              //   .catch((e) => console.log(e))
             }
           >
             <GoogleLogo />
