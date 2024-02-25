@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import styled from 'styled-components/native';
 import Setting from '@assets/icons/setting.svg';
@@ -19,7 +19,9 @@ const HomeScreen = () => {
       onFirstChildPress={() => navigation.navigate('Setting')}
     >
       <Container>
-        <NoticeSection />
+        <Suspense fallback={<NoticeSection.Skeleton />}>
+          <NoticeSection />
+        </Suspense>
         <TimetableSection />
         <MealSection />
       </Container>
