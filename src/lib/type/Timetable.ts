@@ -1,4 +1,4 @@
-interface Timetable {
+export interface Timetable {
   period: number;
   timetable: [
     number,
