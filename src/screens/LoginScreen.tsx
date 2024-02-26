@@ -79,12 +79,6 @@ const LoginScreen = ({ navigation }) => {
     );
   };
 
-  // const login = async () => {
-  //   // await GoogleSignin.hasPlayServices();
-  //   logisn();
-  //   // console.log(token);
-  // };
-
   return (
     <SafeAreaView
       style={{
