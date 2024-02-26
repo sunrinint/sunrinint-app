@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row } from '@components/atomic';
-import { View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import VfriendsLogo from '@assets/icons/club/vfriends.svg';
 import Typography from '@components/typography';
 import WebsiteIcon from '@assets/icons/website.svg';
@@ -8,27 +8,15 @@ import InstagramIcon from '@assets/icons/instagram.svg';
 import FacebookIcon from '@assets/icons/facebook.svg';
 import styled, { useTheme } from 'styled-components/native';
 import Box from '../atomic/Box';
+import useClub from '@hooks/useClub';
 
 interface ClubCardProps {
-  name: string;
-  kind: string;
-  description: string;
-  room: string;
-  website?: string;
-  instagram?: string;
-  facebook?: string;
+  id: string;
 }
 
-const ClubCard = ({
-  name,
-  kind,
-  description,
-  room,
-  website,
-  instagram,
-  facebook,
-}: ClubCardProps) => {
+const ClubCard = ({ id }: ClubCardProps) => {
   const { colors } = useTheme();
+  const { club } = useClub(id);
   return (
     <ClubCardLayout>
       <ClubCardTop>
@@ -39,31 +27,39 @@ const ClubCard = ({
             </Box>
             <View>
               <Typography.SemiLabel $color={colors.gray80}>
-                {name}
+                {club.displayName}
               </Typography.SemiLabel>
               <Typography.Caption $color={colors.gray80}>
-                {kind}
+                {club.name}
               </Typography.Caption>
             </View>
           </Row>
-          <Typography.Body $color={colors.gray60}>{room}</Typography.Body>
+          <Typography.Body $color={colors.gray60}>{club.room}</Typography.Body>
         </Row>
-        <Typography.Body $color={colors.gray70}>{description}</Typography.Body>
+        <Typography.Body $color={colors.gray70}>
+          {club.description}
+        </Typography.Body>
       </ClubCardTop>
       <ButtonGroup>
-        <RoundedButton disabled={!website}>
-          <WebsiteIcon fill={facebook ? colors.gray80 : colors.gray40} />
+        <RoundedButton disabled={!club.homepage}>
+          <WebsiteIcon fill={club.facebook ? colors.gray80 : colors.gray40} />
         </RoundedButton>
-        <RoundedButton disabled={!instagram}>
-          <InstagramIcon fill={facebook ? colors.gray80 : colors.gray40} />
+        <RoundedButton disabled={!club.instagram}>
+          <InstagramIcon fill={club.facebook ? colors.gray80 : colors.gray40} />
         </RoundedButton>
-        <RoundedButton disabled={!facebook}>
-          <FacebookIcon fill={facebook ? colors.gray80 : colors.gray40} />
+        <RoundedButton disabled={!club.facebook}>
+          <FacebookIcon fill={club.facebook ? colors.gray80 : colors.gray40} />
         </RoundedButton>
       </ButtonGroup>
     </ClubCardLayout>
   );
 };
+
+const Skeleton = () => {
+  return <ActivityIndicator />;
+};
+
+ClubCard.Skeleton = Skeleton;
 
 const ButtonGroup = styled.View`
   display: flex;
