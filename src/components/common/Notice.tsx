@@ -72,6 +72,7 @@ const SkeletonContainer = styled.View`
   background-color: ${({ theme }) => theme.colors.gray10};
   padding: 20px;
   border-radius: 8px;
+  height: 88px;
 `;
 
 const NoticeTopLeft = styled.View`
