@@ -5,13 +5,17 @@ import { Card } from '../../atomic/Card';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
-import {Column, Row} from '@components/atomic';
+import { Column, Row } from '@components/atomic';
+import useLunch from '@hooks/useLunch';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
 const MealSection = () => {
   const navigation = useNavigation<tabScreenProp>();
+  const { lunch } = useLunch();
   const { colors } = useTheme();
+  const [_, month, day] = lunch.date.split('-');
+
   return (
     <Card.CardContainer
       onPress={() => {
@@ -20,13 +24,12 @@ const MealSection = () => {
     >
       <Card.CardTop>
         <Typography.SemiLabel $color={colors.gray80}>
-          1월 23일 점심
+          {month}월 {day}일 점심
         </Typography.SemiLabel>
       </Card.CardTop>
 
       <Typography.Body $color={colors.gray80}>
-        수수밥, 설렁탕, 소면, 생선까스, 타르타르, 궁중떡볶이, 석박지,
-        생과일(청포도)
+        {lunch.menu.map((v) => v.name).join(', ')}
       </Typography.Body>
     </Card.CardContainer>
   );
@@ -34,19 +37,19 @@ const MealSection = () => {
 
 const Skeleton = () => {
   return (
-      <SkeletonContainer>
-        <Row $padding={[4,0]}>
-          <SkeletonContent18 $width={140}/>
+    <SkeletonContainer>
+      <Row $padding={[4, 0]}>
+        <SkeletonContent18 $width={140} />
+      </Row>
+      <Column>
+        <Row $padding={[4, 0]}>
+          <SkeletonContent16 style={{ width: '100%' }} />
         </Row>
-        <Column>
-          <Row $padding={[4,0]}>
-            <SkeletonContent16 style={{width: '100%'}}/>
-          </Row>
-          <Row $padding={[4,0]}>
-            <SkeletonContent16 $width={140}/>
-          </Row>
-        </Column>
-      </SkeletonContainer>
+        <Row $padding={[4, 0]}>
+          <SkeletonContent16 $width={140} />
+        </Row>
+      </Column>
+    </SkeletonContainer>
   );
 };
 
@@ -60,28 +63,28 @@ const SkeletonContainer = styled.View`
   gap: 12px;
 `;
 
-const SkeletonContent12 = styled.View`
+const SkeletonContent12 = styled.View<{ $width?: number }>`
   width: ${(props) => props.$width || 0}px;
   height: 12px;
   background-color: ${({ theme }) => theme.colors.gray20};
   border-radius: 100px;
 `;
 
-const SkeletonContent16 = styled.View`
+const SkeletonContent16 = styled.View<{ $width?: number }>`
   width: ${(props) => props.$width || 0}px;
   height: 16px;
   background-color: ${({ theme }) => theme.colors.gray20};
   border-radius: 100px;
 `;
 
-const SkeletonContent18 = styled.View`
+const SkeletonContent18 = styled.View<{ $width?: number }>`
   width: ${(props) => props.$width || 0}px;
   height: 16px;
   background-color: ${({ theme }) => theme.colors.gray20};
   border-radius: 100px;
 `;
 
-const SkeletonContent20 = styled.View`
+const SkeletonContent20 = styled.View<{ $width?: number }>`
   width: ${(props) => props.$width || 0}px;
   height: 20px;
   background-color: ${({ theme }) => theme.colors.gray20};
