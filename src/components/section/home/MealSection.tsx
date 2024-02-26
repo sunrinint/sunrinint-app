@@ -7,12 +7,16 @@ import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 import {Column, Row} from '@components/atomic';
 import {SkeletonContent} from "@components/skeleton/SkeletonContent";
+import useLunch from '@hooks/useLunch';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
 const MealSection = () => {
   const navigation = useNavigation<tabScreenProp>();
+  const { lunch } = useLunch();
   const { colors } = useTheme();
+  const [_, month, day] = lunch.date.split('-');
+
   return (
     <Card.CardContainer
       onPress={() => {
@@ -21,13 +25,12 @@ const MealSection = () => {
     >
       <Card.CardTop>
         <Typography.SemiLabel $color={colors.gray80}>
-          1월 23일 점심
+          {month}월 {day}일 점심
         </Typography.SemiLabel>
       </Card.CardTop>
 
       <Typography.Body $color={colors.gray80}>
-        수수밥, 설렁탕, 소면, 생선까스, 타르타르, 궁중떡볶이, 석박지,
-        생과일(청포도)
+        {lunch.menu.map((v) => v.name).join(', ')}
       </Typography.Body>
     </Card.CardContainer>
   );
