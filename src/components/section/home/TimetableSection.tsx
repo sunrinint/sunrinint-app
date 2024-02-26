@@ -129,71 +129,143 @@ const TimeProgress = ({ start, end }: ProgressProps) => {
 
 const Skeleton = () => {
   return (
-      <SkeletonContainer>
-        <Column $gap={4} $alignItems={'flex-start'}>
-          <Row $gap={8} $padding={[4,0]}>
-            <SkeletonContent20 $width={48}/>
-            <SkeletonContent20 $width={80}/>
+    <SkeletonContainer>
+      <Column $gap={4} $alignItems={'flex-start'}>
+        <Row $gap={8} $padding={[4, 0]}>
+          <SkeletonContent20 $width={48} />
+          <SkeletonContent20 $width={80} />
+        </Row>
+        <Row $gap={4} $padding={[4, 0]}>
+          <SkeletonContent12 $width={32} />
+          <SkeletonContent12 $width={80} />
+        </Row>
+      </Column>
+      <Row $alignItems={'flex-start'} $justifyContent={'space-between'}>
+        <Column
+          $padding={[4, 0]}
+          $justifyContent={'center'}
+          $alignItems={'center'}
+        >
+          <Row
+            $padding={[4, 4]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent12 $width={32} />
           </Row>
-          <Row $gap={4} $padding={[4,0]}>
-            <SkeletonContent12 $width={32}/>
-            <SkeletonContent12 $width={80}/>
+          <Row
+            $padding={[4, 0]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent16 $width={40} />
           </Row>
         </Column>
-        <Row $alignItems={'flex-start'} $justifyContent={"space-between"}>
-          <Column $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-            <Row $padding={[4,4]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent12 $width={32}/>
-            </Row>
-            <Row $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent16 $width={40}/>
-            </Row>
-          </Column>
-          <Column $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-            <Row $padding={[4,4]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent12 $width={32}/>
-            </Row>
-            <Row $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent16 $width={40}/>
-            </Row>
-          </Column>
-          <Column $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-            <Row $padding={[4,4]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent12 $width={32}/>
-            </Row>
-            <Row $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent16 $width={40}/>
-            </Row>
-          </Column>
-          <Column $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-            <Row $padding={[4,4]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent12 $width={32}/>
-            </Row>
-            <Row $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent16 $width={40}/>
-            </Row>
-          </Column>
-          <Column $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-            <Row $padding={[4,4]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent12 $width={32}/>
-            </Row>
-            <Row $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent16 $width={40}/>
-            </Row>
-          </Column>
-          <Column $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-            <Row $padding={[4,4]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent12 $width={32}/>
-            </Row>
-            <Row $padding={[4,0]} $justifyContent={'center'} $alignItems={'center'}>
-              <SkeletonContent16 $width={40}/>
-            </Row>
-          </Column>
-        </Row>
-        <Row $padding={[4,0]}>
-          <SkeletonContent12 style={{width: '100%'}}/>
-        </Row>
-      </SkeletonContainer>
+        <Column
+          $padding={[4, 0]}
+          $justifyContent={'center'}
+          $alignItems={'center'}
+        >
+          <Row
+            $padding={[4, 4]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent12 $width={32} />
+          </Row>
+          <Row
+            $padding={[4, 0]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent16 $width={40} />
+          </Row>
+        </Column>
+        <Column
+          $padding={[4, 0]}
+          $justifyContent={'center'}
+          $alignItems={'center'}
+        >
+          <Row
+            $padding={[4, 4]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent12 $width={32} />
+          </Row>
+          <Row
+            $padding={[4, 0]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent16 $width={40} />
+          </Row>
+        </Column>
+        <Column
+          $padding={[4, 0]}
+          $justifyContent={'center'}
+          $alignItems={'center'}
+        >
+          <Row
+            $padding={[4, 4]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent12 $width={32} />
+          </Row>
+          <Row
+            $padding={[4, 0]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent16 $width={40} />
+          </Row>
+        </Column>
+        <Column
+          $padding={[4, 0]}
+          $justifyContent={'center'}
+          $alignItems={'center'}
+        >
+          <Row
+            $padding={[4, 4]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent12 $width={32} />
+          </Row>
+          <Row
+            $padding={[4, 0]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent16 $width={40} />
+          </Row>
+        </Column>
+        <Column
+          $padding={[4, 0]}
+          $justifyContent={'center'}
+          $alignItems={'center'}
+        >
+          <Row
+            $padding={[4, 4]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent12 $width={32} />
+          </Row>
+          <Row
+            $padding={[4, 0]}
+            $justifyContent={'center'}
+            $alignItems={'center'}
+          >
+            <SkeletonContent16 $width={40} />
+          </Row>
+        </Column>
+      </Row>
+      <Row $padding={[4, 0]}>
+        <SkeletonContent12 style={{ width: '100%' }} />
+      </Row>
+    </SkeletonContainer>
   );
 };
 
@@ -207,21 +279,21 @@ const SkeletonContainer = styled.View`
   gap: 12px;
 `;
 
-const SkeletonContent12 = styled.View`
+const SkeletonContent12 = styled.View<{ $width?: number }>`
   width: ${(props) => props.$width || 0}px;
   height: 12px;
   background-color: ${({ theme }) => theme.colors.gray20};
   border-radius: 100px;
 `;
 
-const SkeletonContent16 = styled.View`
+const SkeletonContent16 = styled.View<{ $width?: number }>`
   width: ${(props) => props.$width || 0}px;
   height: 16px;
   background-color: ${({ theme }) => theme.colors.gray20};
   border-radius: 100px;
 `;
 
-const SkeletonContent20 = styled.View`
+const SkeletonContent20 = styled.View<{ $width?: number }>`
   width: ${(props) => props.$width || 0}px;
   height: 20px;
   background-color: ${({ theme }) => theme.colors.gray20};
