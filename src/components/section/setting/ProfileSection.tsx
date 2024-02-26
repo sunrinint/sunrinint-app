@@ -10,11 +10,15 @@ import React from 'react';
 import Button from '@components/common/Button';
 import Logout from '@assets/icons/logout.svg';
 import Edit from '@assets/icons/edit.svg';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 const ProfileSection = () => {
   const { user } = useUser();
   const { colors } = useTheme();
   const overlay = useOverlay();
+  const navigatoin = useNavigation<any>();
   const openModal = () => {
     overlay.open(
       <ModalOverlay>
@@ -50,7 +54,15 @@ const ProfileSection = () => {
                   취소
                 </Typography.SemiLabel>
               </GrayButton>
-              <RedButton onPress={() => overlay.close()}>
+              <RedButton
+                onPress={async () => {
+                  await GoogleSignin.signOut();
+                  await AsyncStorage.removeItem('access');
+                  await AsyncStorage.removeItem('refresh');
+                  overlay.close();
+                  navigatoin.navigate('Login');
+                }}
+              >
                 <Typography.SemiLabel $color={light.gray10}>
                   로그아웃
                 </Typography.SemiLabel>
