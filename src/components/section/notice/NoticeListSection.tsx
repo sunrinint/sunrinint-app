@@ -12,6 +12,7 @@ const NoticeListSection = () => {
       <FlatList
         style={{ height: '100%' }}
         data={noticeList}
+        showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
