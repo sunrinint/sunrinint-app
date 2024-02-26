@@ -1,8 +1,10 @@
 import React from 'react';
 import useTimetableWeek from '@hooks/useTimetableWeek';
 import { Column, Row } from '@components/atomic';
-import styled from 'styled-components/native';
+import styled, {useTheme} from 'styled-components/native';
 import Typography from '@components/typography';
+import theme from '@/theme/types/Theme';
+import {SkeletonContent} from '@components/skeleton/SkeletonContent';
 
 const week = ['월', '화', '수', '목', '금'];
 
@@ -45,6 +47,277 @@ const Timetable = () => {
     </Container>
   );
 };
+
+const Skeleton = () => {
+    const { colors } = useTheme();
+    return (
+        <SkeletonContainer>
+            <Row $gap={4} $alignItems={'center'}>
+                <Date>
+                    <Typography.Caption $color={colors.gray50}>월</Typography.Caption>
+                </Date>
+                <Date>
+                    <Typography.Caption $color={colors.gray50}>화</Typography.Caption>
+                </Date>
+                <Date>
+                    <Typography.Caption $color={colors.gray50}>수</Typography.Caption>
+                </Date>
+                <Date>
+                    <Typography.Caption $color={colors.gray50}>목</Typography.Caption>
+                </Date>
+                <Date>
+                    <Typography.Caption $color={colors.gray50}>금</Typography.Caption>
+                </Date>
+            </Row>
+            <Row $gap={4} $alignItems={'center'}>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+            </Row>
+            <Row $gap={4} $alignItems={'center'}>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+            </Row>
+            <Row $gap={4} $alignItems={'center'}>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+            </Row>
+            <Row $gap={4} $alignItems={'center'}>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+            </Row>
+            <Row $gap={4} $alignItems={'center'}>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+            </Row>
+            <Row $gap={4} $alignItems={'center'}>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+            </Row>
+            <Row $gap={4} $alignItems={'center'}>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+                <Date>
+                    <Column $padding={[12,0]} $gap={8} $alignItems={'center'} $justifyContent={'center'}>
+                        <SkeletonContent $width={36} $height={16}/>
+                        <SkeletonContent $width={48} $height={12}/>
+                    </Column>
+                </Date>
+            </Row>
+        </SkeletonContainer>
+    );
+};
+
+Timetable.Skeleton = Skeleton;
+
+const Date = styled.View`
+    flex: 1 0 0;
+    flex-direction: row;
+    justify-content: center;
+`;
+
+const SkeletonContainer = styled.View`
+    display: flex;
+    width: 100%;
+    padding: 20px 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    background-color: ${({ theme }) => theme.colors.gray10};
+    border-radius: 8px;
+    border: 1px solid ${({ theme }) => theme.colors.gray30};
+`;
+
 const Container = styled.View`
   display: flex;
   width: 100%;
@@ -87,11 +360,5 @@ const Name = styled(Typography.Caption)<{ $selected?: boolean }>`
   color: ${({ theme, $selected }) =>
     $selected ? theme.colors.gray10 : theme.colors.gray60};
 `;
-
-const Skeleton = () => {
-  return <></>;
-};
-
-Timetable.Skeleton = Skeleton;
 
 export default Timetable;
