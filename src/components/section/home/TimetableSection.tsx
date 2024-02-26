@@ -8,6 +8,7 @@ import { Column, Row } from '@components/atomic';
 import Typography from '@components/typography';
 import { Animated } from 'react-native';
 import useTimetable from '@hooks/useTimetable';
+import {SkeletonContent} from "@components/skeleton/SkeletonContent";
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
@@ -132,12 +133,12 @@ const Skeleton = () => {
     <SkeletonContainer>
       <Column $gap={4} $alignItems={'flex-start'}>
         <Row $gap={8} $padding={[4, 0]}>
-          <SkeletonContent20 $width={48} />
-          <SkeletonContent20 $width={80} />
+          <SkeletonContent $width={48} $height={20}/>
+          <SkeletonContent $width={80} $height={20}/>
         </Row>
         <Row $gap={4} $padding={[4, 0]}>
-          <SkeletonContent12 $width={32} />
-          <SkeletonContent12 $width={80} />
+          <SkeletonContent $width={32} $height={12}/>
+          <SkeletonContent $width={80} $height={12}/>
         </Row>
       </Column>
       <Row $alignItems={'flex-start'} $justifyContent={'space-between'}>
@@ -151,14 +152,14 @@ const Skeleton = () => {
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent12 $width={32} />
+            <SkeletonContent $width={32} $height={12}/>
           </Row>
           <Row
             $padding={[4, 0]}
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent16 $width={40} />
+            <SkeletonContent $width={40} $height={16}/>
           </Row>
         </Column>
         <Column
@@ -171,14 +172,14 @@ const Skeleton = () => {
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent12 $width={32} />
+            <SkeletonContent $width={32} $height={12}/>
           </Row>
           <Row
             $padding={[4, 0]}
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent16 $width={40} />
+            <SkeletonContent $width={40} $height={16}/>
           </Row>
         </Column>
         <Column
@@ -191,14 +192,14 @@ const Skeleton = () => {
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent12 $width={32} />
+            <SkeletonContent $width={32} $height={12}/>
           </Row>
           <Row
             $padding={[4, 0]}
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent16 $width={40} />
+            <SkeletonContent $width={40} $height={16}/>
           </Row>
         </Column>
         <Column
@@ -211,14 +212,14 @@ const Skeleton = () => {
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent12 $width={32} />
+            <SkeletonContent $width={32} $height={12}/>
           </Row>
           <Row
             $padding={[4, 0]}
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent16 $width={40} />
+            <SkeletonContent $width={40} $height={16}/>
           </Row>
         </Column>
         <Column
@@ -231,14 +232,14 @@ const Skeleton = () => {
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent12 $width={32} />
+            <SkeletonContent $width={32} $height={12}/>
           </Row>
           <Row
             $padding={[4, 0]}
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent16 $width={40} />
+            <SkeletonContent $width={40} $height={16}/>
           </Row>
         </Column>
         <Column
@@ -251,19 +252,19 @@ const Skeleton = () => {
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent12 $width={32} />
+            <SkeletonContent $width={32} $height={12}/>
           </Row>
           <Row
             $padding={[4, 0]}
             $justifyContent={'center'}
             $alignItems={'center'}
           >
-            <SkeletonContent16 $width={40} />
+            <SkeletonContent $width={40} $height={16}/>
           </Row>
         </Column>
       </Row>
       <Row $padding={[4, 0]}>
-        <SkeletonContent12 style={{ width: '100%' }} />
+        <SkeletonContent $height={12}/>
       </Row>
     </SkeletonContainer>
   );
@@ -277,27 +278,6 @@ const SkeletonContainer = styled.View`
   padding: 20px 20px;
   border-radius: 8px;
   gap: 12px;
-`;
-
-const SkeletonContent12 = styled.View<{ $width?: number }>`
-  width: ${(props) => props.$width || 0}px;
-  height: 12px;
-  background-color: ${({ theme }) => theme.colors.gray20};
-  border-radius: 100px;
-`;
-
-const SkeletonContent16 = styled.View<{ $width?: number }>`
-  width: ${(props) => props.$width || 0}px;
-  height: 16px;
-  background-color: ${({ theme }) => theme.colors.gray20};
-  border-radius: 100px;
-`;
-
-const SkeletonContent20 = styled.View<{ $width?: number }>`
-  width: ${(props) => props.$width || 0}px;
-  height: 20px;
-  background-color: ${({ theme }) => theme.colors.gray20};
-  border-radius: 100px;
 `;
 
 const ProgressBar = styled(Animated.View)`

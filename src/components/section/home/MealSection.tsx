@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 import {Column, Row} from '@components/atomic';
+import {SkeletonContent} from "@components/skeleton/SkeletonContent";
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
@@ -36,14 +37,14 @@ const Skeleton = () => {
   return (
       <SkeletonContainer>
         <Row $padding={[4,0]}>
-          <SkeletonContent18 $width={140}/>
+          <SkeletonContent $width={140} $height={18}/>
         </Row>
         <Column>
           <Row $padding={[4,0]}>
-            <SkeletonContent16 style={{width: '100%'}}/>
+            <SkeletonContent $height={16}/>
           </Row>
           <Row $padding={[4,0]}>
-            <SkeletonContent16 $width={140}/>
+            <SkeletonContent $width={140} $height={16}/>
           </Row>
         </Column>
       </SkeletonContainer>
@@ -58,34 +59,6 @@ const SkeletonContainer = styled.View`
   padding: 20px 20px;
   border-radius: 8px;
   gap: 12px;
-`;
-
-const SkeletonContent12 = styled.View`
-  width: ${(props) => props.$width || 0}px;
-  height: 12px;
-  background-color: ${({ theme }) => theme.colors.gray20};
-  border-radius: 100px;
-`;
-
-const SkeletonContent16 = styled.View`
-  width: ${(props) => props.$width || 0}px;
-  height: 16px;
-  background-color: ${({ theme }) => theme.colors.gray20};
-  border-radius: 100px;
-`;
-
-const SkeletonContent18 = styled.View`
-  width: ${(props) => props.$width || 0}px;
-  height: 16px;
-  background-color: ${({ theme }) => theme.colors.gray20};
-  border-radius: 100px;
-`;
-
-const SkeletonContent20 = styled.View`
-  width: ${(props) => props.$width || 0}px;
-  height: 20px;
-  background-color: ${({ theme }) => theme.colors.gray20};
-  border-radius: 100px;
 `;
 
 export default MealSection;

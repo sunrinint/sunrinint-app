@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row } from '@components/atomic';
+import {Column, Row} from '@components/atomic';
 import { ActivityIndicator, View } from 'react-native';
 import VfriendsLogo from '@assets/icons/club/vfriends.svg';
 import Typography from '@components/typography';
@@ -9,6 +9,7 @@ import FacebookIcon from '@assets/icons/facebook.svg';
 import styled, { useTheme } from 'styled-components/native';
 import Box from '../atomic/Box';
 import useClub from '@hooks/useClub';
+import {SkeletonContent} from '@components/skeleton/SkeletonContent';
 
 interface ClubCardProps {
   id: string;
@@ -56,10 +57,45 @@ const ClubCard = ({ id }: ClubCardProps) => {
 };
 
 const Skeleton = () => {
-  return <ActivityIndicator />;
+  return (
+      <SkeletonContainer>
+        <Row $justifyContent={'space-between'} $alignItems={'center'}>
+          <Row $gap={8} $alignItems={'center'} $justifyContent={'flex-start'}>
+            <SkeletonContent $width={32} $height={32}/>
+            <Column $gap={8} $alignItems={'flex-start'}>
+              <SkeletonContent $width={80} $height={16}/>
+              <SkeletonContent $width={128} $height={12}/>
+            </Column>
+          </Row>
+          <SkeletonContent $width={48} $height={12}/>
+        </Row>
+        <Column>
+          <Row $padding={[6,0]} $justifyContent={'flex-start'}>
+            <SkeletonContent $height={12}/>
+          </Row>
+          <Row $padding={[6,0]} $justifyContent={'flex-start'}>
+            <SkeletonContent $height={12}/>
+          </Row>
+          <Row $padding={[6,0]} $justifyContent={'flex-start'}>
+            <SkeletonContent $height={12}/>
+          </Row>
+          <Row $padding={[6,0]} $justifyContent={'flex-start'}>
+            <SkeletonContent $width={128} $height={12}/>
+          </Row>
+        </Column>
+      </SkeletonContainer>
+  );
 };
 
 ClubCard.Skeleton = Skeleton;
+
+const SkeletonContainer = styled.View`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.gray10};
+  padding: 20px 20px;
+  border-radius: 8px;
+  gap: 16px;
+`;
 
 const ButtonGroup = styled.View`
   display: flex;
