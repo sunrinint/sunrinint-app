@@ -97,7 +97,9 @@ const TimeProgress = ({ start, end }: ProgressProps) => {
   const animation = useRef(new Animated.Value(0)).current;
   const { timetable } = useTimetable();
   useEffect(() => {
-    const percentage = (timetable.period - 0.5) / timetable.timetable[0];
+    const [_, ...subjects] = timetable.timetable;
+    const subjectsLength = subjects.filter((item) => item).length;
+    const percentage = (timetable.period - 0.5) / subjectsLength;
     Animated.timing(animation, {
       toValue: percentage,
       duration: 1000,
