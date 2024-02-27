@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row } from '@components/atomic';
+import { Row, Column } from '@components/atomic';
 import { ActivityIndicator, View } from 'react-native';
 import Typography from '@components/typography';
 import WebsiteIcon from '@assets/icons/website.svg';
@@ -7,7 +7,7 @@ import InstagramIcon from '@assets/icons/instagram.svg';
 import FacebookIcon from '@assets/icons/facebook.svg';
 import styled, { useTheme } from 'styled-components/native';
 import useClub from '@hooks/useClub';
-import {SkeletonContent} from '@components/skeleton/SkeletonContent';
+import { SkeletonContent } from '@components/skeleton/SkeletonContent';
 import useAppTheme from '@hooks/useAppTheme';
 
 interface ClubCardProps {
@@ -57,32 +57,32 @@ const ClubCard = ({ id }: ClubCardProps) => {
 
 const Skeleton = () => {
   return (
-      <SkeletonContainer>
-        <Row $justifyContent={'space-between'} $alignItems={'center'}>
-          <Row $gap={8} $alignItems={'center'} $justifyContent={'flex-start'}>
-            <SkeletonContent $width={32} $height={32}/>
-            <Column $gap={8} $alignItems={'flex-start'}>
-              <SkeletonContent $width={80} $height={16}/>
-              <SkeletonContent $width={128} $height={12}/>
-            </Column>
-          </Row>
-          <SkeletonContent $width={48} $height={12}/>
+    <SkeletonContainer>
+      <Row $justifyContent={'space-between'} $alignItems={'center'}>
+        <Row $gap={8} $alignItems={'center'} $justifyContent={'flex-start'}>
+          <SkeletonContent $width={32} $height={32} />
+          <Column $gap={8} $alignItems={'flex-start'}>
+            <SkeletonContent $width={80} $height={16} />
+            <SkeletonContent $width={128} $height={12} />
+          </Column>
         </Row>
-        <Column>
-          <Row $padding={[6,0]} $justifyContent={'flex-start'}>
-            <SkeletonContent $height={12}/>
-          </Row>
-          <Row $padding={[6,0]} $justifyContent={'flex-start'}>
-            <SkeletonContent $height={12}/>
-          </Row>
-          <Row $padding={[6,0]} $justifyContent={'flex-start'}>
-            <SkeletonContent $height={12}/>
-          </Row>
-          <Row $padding={[6,0]} $justifyContent={'flex-start'}>
-            <SkeletonContent $width={128} $height={12}/>
-          </Row>
-        </Column>
-      </SkeletonContainer>
+        <SkeletonContent $width={48} $height={12} />
+      </Row>
+      <Column>
+        <Row $padding={[6, 0]} $justifyContent={'flex-start'}>
+          <SkeletonContent $height={12} />
+        </Row>
+        <Row $padding={[6, 0]} $justifyContent={'flex-start'}>
+          <SkeletonContent $height={12} />
+        </Row>
+        <Row $padding={[6, 0]} $justifyContent={'flex-start'}>
+          <SkeletonContent $height={12} />
+        </Row>
+        <Row $padding={[6, 0]} $justifyContent={'flex-start'}>
+          <SkeletonContent $width={128} $height={12} />
+        </Row>
+      </Column>
+    </SkeletonContainer>
   );
 };
 
