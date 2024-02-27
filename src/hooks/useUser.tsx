@@ -10,7 +10,7 @@ const useUser = () => {
   return {
     user: {
       ...data,
-      birthday: data?.birthday.replace(/-/g, '.'),
+      birthday: data?.birthday?.replace(/-/g, '.'),
     },
   };
 };

@@ -26,7 +26,9 @@ const NoticeSection = () => {
             <NoticeIcon fill={colors.gray90} />
           </IconBox>
           <Typography.SemiBody $color={colors.gray90}>
-            {noticeList[0].title}
+            {noticeList.length > 0
+              ? noticeList[0].title
+              : '공지사항이 없습니다.'}
           </Typography.SemiBody>
         </NoticeRow>
       </Card.CardTop>
