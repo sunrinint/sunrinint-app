@@ -8,3 +8,11 @@ export const getLunch = async () => {
     menu: res.data.menu,
   } as Lunch;
 };
+
+export const getLunchWeek = async () => {
+  const res = await authClient.get<Lunch[]>('/lunch/week/demo');
+  return res.data.map((lunch) => ({
+    date: lunch.date,
+    menu: lunch.menu,
+  })) as Lunch[];
+};
