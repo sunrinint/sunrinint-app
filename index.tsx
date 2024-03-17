@@ -2,7 +2,7 @@
  * @format
  */
 
-import { AppRegistry } from 'react-native';
+import { AppRegistry, LogBox } from 'react-native';
 import { name as appName } from './app.json';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,7 +17,13 @@ import useAppTheme from '@hooks/useAppTheme';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { GOOGLE_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from '@env';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      throwOnError: true,
+    },
+  },
+});
 
 const App = () => {
   const onReady = () => {
@@ -30,6 +36,7 @@ const App = () => {
       webClientId: GOOGLE_CLIENT_ID,
       offlineAccess: true,
     });
+    // LogBox.uninstall();
   }, []);
 
   const { theme } = useAppTheme();
