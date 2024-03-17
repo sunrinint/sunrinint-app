@@ -8,6 +8,7 @@ import {
   NoticeSection,
   TimetableSection,
 } from '@components/section/home';
+import { SuspenseWithErrorBoundary } from '@lib/error-boundary';
 
 const HomeScreen = () => {
   const navigation = useNavigation<any>();
@@ -22,9 +23,12 @@ const HomeScreen = () => {
         <Suspense fallback={<NoticeSection.Skeleton />}>
           <NoticeSection />
         </Suspense>
-        <Suspense fallback={<TimetableSection.Skeleton />}>
+        <SuspenseWithErrorBoundary
+          fallback={<TimetableSection.Skeleton />}
+          errorFallback={<TimetableSection.Error />}
+        >
           <TimetableSection />
-        </Suspense>
+        </SuspenseWithErrorBoundary>
         <Suspense fallback={<MealSection.Skeleton />}>
           <MealSection />
         </Suspense>

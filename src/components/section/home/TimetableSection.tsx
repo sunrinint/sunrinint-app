@@ -274,6 +274,7 @@ const Skeleton = () => {
 };
 
 TimeTableSection.Skeleton = Skeleton;
+TimeTableSection.Error = Skeleton;
 
 const SkeletonContainer = styled.View`
   width: 100%;
