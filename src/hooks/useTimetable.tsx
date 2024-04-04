@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 const useTimetable = () => {
   const { data, refetch } = useSuspenseQuery({
     queryKey: ['timetable'],
-    queryFn: () => getTimetable(),
+    queryFn: getTimetable,
   });
   useEffect(() => {
     const interval = setInterval(() => refetch(), 1000 * 60 * 30);

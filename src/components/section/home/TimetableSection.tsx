@@ -9,6 +9,7 @@ import Typography from '@components/typography';
 import { Animated } from 'react-native';
 import useTimetable from '@hooks/useTimetable';
 import { SkeletonContent } from '@components/skeleton/SkeletonContent';
+import useScheduleState from '@hooks/useScheduleState';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
@@ -21,6 +22,7 @@ const TimeTableSection = () => {
     subject: string;
     room: string;
   };
+  const { state } = useScheduleState();
   return (
     <Card.CardContainer
       onPress={() => {
@@ -29,36 +31,51 @@ const TimeTableSection = () => {
     >
       <Card.CardTop>
         <Column $gap={2}>
-          <Typography.SemiLabel $color={colors.gray90}>
-            {`${timetable.period}교시,`}{' '}
-            <Typography.SemiLabel $color={colors.highlight}>
-              {currentTime.subject}
-            </Typography.SemiLabel>{' '}
-            시간
-          </Typography.SemiLabel>
+          {state === 'DURING_CLASSES' ? (
+            <Typography.SemiLabel $color={colors.gray90}>
+              {`${timetable.period}교시,`}{' '}
+              <Typography.SemiLabel $color={colors.highlight}>
+                {currentTime.subject}
+              </Typography.SemiLabel>
+              시간
+            </Typography.SemiLabel>
+          ) : (
+            <Typography.Label $bold $color={colors.gray90}>
+              {state === 'BEFORE_CLASSES' && '현재는 등교 전입니다'}
+              {state === 'AFTER_SCHOOL' && '방과 후'}
+            </Typography.Label>
+          )}
           <Typography.Body $color={colors.gray60}>
-            {`${currentTime.room} ${currentTime.teacher} 선생님`}
+            {state === 'DURING_CLASSES' &&
+              `${currentTime.room} ${currentTime.teacher} 선생님`}
+            {state === 'BEFORE_CLASSES' && '등교시간 : 8시 30분'}
+            {(state === 'AFTER_SCHOOL' || state === 'WEEKEND_OR_HOLIDAY') &&
+              '현재는 수업시간이 아닙니다'}
           </Typography.Body>
         </Column>
       </Card.CardTop>
-      <Row $gap={4} $fill>
-        {timetable.timetable.map(
-          (item, index) =>
-            item &&
-            typeof item !== 'number' && (
-              <PeriodItem
-                key={index}
-                period={index}
-                currentPeriod={timetable.period}
-                subject={item.subject}
-              />
-            ),
-        )}
-      </Row>
-      <TimeProgress
-        start={timetable.timeOfDay[0]}
-        end={timetable.timeOfDay.slice(-1)[0]}
-      />
+      {state !== 'WEEKEND_OR_HOLIDAY' && (
+        <>
+          <Row $gap={4} $fill>
+            {timetable.timetable.map(
+              (item, index) =>
+                item &&
+                typeof item !== 'number' && (
+                  <PeriodItem
+                    key={index}
+                    period={index}
+                    currentPeriod={timetable.period}
+                    subject={item.subject}
+                  />
+                ),
+            )}
+          </Row>
+          <TimeProgress
+            start={timetable.timeOfDay[0]}
+            end={timetable.timeOfDay.slice(-1)[0]}
+          />
+        </>
+      )}
     </Card.CardContainer>
   );
 };
@@ -96,17 +113,18 @@ const TimeProgress = ({ start, end }: ProgressProps) => {
   const { colors } = useTheme();
   const animation = useRef(new Animated.Value(0)).current;
   const { timetable } = useTimetable();
+  const { state } = useScheduleState();
   useEffect(() => {
     const [_, ...subjects] = timetable.timetable;
     const subjectsLength = subjects.filter((item) => item).length;
-    const percentage = (timetable.period - 0.5) / subjectsLength;
+    const percentage =
+      state === 'AFTER_SCHOOL' ? 1 : (timetable.period - 0.5) / subjectsLength;
     Animated.timing(animation, {
       toValue: percentage,
       duration: 1000,
       useNativeDriver: false,
     }).start();
   }, [timetable]);
-
   return (
     <Column $gap={8}>
       <ProgressContainer>
@@ -123,7 +141,9 @@ const TimeProgress = ({ start, end }: ProgressProps) => {
         <Typography.Caption $color={colors.highlight}>
           {formatTime(start)}
         </Typography.Caption>
-        <Typography.Caption $color={colors.gray40}>
+        <Typography.Caption
+          $color={state === 'AFTER_SCHOOL' ? colors.highlight : colors.gray40}
+        >
           {formatTime(end)}
         </Typography.Caption>
       </Row>
