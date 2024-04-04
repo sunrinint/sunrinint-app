@@ -15,6 +15,7 @@ import NoticeScreen from '@/screens/NoticeScreen';
 import { StatusBar } from 'react-native';
 import useAppTheme from '@/hooks/useAppTheme';
 import { useTheme } from 'styled-components/native';
+import MadebyScreen from '@screens/MadebyScreen';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -24,6 +25,7 @@ export type RootStackParamList = {
   Meal: undefined;
   TimeTable: undefined;
   Notice: undefined;
+  Madeby: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -76,6 +78,7 @@ const RootNavigator = () => {
         <Stack.Screen name={'Meal'} component={MealScreen} />
         <Stack.Screen name={'TimeTable'} component={TimetableScreen} />
         <Stack.Screen name={'Notice'} component={NoticeScreen} />
+        <Stack.Screen name={'Madeby'} component={MadebyScreen} />
       </Stack.Navigator>
     </>
   );
