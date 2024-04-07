@@ -13,12 +13,16 @@ import Edit from '@assets/icons/edit.svg';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import useUpdateUser from '@hooks/useUpdateUser';
+import ImagePicker from 'react-native-image-crop-picker';
+import { uploadImage } from '@lib/api/upload';
 
 const ProfileSection = () => {
   const { user } = useUser();
   const { colors } = useTheme();
   const overlay = useOverlay();
   const navigatoin = useNavigation<any>();
+  const { updateUser } = useUpdateUser();
   const openModal = () => {
     overlay.open(
       <ModalOverlay>
@@ -95,7 +99,27 @@ const ProfileSection = () => {
           <Typography.Body $color={colors.gray70}>로그아웃</Typography.Body>
           <Logout fill={colors.gray80} />
         </Button>
-        <Button fullWidth height={44} radius={999} level={10}>
+        <Button
+          fullWidth
+          height={44}
+          radius={999}
+          level={10}
+          onPress={() => {
+            ImagePicker.openPicker({
+              mediaType: 'photo',
+              cropping: true,
+              smartAlbums: ['UserLibrary'],
+              width: 128,
+              height: 160,
+            })
+              .then((image) => {
+                uploadImage(image).then((res) =>
+                  updateUser({ profileImage: res.url }),
+                );
+              })
+              .catch((err) => console.log(err));
+          }}
+        >
           <Typography.Body $color={colors.gray70}>사진 수정</Typography.Body>
           <Edit fill={colors.gray80} />
         </Button>
