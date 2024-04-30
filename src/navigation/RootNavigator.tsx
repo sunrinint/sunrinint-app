@@ -73,7 +73,6 @@ const RootNavigator = () => {
             gestureEnabled: false,
           }}
         />
-        <Stack.Screen name={'Setting'} component={SettingScreen} />
         <Stack.Screen name={'Class'} component={ClassScreen} />
         <Stack.Screen name={'Meal'} component={MealScreen} />
         <Stack.Screen name={'TimeTable'} component={TimetableScreen} />
