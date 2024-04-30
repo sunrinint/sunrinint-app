@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Column } from '@components/atomic';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 import Typography from '@components/typography';
 import WebsiteIcon from '@assets/icons/website.svg';
 import InstagramIcon from '@assets/icons/instagram.svg';
@@ -9,6 +9,7 @@ import styled, { useTheme } from 'styled-components/native';
 import useClub from '@hooks/useClub';
 import { SkeletonContent } from '@components/skeleton/SkeletonContent';
 import useAppTheme from '@hooks/useAppTheme';
+import { SvgUri } from 'react-native-svg';
 
 interface ClubCardProps {
   id: string;
@@ -17,14 +18,16 @@ interface ClubCardProps {
 const ClubCard = ({ id }: ClubCardProps) => {
   const { colors } = useTheme();
   const { club } = useClub(id);
+
   const { theme } = useAppTheme();
   const logo = theme === 'light' ? club.logo : club.logo_dark;
+
   return (
     <ClubCardLayout>
       <ClubCardTop>
         <Row $fill $justifyContent={'space-between'} $alignItems={'center'}>
           <Row $gap={8} $alignItems={'center'}>
-            <Logo source={{ uri: logo }} />
+            <SvgUri width={32} height={32} uri={logo} />
             <View>
               <Typography.SemiLabel $color={colors.gray80}>
                 {club.displayName}
@@ -87,12 +90,6 @@ const Skeleton = () => {
 };
 
 ClubCard.Skeleton = Skeleton;
-
-const Logo = styled.Image`
-  width: 32px;
-  height: 32px;
-  //border-radius: 8px;
-`;
 
 const SkeletonContainer = styled.View`
   width: 100%;
