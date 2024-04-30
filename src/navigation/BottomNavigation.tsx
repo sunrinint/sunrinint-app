@@ -9,7 +9,9 @@ import {
   ClubIcon,
   HomeIcon,
   SchoolCardIcon,
+  SettingsIcon,
 } from '@components/icons/bottom-tabs';
+import SettingScreen from '@/screens/SettingScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,19 +25,9 @@ const BottomNavigation = () => {
       screenOptions={{
         headerShown: false,
         tabBarInactiveTintColor: colors.gray40,
-        tabBarActiveTintColor: colors.gray10,
+        tabBarActiveTintColor: colors.gray90,
       }}
     >
-      <Tab.Screen
-        name="Club"
-        component={ClubScreen}
-        options={{
-          tabBarLabel: '동아리',
-          tabBarIcon: ({ color, focused }) => (
-            <ClubIcon color={color} fill={focused} />
-          ),
-        }}
-      />
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -47,12 +39,33 @@ const BottomNavigation = () => {
         }}
       />
       <Tab.Screen
+        name="Club"
+        component={ClubScreen}
+        options={{
+          tabBarLabel: '동아리',
+          tabBarIcon: ({ color, focused }) => (
+            <ClubIcon color={color} fill={focused} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
         name="SchoolCard"
         component={SchoolCardScreen}
         options={{
           tabBarLabel: '학생증',
           tabBarIcon: ({ color, focused }) => (
             <SchoolCardIcon color={color} fill={focused} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingScreen}
+        options={{
+          tabBarLabel: '설정',
+          tabBarIcon: ({ color, focused }) => (
+            <SettingsIcon color={color} fill={focused} />
           ),
         }}
       />
