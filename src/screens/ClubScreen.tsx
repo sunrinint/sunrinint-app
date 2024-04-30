@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import styled from 'styled-components/native';
-import Setting from '@assets/icons/setting.svg';
 import { useNavigation } from '@react-navigation/native';
 import { ClubType } from '@lib/type/Club';
 import ClubListSection from '@components/section/club/ClubListSection';
@@ -9,7 +8,6 @@ import SelectSection from '@components/section/club/SelectSection';
 import { getUser } from '@lib/api/user';
 
 const ClubScreen = () => {
-  const navigation = useNavigation<any>();
   const [department, setDepartment] = useState<ClubType>('security');
   useEffect(() => {
     getUser().then((user) => {
@@ -19,11 +17,7 @@ const ClubScreen = () => {
     });
   }, []);
   return (
-    <LayoutWithHeader
-      logo
-      FirstChild={Setting}
-      onFirstChildPress={() => navigation.navigate('Setting')}
-    >
+    <LayoutWithHeader title="동아리">
       <Container>
         <SelectSection department={department} setDepartment={setDepartment} />
         <Suspense fallback={<ClubListSection.Skeleton />}>

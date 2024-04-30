@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import styled from 'styled-components/native';
-import Setting from '@assets/icons/setting.svg';
-import { useNavigation } from '@react-navigation/native';
 import {
   MealSection,
   NoticeSection,
@@ -11,14 +9,8 @@ import {
 import { SuspenseWithErrorBoundary } from '@lib/error-boundary';
 
 const HomeScreen = () => {
-  const navigation = useNavigation<any>();
-
   return (
-    <LayoutWithHeader
-      logo
-      FirstChild={Setting}
-      onFirstChildPress={() => navigation.navigate('Setting')}
-    >
+    <LayoutWithHeader logo>
       <Container>
         <Suspense fallback={<NoticeSection.Skeleton />}>
           <NoticeSection />

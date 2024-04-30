@@ -5,8 +5,6 @@ import SchoolCard from '@components/common/school-card';
 import Typography from '@components/typography';
 import styled, { useTheme } from 'styled-components/native';
 import { SvgXml } from 'react-native-svg';
-import Setting from '@assets/icons/setting.svg';
-import { useNavigation } from '@react-navigation/native';
 import { Spacer } from '@components/atomic/Spacer';
 import {
   Directions,
@@ -16,21 +14,16 @@ import {
 import { View } from 'react-native';
 
 const SchoolCardScreen = () => {
-  const navigation = useNavigation<any>();
   const { colors } = useTheme();
   const [isBack, setIsBack] = useState(false);
   return (
-    <LayoutWithHeader
-      logo
-      FirstChild={Setting}
-      onFirstChildPress={() => navigation.navigate('Setting')}
-    >
-      <Column
-        $alignItems={'center'}
-        $justifyContent={'center'}
-        $gap={12}
+    <LayoutWithHeader title="학생증">
+      <View
         style={{
           flex: 1,
+          gap: 12,
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <FlingGestureHandler
@@ -68,8 +61,7 @@ const SchoolCardScreen = () => {
             `}
           />
         </Button>
-      </Column>
-      <Spacer $height={80} />
+      </View>
     </LayoutWithHeader>
   );
 };

@@ -13,14 +13,9 @@ import {
 } from '@components/section/setting';
 
 const SettingScreen = () => {
-  const navigation = useNavigation<any>();
   return (
     <>
-      <LayoutWithHeader
-        showBack={true}
-        onBackPress={() => navigation.pop()}
-        title={'설정'}
-      >
+      <LayoutWithHeader title={'설정'}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Wrapper $padding={[8, 12]}>
             <Suspense fallback={<ProfileSection.Skeleton />}>
