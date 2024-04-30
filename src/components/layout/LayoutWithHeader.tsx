@@ -32,6 +32,7 @@ const LayoutWithHeader = ({
   const { colors } = useTheme();
   return (
     <SafeAreaView
+      edges={['top']}
       style={{
         flex: 1,
         backgroundColor: colors.gray20,
@@ -62,15 +63,17 @@ const LayoutWithHeader = ({
               `}
             />
           )}
-          {showBack && (
+          {title && (
             <Row $alignItems={'center'} $gap={12}>
-              <IconBox
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              >
-                <Back fill={colors.gray70} />
-              </IconBox>
+              {showBack && (
+                <IconBox
+                  onPress={() => {
+                    navigation.goBack();
+                  }}
+                >
+                  <Back fill={colors.gray70} />
+                </IconBox>
+              )}
               <Typography.Title $color={colors.gray80}>
                 {title}
               </Typography.Title>
@@ -88,6 +91,7 @@ const LayoutWithHeader = ({
       <View
         style={{
           flex: 1,
+          width: '100%',
         }}
       >
         {children}
@@ -100,7 +104,7 @@ const Container = styled.View`
   display: flex;
   flex-direction: row;
   height: 56px;
-  padding: 0 20px;
+  padding: 0 16px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
