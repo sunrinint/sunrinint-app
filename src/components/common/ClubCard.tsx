@@ -10,6 +10,7 @@ import useClub from '@hooks/useClub';
 import { SkeletonContent } from '@components/skeleton/SkeletonContent';
 import useAppTheme from '@hooks/useAppTheme';
 import { SvgUri } from 'react-native-svg';
+import { Linking } from 'react-native';
 
 interface ClubCardProps {
   id: string;
@@ -44,13 +45,23 @@ const ClubCard = ({ id }: ClubCardProps) => {
         </Typography.Body>
       </ClubCardTop>
       <ButtonGroup>
-        <RoundedButton disabled={!club.homepage}>
+        <RoundedButton
+          onPress={() => Linking.openURL(club.homepage)}
+        disabled={!club.homepage}>
           <WebsiteIcon fill={club.facebook ? colors.gray80 : colors.gray40} />
         </RoundedButton>
-        <RoundedButton disabled={!club.instagram}>
+        <RoundedButton 
+        onPress={() => {
+          Linking.openURL(`instagram://user?username=${club.instagram}`).catch(() => {
+            Linking.openURL(`https://www.instagram.com/${club.instagram}`).then();
+          });
+        }}
+        disabled={!club.instagram}>
           <InstagramIcon fill={club.facebook ? colors.gray80 : colors.gray40} />
         </RoundedButton>
-        <RoundedButton disabled={!club.facebook}>
+        <RoundedButton
+          onPress={() => Linking.openURL(`https://www.facebook.com/${club.facebook}`)}
+        disabled={!club.facebook}>
           <FacebookIcon fill={club.facebook ? colors.gray80 : colors.gray40} />
         </RoundedButton>
       </ButtonGroup>
