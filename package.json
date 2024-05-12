@@ -28,7 +28,7 @@
     "react-native-bootsplash": "^5.3.0",
     "react-native-dotenv": "^3.4.9",
     "react-native-gesture-handler": "^2.14.1",
-    "react-native-image-crop-picker": "^0.40.3",
+    "react-native-image-crop-picker": "^0.41.1",
     "react-native-safe-area-context": "^4.8.2",
     "react-native-screens": "^3.29.0",
     "react-native-shadow-2": "^7.0.8",

@@ -7,9 +7,13 @@ import ThemeMode from '@lib/type/ThemeMode';
 import { SelectBottomSheet } from '@components/common/bottom-sheets/select';
 import useOverlay from '@hooks/useOverlay';
 import useAppTheme from '@hooks/useAppTheme';
-import { useTheme } from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import { InfoCard } from '@components/section/setting/styles';
 
+
+const Container = styled.TouchableOpacity`
+    
+`
 const ThemeSection = () => {
   const { colors } = useTheme();
   const overlay = useOverlay();
@@ -44,6 +48,7 @@ const ThemeSection = () => {
   return (
     <TouchableOpacity>
       <InfoCard>
+        <Container onPress={openBottomSheet}>
         <Row
           $padding={[7, 12]}
           $alignItems={'center'}
@@ -53,15 +58,14 @@ const ThemeSection = () => {
           <Typography.SemiLabel $color={colors.gray90}>
             테마 설정
           </Typography.SemiLabel>
-          <Pressable onPress={openBottomSheet}>
             <Row $gap={8} $alignItems={'center'}>
               <Typography.Body $color={colors.gray70}>
                 {convertThemeName(themeMode)}
               </Typography.Body>
               <Next />
             </Row>
-          </Pressable>
         </Row>
+        </Container>
       </InfoCard>
     </TouchableOpacity>
   );

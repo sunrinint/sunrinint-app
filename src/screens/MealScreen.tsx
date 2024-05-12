@@ -36,7 +36,7 @@ const MealScreen = () => {
     <LayoutWithHeader title="급식" showBack>
       <Container>
         <DateContainer>
-          <Typography.Title>
+          <Typography.Title $color={({ theme }) => theme.colors.gray80}>
             {formatDate(lunchWeek[0].date)} ~ {formatDate(lunchWeek.slice(-1)[0].date)}
           </Typography.Title>
         </DateContainer>
@@ -56,17 +56,17 @@ const MealScreen = () => {
         </WeekContainer>
 
         <MenuContainer>
-          <Typography.Label>
+          <Typography.Label $color={({ theme }) => theme.colors.gray90}>
             {formatDate(lunchWeek[selectedDayIndex].date)} 점심
           </Typography.Label>
           <MenuList>
             {
               lunchWeek[selectedDayIndex].menu.map((item) =>
                 <MenuInfo>
-                  <Typography.Body>
+                  <Typography.Body $color={({ theme }) => theme.colors.gray80}>
                     {item.name}
                   </Typography.Body>
-                  <Typography.Body $color={colors.gray60}>
+                  <Typography.Body $color={({ theme }) => theme.colors.gray60}>
                     {item.code}
                   </Typography.Body>
                 </MenuInfo>
