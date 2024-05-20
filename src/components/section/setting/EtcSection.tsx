@@ -14,10 +14,16 @@ const EtcSection = () => {
         title={'만든 사람들'}
         onPress={() => {
           navigation.navigate('Madeby');
-          console.log("test");
+          console.log('test');
         }}
       />
-      <PressibleCard title={'오픈소스 라이센스'} />
+      <PressibleCard
+        title={'오픈소스 라이센스'}
+        onPress={() => {
+          navigation.navigate('OpenSourceLicense');
+          console.log('test');
+        }}
+      />
       <PressibleCard
         title={'SunrinINT 인스타그램'}
         onPress={() => {
