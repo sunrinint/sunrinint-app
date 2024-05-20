@@ -7,7 +7,6 @@ import {
 
 import BottomNavigation from './BottomNavigation';
 import LoginScreen from '@screens/LoginScreen';
-import SettingScreen from '@screens/SettingScreen';
 import ClassScreen from '@screens/ClassScreen';
 import MealScreen from '@/screens/MealScreen';
 import TimetableScreen from '@screens/TimetableScreen';
@@ -16,6 +15,8 @@ import { StatusBar } from 'react-native';
 import useAppTheme from '@/hooks/useAppTheme';
 import { useTheme } from 'styled-components/native';
 import MadebyScreen from '@screens/MadebyScreen';
+import OpenSourceLicenseScreen from '@/screens/OpenSourceLicenseScreen';
+import OpenSourceLicenseDetailScreen from '@/screens/OpenSourceLicenseDetail';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -26,6 +27,8 @@ export type RootStackParamList = {
   TimeTable: undefined;
   Notice: undefined;
   Madeby: undefined;
+  OpenSourceLicense: undefined;
+  OpenSourceLicenseDetail: { id: number };
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -78,6 +81,14 @@ const RootNavigator = () => {
         <Stack.Screen name={'TimeTable'} component={TimetableScreen} />
         <Stack.Screen name={'Notice'} component={NoticeScreen} />
         <Stack.Screen name={'Madeby'} component={MadebyScreen} />
+        <Stack.Screen
+          name={'OpenSourceLicense'}
+          component={OpenSourceLicenseScreen}
+        />
+        <Stack.Screen
+          name={'OpenSourceLicenseDetail'}
+          component={OpenSourceLicenseDetailScreen}
+        />
       </Stack.Navigator>
     </>
   );
