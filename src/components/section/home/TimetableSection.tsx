@@ -47,7 +47,7 @@ const TimeTableSection = () => {
           )}
           <Typography.Body $color={colors.gray60}>
             {state === 'DURING_CLASSES' &&
-              `${currentTime.room} ${currentTime.teacher} 선생님`}
+              `${currentTime.room ? currentTime.room + ' ' : ''}${currentTime.teacher} 선생님`}
             {state === 'BEFORE_CLASSES' && '등교시간 : 8시 30분'}
             {(state === 'AFTER_SCHOOL' || state === 'WEEKEND_OR_HOLIDAY') &&
               '현재는 수업시간이 아닙니다'}
