@@ -67,7 +67,7 @@ const Designers = [
   {
     name: '이주영',
     role: 'UI/UX Designer',
-    link: 'https://behance.net/juyounglee',
+    link: 'https://jooyoungjoo.notion.site/Hello-I-m-JooYoung-Lee-a4a7fb79b3c04bd18dd618363bad90b5',
     logo: require('@assets/images/jooyong.png'),
   },
   {
@@ -79,7 +79,7 @@ const Designers = [
   {
     name: '김대현',
     role: 'UI/UX Designer',
-    link: 'https://behance.net/daehyunkim',
+    link: 'https://www.behance.net/daehyunamic',
     logo: require('@assets/images/dhyun.png'),
   },
 ];
