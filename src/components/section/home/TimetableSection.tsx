@@ -17,11 +17,14 @@ const TimeTableSection = () => {
   const navigation = useNavigation<tabScreenProp>();
   const { colors } = useTheme();
   const { timetable } = useTimetable();
-  const currentTime = timetable.timetable[timetable.period] as {
-    teacher: string;
-    subject: string;
-    room: string;
-  };
+  const currentTime = timetable.timetable
+    ? (timetable.timetable[timetable.period] as {
+        teacher: string;
+        subject: string;
+        room: string;
+      })
+    : { teacher: '', subject: '', room: '' };
+
   const { state } = useScheduleState();
   return (
     <Card.CardContainer
