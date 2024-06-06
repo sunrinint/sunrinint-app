@@ -5,8 +5,8 @@ import { Card } from '../../atomic/Card';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
-import {Column, Row} from '@components/atomic';
-import {SkeletonContent} from "@components/skeleton/SkeletonContent";
+import { Column, Row } from '@components/atomic';
+import { SkeletonContent } from '@components/skeleton/SkeletonContent';
 import useLunch from '@hooks/useLunch';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
@@ -30,7 +30,7 @@ const MealSection = () => {
       </Card.CardTop>
 
       <Typography.Body $color={colors.gray80}>
-        {lunch.menu.map((v) => v.name).join(', ')}
+        {lunch.meals.map((v) => v.meal).join(', ')}
       </Typography.Body>
     </Card.CardContainer>
   );
@@ -38,19 +38,19 @@ const MealSection = () => {
 
 const Skeleton = () => {
   return (
-      <SkeletonContainer>
-        <Row $padding={[4,0]}>
-          <SkeletonContent $width={140} $height={18}/>
+    <SkeletonContainer>
+      <Row $padding={[4, 0]}>
+        <SkeletonContent $width={140} $height={18} />
+      </Row>
+      <Column>
+        <Row $padding={[4, 0]}>
+          <SkeletonContent $height={16} />
         </Row>
-        <Column>
-          <Row $padding={[4,0]}>
-            <SkeletonContent $height={16}/>
-          </Row>
-          <Row $padding={[4,0]}>
-            <SkeletonContent $width={140} $height={16}/>
-          </Row>
-        </Column>
-      </SkeletonContainer>
+        <Row $padding={[4, 0]}>
+          <SkeletonContent $width={140} $height={16} />
+        </Row>
+      </Column>
+    </SkeletonContainer>
   );
 };
 

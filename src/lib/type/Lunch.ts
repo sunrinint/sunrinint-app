@@ -1,7 +1,7 @@
 interface Lunch {
   date: string;
-  menu: Array<{
-    name: string;
+  meals: Array<{
+    meal: string;
     code?: string;
   }>;
 }
