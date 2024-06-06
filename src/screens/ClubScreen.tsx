@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
 import styled from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
 import { ClubType } from '@lib/type/Club';
 import ClubListSection from '@components/section/club/ClubListSection';
 import SelectSection from '@components/section/club/SelectSection';
