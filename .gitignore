@@ -75,3 +75,5 @@ yarn-error.log
 # env
 .env
 android/gradle.properties
+android/app/signing.properties
+
