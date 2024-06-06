@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Row, Column } from '@components/atomic';
 import { View } from 'react-native';
 import Typography from '@components/typography';
@@ -10,7 +10,7 @@ import useClub from '@hooks/useClub';
 import { SkeletonContent } from '@components/skeleton/SkeletonContent';
 import useAppTheme from '@hooks/useAppTheme';
 import { SvgUri } from 'react-native-svg';
-import { Linking } from 'react-native';
+import { Linking, Image } from 'react-native';
 
 interface ClubCardProps {
   id: string;
@@ -28,7 +28,16 @@ const ClubCard = ({ id }: ClubCardProps) => {
       <ClubCardTop>
         <Row $fill $justifyContent={'space-between'} $alignItems={'center'}>
           <Row $gap={8} $alignItems={'center'}>
-            <SvgUri width={32} height={32} uri={logo} />
+            {logo.includes('.svg') ? (
+              <SvgUri width={32} height={32} uri={logo} />
+            ) : (
+              <Image
+                style={{ width: 32, height: 32 }}
+                source={{
+                  uri: logo,
+                }}
+              />
+            )}
             <View>
               <Typography.SemiLabel $color={colors.gray80}>
                 {club.displayName}
@@ -47,21 +56,32 @@ const ClubCard = ({ id }: ClubCardProps) => {
       <ButtonGroup>
         <RoundedButton
           onPress={() => Linking.openURL(club.homepage)}
-        disabled={!club.homepage}>
-          <WebsiteIcon fill={club.facebook ? colors.gray80 : colors.gray40} />
-        </RoundedButton>
-        <RoundedButton 
-        onPress={() => {
-          Linking.openURL(`instagram://user?username=${club.instagram}`).catch(() => {
-            Linking.openURL(`https://www.instagram.com/${club.instagram}`).then();
-          });
-        }}
-        disabled={!club.instagram}>
-          <InstagramIcon fill={club.facebook ? colors.gray80 : colors.gray40} />
+          disabled={!club.homepage}
+        >
+          <WebsiteIcon fill={club.homepage ? colors.gray80 : colors.gray40} />
         </RoundedButton>
         <RoundedButton
-          onPress={() => Linking.openURL(`https://www.facebook.com/${club.facebook}`)}
-        disabled={!club.facebook}>
+          onPress={() => {
+            Linking.openURL(
+              `instagram://user?username=${club.instagram}`,
+            ).catch(() => {
+              Linking.openURL(
+                `https://www.instagram.com/${club.instagram}`,
+              ).then();
+            });
+          }}
+          disabled={!club.instagram}
+        >
+          <InstagramIcon
+            fill={club.instagram ? colors.gray80 : colors.gray40}
+          />
+        </RoundedButton>
+        <RoundedButton
+          onPress={() =>
+            Linking.openURL(`https://www.facebook.com/${club.facebook}`)
+          }
+          disabled={!club.facebook}
+        >
           <FacebookIcon fill={club.facebook ? colors.gray80 : colors.gray40} />
         </RoundedButton>
       </ButtonGroup>
