@@ -16,6 +16,7 @@ import OverlayContext from '@/lib/overlay/OverlayContext';
 import useAppTheme from '@hooks/useAppTheme';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { GOOGLE_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from '@env';
+import { getUser } from '@lib/api/user';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,10 +27,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const onReady = () => {
-    BootSplash.hide();
-  };
-
+  let logincheck = false
   useEffect(() => {
     GoogleSignin.configure({
       iosClientId: GOOGLE_IOS_CLIENT_ID,
@@ -47,8 +45,8 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={palette}>
           <OverlayContext>
-            <NavigationContainer onReady={onReady}>
-              <RootNavigator />
+            <NavigationContainer>
+              <RootNavigator/>
             </NavigationContainer>
           </OverlayContext>
         </ThemeProvider>

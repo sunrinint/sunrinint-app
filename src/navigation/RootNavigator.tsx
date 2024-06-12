@@ -17,6 +17,9 @@ import { useTheme } from 'styled-components/native';
 import MadebyScreen from '@screens/MadebyScreen';
 import OpenSourceLicenseScreen from '@/screens/OpenSourceLicenseScreen';
 import OpenSourceLicenseDetailScreen from '@/screens/OpenSourceLicenseDetail';
+import { useEffect, useState } from 'react';
+import { getUser } from '@lib/api/user';
+import BootSplash from 'react-native-bootsplash';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -36,6 +39,20 @@ const Stack = createStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
   const { theme } = useAppTheme();
   const { colors } = useTheme();
+  const [logincheck, setLogincheck] = useState<boolean | null>(null);
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await getUser();
+      setLogincheck(!!user);
+      BootSplash.hide();
+    };
+    checkUser();
+  }, []);
+
+  if (logincheck === null) {
+    return null;
+  }
+
   return (
     <>
       <StatusBar
@@ -44,7 +61,7 @@ const RootNavigator = () => {
         barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
       />
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName={logincheck ? "Tab" : "Login"}
         screenOptions={{
           headerShown: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
