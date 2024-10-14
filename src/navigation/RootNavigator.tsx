@@ -44,14 +44,9 @@ const RootNavigator = () => {
     const checkUser = async () => {
       const user = await getUser();
       setLogincheck(!!user);
-      BootSplash.hide();
     };
     checkUser();
   }, []);
-
-  if (logincheck === null) {
-    return null;
-  }
 
   return (
     <>
@@ -61,7 +56,7 @@ const RootNavigator = () => {
         barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
       />
       <Stack.Navigator
-        initialRouteName={logincheck ? "Tab" : "Login"}
+        initialRouteName={logincheck ? 'Tab' : 'Login'}
         screenOptions={{
           headerShown: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
