@@ -7,15 +7,15 @@ import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Column, Row } from '@components/atomic';
 import { SkeletonContent } from '@components/skeleton/SkeletonContent';
-import useLunch from '@hooks/useLunch';
+import useMeal from '@/hooks/useMeal';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
 const MealSection = () => {
   const navigation = useNavigation<tabScreenProp>();
-  const { lunch } = useLunch();
+  const { meal } = useMeal();
   const { colors } = useTheme();
-  const [_, month, day] = lunch.date.split('-');
+  const [_, month, day] = meal.date.split('-');
 
   return (
     <Card.CardContainer
@@ -30,7 +30,7 @@ const MealSection = () => {
       </Card.CardTop>
 
       <Typography.Body $color={colors.gray80}>
-        {lunch.meals.map((v) => v.meal).join(', ')}
+        {meal.meals.map((v) => v.meal).join(', ')}
       </Typography.Body>
     </Card.CardContainer>
   );

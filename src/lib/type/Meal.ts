@@ -1,4 +1,4 @@
-interface Lunch {
+interface Meal {
   date: string;
   meals: Array<{
     meal: string;
@@ -6,4 +6,4 @@ interface Lunch {
   }>;
 }
 
-export default Lunch;
+export default Meal;

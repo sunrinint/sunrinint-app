@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import LayoutWithHeader from '@/components/layout/LayoutWithHeader';
 import styled, { useTheme } from 'styled-components/native';
-import useLunchWeek from '@hooks/useLunchWeek';
 import Typography from '@components/typography';
 import { ScrollView } from 'react-native-gesture-handler';
+import useMealWeek from '@/hooks/useMealWeek';
 
 const MealScreen = () => {
-  const { lunchWeek } = useLunchWeek();
-  console.log(lunchWeek);
-  console.log(lunchWeek[0].meals);
+  const { mealWeek } = useMealWeek();
   const { colors } = useTheme();
 
-  const [selectedDayIndex, setSelectedDayIndex] = useState<number>(0); // 선택된 요일의 인덱스를 저장하는 state 추가
+  const [selectedDayIndex] = useState(0);
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
@@ -31,12 +29,12 @@ const MealScreen = () => {
       <Container>
         <DateContainer>
           <Typography.Title $color={colors.gray80}>
-            {formatDate(lunchWeek[0].date)} ~{' '}
-            {formatDate(lunchWeek.slice(-1)[0].date)}
+            {formatDate(mealWeek[0].date)} ~{' '}
+            {formatDate(mealWeek.slice(-1)[0].date)}
           </Typography.Title>
         </DateContainer>
         <WeekContainer>
-          {lunchWeek.map((lunch, index) => (
+          {mealWeek.map((lunch, index) => (
             <DayContainer key={index} selected={selectedDayIndex === index}>
               <Typography.Body
                 $color={
@@ -67,7 +65,7 @@ const MealScreen = () => {
             paddingBottom: 42,
           }}
         >
-          {lunchWeek.map((lunch, index) => (
+          {mealWeek.map((lunch) => (
             <MenuContainer>
               <Typography.Label $color={colors.gray90}>
                 {formatDate(lunch.date)} 점심
