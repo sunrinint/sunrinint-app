@@ -3,7 +3,7 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "allowSvg": true,
-    "include": ["src","declaration.d.ts"],
+    "include": ["src", "declaration.d.ts"],
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"],
@@ -13,10 +13,10 @@
       "@assets/*": ["assets/*"],
       "@lib/*": ["lib/*"],
       "@types/*": ["types/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@constans/*": ["constants/*"]
     },
     "jsx": "react",
     "allowSyntheticDefaultImports": true
-  },
-  "extends": "@tsconfig/react-native/tsconfig.json",
+  }
 }

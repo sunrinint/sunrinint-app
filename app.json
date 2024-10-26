@@ -1,4 +1,7 @@
 {
   "name": "sunrinint_app_v1",
-  "displayName": "sunrinint_app_v1"
+  "displayName": "SunrinINT",
+  "androidNavigationBar": {
+    "visible": "sticky-immersive"
+  }
 }

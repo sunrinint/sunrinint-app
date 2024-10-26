@@ -2,3 +2,5 @@ rootProject.name = 'sunrinint_app_v1'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
+include ':react-native-bootsplash'
+project(':react-native-bootsplash').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-bootsplash/android')

@@ -38,6 +38,7 @@ react {
     //
     //   The entry file for bundle generation. Default is 'index.android.js' or 'index.js'
     // entryFile = file("../js/MyApplication.android.js")
+    entryFile = file("../../index.tsx")
     //
     //   A list of extra flags to pass to the 'bundle' commands.
     //   See https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle
@@ -68,21 +69,31 @@ def enableProguardInReleaseBuilds = false
  * this variant is about 6MiB larger per architecture than default.
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
+def keystorePropertiesFile = rootProject.file("signing.properties");
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.sunrinint_app_v1"
+    namespace "in.sunrin.app"
     defaultConfig {
-        applicationId "com.sunrinint_app_v1"
+        applicationId "in.sunrin.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
     signingConfigs {
+        release {
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -97,7 +108,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -108,7 +119,7 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation("com.facebook.react:flipper-integration")
-
+    implementation project(':react-native-bootsplash')
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
