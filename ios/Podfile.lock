@@ -1082,12 +1082,12 @@ PODS:
   - RNGoogleSignin (11.0.1):
     - GoogleSignIn (~> 7.0.0)
     - React-Core
-  - RNImageCropPicker (0.41.1):
+  - RNImageCropPicker (0.41.4):
     - React-Core
     - React-RCTImage
-    - RNImageCropPicker/QBImagePickerController (= 0.41.1)
+    - RNImageCropPicker/QBImagePickerController (= 0.41.4)
     - TOCropViewController (~> 2.7.4)
-  - RNImageCropPicker/QBImagePickerController (0.41.1):
+  - RNImageCropPicker/QBImagePickerController (0.41.4):
     - React-Core
     - React-RCTImage
     - TOCropViewController (~> 2.7.4)
@@ -1352,12 +1352,12 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
   RNGestureHandler: 48c9d38f57c7761b4153def57b718f491f4bbb4b
   RNGoogleSignin: 24d3b3261f78b0fae0aa013f8ab6f8d25e369b0c
-  RNImageCropPicker: 601604515fd6fbba318147b0a56aed0be9379415
+  RNImageCropPicker: 3d888d481c65776063556b72c19893a8b8344b1b
   RNScreens: 79c1020e7f52f4edde5ad96540f6e33c8b9b3b6c
   RNSVG: 963a95f1f5d512a13d11ffd50d351c87fb5c6890
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
-  Yoga: e64aa65de36c0832d04e8c7bd614396c77a80047
+  Yoga: 13c8ef87792450193e117976337b8527b49e8c03
 
 PODFILE CHECKSUM: f8c6c996468c192048f3acf581b25b692f762b70
 
