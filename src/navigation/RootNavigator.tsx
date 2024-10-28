@@ -20,6 +20,7 @@ import OpenSourceLicenseDetailScreen from '@/screens/OpenSourceLicenseDetail';
 import { useEffect, useState } from 'react';
 import { getUser } from '@lib/api/user';
 import BootSplash from 'react-native-bootsplash';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -36,18 +37,16 @@ export type RootStackParamList = {
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-const RootNavigator = () => {
+interface RootNavigatorProps {
+  logincheck: boolean | null;
+}
+const RootNavigator = ({ logincheck }:RootNavigatorProps) => {
   const { theme } = useAppTheme();
   const { colors } = useTheme();
-  const [logincheck, setLogincheck] = useState<boolean | null>(null);
-  useEffect(() => {
-    const checkUser = async () => {
-      const user = await getUser();
-      setLogincheck(!!user);
-    };
-    checkUser();
-  }, []);
 
+  if (logincheck === null) {
+    return null;
+  }
   return (
     <>
       <StatusBar

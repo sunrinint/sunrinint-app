@@ -17,14 +17,6 @@ const LoginScreen = ({ navigation }) => {
 
   const overlay = useOverlay();
 
-  useEffect(() => {
-    getUser().then((user) => {
-      if (user) {
-        navigation.navigate('Tab');
-      }
-    });
-  }, []);
-
   const openModal = () => {
     overlay.open(
       <ModalOverlay>
