@@ -37,7 +37,7 @@ authClient.interceptors.response.use(
           });
         return authClient(error.config);
       } catch (e: any) {
-        console.error(e.message);
+        return Promise.reject(e);
       }
     }
     return Promise.reject(error);
