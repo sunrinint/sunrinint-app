@@ -33,28 +33,25 @@ const App = () => {
     GoogleSignin.configure({
       iosClientId: GOOGLE_IOS_CLIENT_ID,
       webClientId: GOOGLE_CLIENT_ID,
-      offlineAccess: true,
     });
   }, []);
 
   const onReady = () => {
-      const checkUser = async () => {
-        const accessToken = await AsyncStorage.getItem('access');
-        if (accessToken !== null) {
-          const user = await getUser().catch(() => {
-            setLogincheck(false);
-            BootSplash.hide();
-          });
-          setLogincheck(!!user);
-          BootSplash.hide();
-        }
-        else {
+    const checkUser = async () => {
+      const accessToken = await AsyncStorage.getItem('access');
+      if (accessToken !== null) {
+        const user = await getUser().catch(() => {
           setLogincheck(false);
           BootSplash.hide();
-        }
-      };
-      checkUser();
-
+        });
+        setLogincheck(!!user);
+        BootSplash.hide();
+      } else {
+        setLogincheck(false);
+        BootSplash.hide();
+      }
+    };
+    checkUser();
   };
 
   const { theme } = useAppTheme();
@@ -66,7 +63,7 @@ const App = () => {
         <ThemeProvider theme={palette}>
           <OverlayContext>
             <NavigationContainer onReady={onReady}>
-              <RootNavigator logincheck={logincheck}/>
+              <RootNavigator logincheck={logincheck} />
             </NavigationContainer>
           </OverlayContext>
         </ThemeProvider>
