@@ -16,16 +16,19 @@ const CardContainer = styled.TouchableOpacity.attrs({
 `;
 
 interface CardTopProps {
+  IsArrowRightShow?: boolean;
   children: React.ReactNode;
 }
 
-const CardTop = ({ children }: CardTopProps) => {
+const CardTop = ({ children, IsArrowRightShow=true }: CardTopProps) => {
   const { colors } = useTheme();
   return (
     <CardTopLayout>
       {children}
       <IconBox>
-        <ArrowRight fill={colors.gray60} />
+        {IsArrowRightShow && (
+          <ArrowRight fill={colors.gray60} />
+        )}
       </IconBox>
     </CardTopLayout>
   );

@@ -19,19 +19,28 @@ const MealSection = () => {
 
   return (
     <Card.CardContainer
+      disabled={meal.date === ""}
       onPress={() => {
         navigation.navigate('Meal');
       }}
     >
-      <Card.CardTop>
-        <Typography.SemiLabel $color={colors.gray80}>
-          {month}월 {day}일 점심
-        </Typography.SemiLabel>
+      <Card.CardTop IsArrowRightShow={meal.date !== ""}>
+        {meal.date === "" ? (
+          <Typography.SemiLabel $color={colors.gray80}>
+            급식 정보가 없습니다
+          </Typography.SemiLabel>
+        ) : (
+          <Typography.SemiLabel $color={colors.gray80}>
+            {month}월 {day}일 점심
+          </Typography.SemiLabel>
+        )}
       </Card.CardTop>
+      {meal.date !== "" && (
+        <Typography.Body $color={colors.gray80}>
+          {meal.meals.map((v) => v.meal).join(', ')}
+        </Typography.Body>
+      )}
 
-      <Typography.Body $color={colors.gray80}>
-        {meal.meals.map((v) => v.meal).join(', ')}
-      </Typography.Body>
     </Card.CardContainer>
   );
 };

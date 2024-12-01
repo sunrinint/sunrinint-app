@@ -26,19 +26,21 @@ const TimeTableSection = () => {
     : { teacher: '', subject: '', room: '' };
 
   const { state } = useScheduleState();
+  console.log(state);
   return (
     <Card.CardContainer
+      disabled={state === 'WEEKEND_OR_HOLIDAY'}
       onPress={() => {
         navigation.navigate('TimeTable');
       }}
     >
-      <Card.CardTop>
+      <Card.CardTop IsArrowRightShow={state !== 'WEEKEND_OR_HOLIDAY'}>
         <Column $gap={2}>
           {state === 'DURING_CLASSES' ? (
             <Typography.SemiLabel $color={colors.gray90}>
-              {`${timetable.period}교시,`}{' '}
+              {timetable.period !== 0 && `${timetable.period}교시,`}
               <Typography.SemiLabel $color={colors.highlight}>
-                {currentTime.subject}
+                {timetable.period !== 0 ? ' ' + currentTime.subject : '조회'}
               </Typography.SemiLabel>
               시간
             </Typography.SemiLabel>
@@ -46,14 +48,16 @@ const TimeTableSection = () => {
             <Typography.Label $bold $color={colors.gray90}>
               {state === 'BEFORE_CLASSES' && '현재는 등교 전입니다'}
               {state === 'AFTER_SCHOOL' && '방과 후'}
+              {state === 'WEEKEND_OR_HOLIDAY' && '오늘은 휴일입니다'}
             </Typography.Label>
           )}
           <Typography.Body $color={colors.gray60}>
-            {state === 'DURING_CLASSES' &&
-              `${currentTime.room ? currentTime.room + ' ' : ''}${currentTime.teacher} 선생님`}
+            {state === 'DURING_CLASSES' && ( timetable.period !== 0 ?
+              `${currentTime.room ? currentTime.room + ' ' : ''}${currentTime.teacher} 선생님` : '담임 선생님' )}
             {state === 'BEFORE_CLASSES' && '등교시간 : 8시 30분'}
-            {(state === 'AFTER_SCHOOL' || state === 'WEEKEND_OR_HOLIDAY') &&
+            {(state === 'AFTER_SCHOOL') &&
               '현재는 수업시간이 아닙니다'}
+            {(state === 'WEEKEND_OR_HOLIDAY') && '좋은 하루 보내세요!'}
           </Typography.Body>
         </Column>
       </Card.CardTop>
@@ -112,6 +116,7 @@ interface ProgressProps {
   end: string;
 }
 
+
 const TimeProgress = ({ start, end }: ProgressProps) => {
   const { colors } = useTheme();
   const animation = useRef(new Animated.Value(0)).current;
@@ -147,7 +152,7 @@ const TimeProgress = ({ start, end }: ProgressProps) => {
         <Typography.Caption
           $color={state === 'AFTER_SCHOOL' ? colors.highlight : colors.gray40}
         >
-          {formatTime(end)}
+          {formatTime(end, 50)}
         </Typography.Caption>
       </Row>
     </Column>
@@ -324,11 +329,22 @@ const ProgressContainer = styled.View`
   position: relative;
 `;
 
-const formatTime = (date: string) => {
-  const [hours, minutes] = date.split(':').map((str) => parseInt(str, 10));
+const formatTime = (date: string, addMinutes = 0) => {
+  let [hours, minutes] = date.split(':').map((str) => parseInt(str, 10));
 
+  // 분 추가
+  minutes += addMinutes;
+
+  // 분이 60 이상일 경우 시간을 추가하고, 분을 0~59로 조정
+  if (minutes >= 60) {
+    hours += Math.floor(minutes / 60);
+    minutes = minutes % 60;
+  }
+
+  // 12시간제로 변환
   const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
 
+  // 시, 분 형식으로 반환
   if (minutes === 0) {
     return `${formattedHours}시`;
   } else {

@@ -65,14 +65,14 @@ const MealScreen = () => {
             paddingBottom: 42,
           }}
         >
-          {mealWeek.map((lunch) => (
-            <MenuContainer>
+          {mealWeek.map((lunch, index) => (
+            <MenuContainer key={index}>
               <Typography.Label $color={colors.gray90}>
                 {formatDate(lunch.date)} 점심
               </Typography.Label>
               <MenuList>
-                {lunch.meals.map((item) => (
-                  <MenuInfo>
+                {lunch.meals.map((item, itemIndex) => (
+                  <MenuInfo key={itemIndex}>
                     <Typography.Body $color={colors.gray80}>
                       {item.meal}
                     </Typography.Body>

@@ -58,7 +58,7 @@
 		</dict>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
+	<string>디바이스에서 사진을 업로드하여 회원 프로필 사진을 수정하기 위해 엑세스를 허용하세요</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SUIT-Variable.ttf</string>
