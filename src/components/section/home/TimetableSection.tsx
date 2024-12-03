@@ -147,7 +147,7 @@ const TimeProgress = ({ start, end }: ProgressProps) => {
         <Typography.Caption
           $color={state === 'AFTER_SCHOOL' ? colors.highlight : colors.gray40}
         >
-          {formatTime(end)}
+          {formatTime(addFiftyMinutes(end))}
         </Typography.Caption>
       </Row>
     </Column>
@@ -334,6 +334,11 @@ const formatTime = (date: string) => {
   } else {
     return `${formattedHours}시 ${minutes}분`;
   }
+};
+
+const addFiftyMinutes = (date: string) => {
+  const [hours, minutes] = date.split(':').map((str) => parseInt(str, 10));
+  return `${hours}:${minutes + 50}`;
 };
 
 export default TimeTableSection;
