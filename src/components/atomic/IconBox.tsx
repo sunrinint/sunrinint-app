@@ -1,41 +1,43 @@
-import { PressableProps, Animated, Pressable } from 'react-native';
-import React, { useRef, useState } from 'react';
+import { PressableProps, Pressable } from 'react-native';
+import React from 'react';
 import { useTheme } from 'styled-components/native';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
 interface IconBoxProps extends PressableProps {
   children: React.ReactNode;
 }
 
-const AnimatedPresable = Animated.createAnimatedComponent(Pressable);
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const IconBox = ({ children, ...props }: IconBoxProps) => {
   const { colors } = useTheme();
   const currentColor = colors.gray20;
-  const [color, setColor] = useState(new Animated.Value(0));
-  const bgColor = color.interpolate({
-    inputRange: [0, 1],
-    outputRange: [currentColor, colors.gray30],
+  const pressed = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: pressed.value === 0 ? currentColor : colors.gray30,
+      width: 30,
+      height: 30,
+      borderRadius: 15,
+      justifyContent: 'center',
+      alignItems: 'center',
+    };
   });
+
   return (
-    <AnimatedPresable
+    <AnimatedPressable
       onPressIn={() => {
-        setColor(new Animated.Value(1));
+        pressed.value = withSpring(1);
       }}
       onPressOut={() => {
-        setColor(new Animated.Value(0));
+        pressed.value = withSpring(0);
       }}
-      style={{
-        width: 30,
-        height: 30,
-        borderRadius: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: bgColor,
-      }}
+      style={animatedStyle}
       {...props}
     >
       {children}
-    </AnimatedPresable>
+    </AnimatedPressable>
   );
 };
 

@@ -3,6 +3,11 @@ import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Typography from '@components/typography';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
 const BottomTabBar = ({ state, descriptors, navigation }: any) => {
   const { bottom } = useSafeAreaInsets();
@@ -31,10 +36,10 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
           }
         };
         return (
-          <ItemContainer key={index} onPress={onPress}>
+          <AnimatedItemContainer key={index} onPress={onPress}>
             <Icon color={color} focused={isFocused} />
             <Typography.Caption $color={color}>{label}</Typography.Caption>
-          </ItemContainer>
+          </AnimatedItemContainer>
         );
       })}
     </Container>
@@ -54,13 +59,50 @@ const Container = styled.View`
   border-color: ${(props) => props.theme.colors.gray30};
 `;
 
-const ItemContainer = styled.Pressable`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  flex: 1 0 0;
-`;
+const ItemContainer = styled(
+  Animated.createAnimatedComponent(styled.Pressable`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex: 1 0 0;
+  `),
+)``;
+
+const AnimatedItemContainer = ({ children, onPress }: any) => {
+  const scale = useSharedValue(1);
+  const opacity = useSharedValue(1);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          scale: scale.value,
+        },
+      ],
+      opacity: opacity.value,
+    };
+  });
+
+  return (
+    <ItemContainer
+      style={animatedStyle}
+      onPressIn={() => {
+        'worklet';
+        scale.value = withSpring(0.9);
+        opacity.value = withSpring(0.8);
+      }}
+      onPressOut={() => {
+        'worklet';
+        scale.value = withSpring(1);
+        opacity.value = withSpring(1);
+      }}
+      onPress={onPress}
+    >
+      {children}
+    </ItemContainer>
+  );
+};
 
 export default BottomTabBar;

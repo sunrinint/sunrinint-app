@@ -1,6 +1,7 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
-import { Animated, Pressable } from 'react-native';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import { Pressable } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, interpolate, interpolateColor } from 'react-native-reanimated';
 
 interface SwitchProps {
   value: boolean;
@@ -9,92 +10,57 @@ interface SwitchProps {
 }
 
 const Switch = ({ value, onChange, disabled }: SwitchProps) => {
-  const theme = useTheme();
-  const positionAnimation = useRef(new Animated.Value(value ? 1 : 0)).current;
-  const widthAnimation = useRef(new Animated.Value(0)).current;
-  const rightAnimation = useRef(new Animated.Value(0)).current;
-  const backgroundAnimation = useRef(new Animated.Value(value ? 1 : 0)).current;
+  const { colors } = useTheme();
+  const position = useSharedValue(value ? 1 : 0);
+  const width = useSharedValue(0);
+  const right = useSharedValue(0);
+  const background = useSharedValue(value ? 1 : 0);
+
   useEffect(() => {
-    Animated.parallel([
-      Animated.timing(positionAnimation, {
-        toValue: value ? 0 : 1,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-      Animated.timing(backgroundAnimation, {
-        toValue: value ? 0 : 1,
-        delay: 50,
-        duration: 150,
-        useNativeDriver: false,
-      }),
-      Animated.timing(widthAnimation, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: false,
-      }),
-      Animated.timing(rightAnimation, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: false,
-      }),
-    ]).start();
+    position.value = withTiming(value ? 0 : 1, { duration: 200 });
+    background.value = withTiming(value ? 0 : 1, { duration: 150 });
+    width.value = withTiming(0, { duration: 250 });
+    right.value = withTiming(0, { duration: 250 });
   }, [value]);
+
+  const containerStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(
+        background.value,
+        [0, 1],
+        [colors.gray40, colors.gray80]
+      ),
+    };
+  });
+
+  const circleStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateX: interpolate(position.value, [0, 1], [0, 24]),
+        },
+      ],
+      width: interpolate(width.value, [0, 1], [24, 30]),
+      right: interpolate(right.value, [0, 1], [0, 6]),
+    };
+  });
+
   return (
     <Container
       $enabled={value}
       onPressIn={() => {
-        Animated.parallel([
-          Animated.timing(widthAnimation, {
-            toValue: 1,
-            duration: 250,
-            useNativeDriver: false,
-          }),
-          Animated.timing(rightAnimation, {
-            toValue: value ? 0 : 1,
-            duration: 250,
-            useNativeDriver: false,
-          }),
-        ]).start();
+        width.value = withTiming(1, { duration: 250 });
+        right.value = withTiming(value ? 0 : 1, { duration: 250 });
       }}
       onPressOut={() => onChange(!value)}
       disabled={disabled}
-      style={{
-        backgroundColor: backgroundAnimation.interpolate({
-          inputRange: [0, 1],
-          outputRange: [theme.colors.gray40, theme.colors.gray80],
-          extrapolate: 'clamp',
-        }),
-      }}
+      style={containerStyle}
     >
-      <Circle
-        style={[
-          {
-            transform: [
-              {
-                translateX: positionAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 24],
-                }),
-              },
-            ],
-          },
-          {
-            width: widthAnimation.interpolate({
-              inputRange: [0, 1],
-              outputRange: [24, 30],
-              extrapolate: 'clamp',
-            }),
-            right: rightAnimation.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, 6],
-              extrapolate: 'clamp',
-            }),
-          },
-        ]}
-      />
+      <Circle style={circleStyle} />
     </Container>
   );
 };
+
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const Container = styled(AnimatedPressable)<{ $enabled: boolean }>`
@@ -106,9 +72,8 @@ const Container = styled(AnimatedPressable)<{ $enabled: boolean }>`
   border-radius: 100px;
 `;
 
-const Circle = styled(Animated.View)<{ width?: number }>`
-  //direction: rtl;
-  width: ${(props) => 24 + (props.width || 0)}px;
+const Circle = styled(Animated.View)`
+  width: 24px;
   height: 24px;
   border-radius: 12px;
   background-color: white;
