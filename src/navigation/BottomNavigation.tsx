@@ -19,10 +19,13 @@ const BottomNavigation = () => {
   const { colors } = useTheme();
   return (
     <Tab.Navigator
+      id={undefined}
       tabBar={(props) => <BottomTabBar {...props} />}
       initialRouteName="Home"
-      backBehavior={'initialRoute'}
+      backBehavior="initialRoute"
       screenOptions={{
+        animation: 'shift',
+
         headerShown: false,
         tabBarInactiveTintColor: colors.gray40,
         tabBarActiveTintColor: colors.gray90,
@@ -32,6 +35,7 @@ const BottomNavigation = () => {
         name="Home"
         component={HomeScreen}
         options={{
+          lazy: true,
           tabBarLabel: '홈',
           tabBarIcon: ({ color, focused }) => (
             <HomeIcon color={color} fill={focused} />
@@ -42,17 +46,18 @@ const BottomNavigation = () => {
         name="Club"
         component={ClubScreen}
         options={{
+          lazy: true,
           tabBarLabel: '동아리',
           tabBarIcon: ({ color, focused }) => (
             <ClubIcon color={color} fill={focused} />
           ),
         }}
       />
-
       <Tab.Screen
         name="SchoolCard"
         component={SchoolCardScreen}
         options={{
+          lazy: true,
           tabBarLabel: '학생증',
           tabBarIcon: ({ color, focused }) => (
             <SchoolCardIcon color={color} fill={focused} />
@@ -63,6 +68,7 @@ const BottomNavigation = () => {
         name="Settings"
         component={SettingScreen}
         options={{
+          lazy: true,
           tabBarLabel: '설정',
           tabBarIcon: ({ color, focused }) => (
             <SettingsIcon color={color} fill={focused} />

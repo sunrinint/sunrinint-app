@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import { ScrollView } from 'react-native';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
-import { useNavigation } from '@react-navigation/native';
 import { Column, Wrapper } from '@components/atomic';
 import { Spacer } from '@components/atomic/Spacer';
 import {

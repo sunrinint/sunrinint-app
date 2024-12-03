@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row } from '@components/atomic';
 import Typography from '@components/typography';
-import { Pressable, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Next from '@assets/icons/next.svg';
 import ThemeMode from '@lib/type/ThemeMode';
 import { SelectBottomSheet } from '@components/common/bottom-sheets/select';
@@ -10,10 +10,7 @@ import useAppTheme from '@hooks/useAppTheme';
 import styled, { useTheme } from 'styled-components/native';
 import { InfoCard } from '@components/section/setting/styles';
 
-
-const Container = styled.TouchableOpacity`
-    
-`
+const Container = styled.View``;
 const ThemeSection = () => {
   const { colors } = useTheme();
   const overlay = useOverlay();
@@ -46,25 +43,25 @@ const ThemeSection = () => {
   };
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.7} onPress={openBottomSheet}>
       <InfoCard>
-        <Container onPress={openBottomSheet}>
-        <Row
-          $padding={[7, 12]}
-          $alignItems={'center'}
-          $justifyContent={'space-between'}
-          $fill
-        >
-          <Typography.SemiLabel $color={colors.gray90}>
-            테마 설정
-          </Typography.SemiLabel>
+        <Container>
+          <Row
+            $padding={[7, 12]}
+            $alignItems={'center'}
+            $justifyContent={'space-between'}
+            $fill
+          >
+            <Typography.SemiLabel $color={colors.gray90}>
+              테마 설정
+            </Typography.SemiLabel>
             <Row $gap={8} $alignItems={'center'}>
               <Typography.Body $color={colors.gray70}>
                 {convertThemeName(themeMode)}
               </Typography.Body>
               <Next />
             </Row>
-        </Row>
+          </Row>
         </Container>
       </InfoCard>
     </TouchableOpacity>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styled, { useTheme } from 'styled-components/native';
 import { Card } from '../../atomic/Card';
 import { useNavigation } from '@react-navigation/native';
@@ -6,7 +6,7 @@ import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Column, Row } from '@components/atomic';
 import Typography from '@components/typography';
-import { Animated } from 'react-native';
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import useTimetable from '@hooks/useTimetable';
 import { SkeletonContent } from '@components/skeleton/SkeletonContent';
 import useScheduleState from '@hooks/useScheduleState';
@@ -111,34 +111,34 @@ interface ProgressProps {
   start: string;
   end: string;
 }
-
 const TimeProgress = ({ start, end }: ProgressProps) => {
   const { colors } = useTheme();
-  const animation = useRef(new Animated.Value(0)).current;
+  const animation = useSharedValue(0);
   const { timetable } = useTimetable();
   const { state } = useScheduleState();
+
   useEffect(() => {
     const [_, ...subjects] = timetable.timetable;
     const subjectsLength = subjects.filter((item) => item).length;
     const percentage =
       state === 'AFTER_SCHOOL' ? 1 : (timetable.period - 0.5) / subjectsLength;
-    Animated.timing(animation, {
-      toValue: percentage,
+
+    animation.value = withTiming(percentage, {
       duration: 1000,
-      useNativeDriver: false,
-    }).start();
+      easing: Easing.linear,
+    });
   }, [timetable]);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      width: `${animation.value * 100}%`,
+    };
+  });
+
   return (
     <Column $gap={8}>
       <ProgressContainer>
-        <ProgressBar
-          style={{
-            width: animation.interpolate({
-              inputRange: [0, 1],
-              outputRange: ['0%', '100%'],
-            }),
-          }}
-        />
+        <ProgressBar style={animatedStyle} />
       </ProgressContainer>
       <Row $justifyContent={'space-between'} $fill>
         <Typography.Caption $color={colors.highlight}>
