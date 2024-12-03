@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useState, useCallback, useEffect } from 'react';
 import useClubList from '@hooks/useClubList';
 import { ClubType } from '@lib/type/Club';
 import { FlatList, RefreshControl } from 'react-native';
@@ -13,19 +13,32 @@ const ClubListSection = ({ department }: Props) => {
   const { clubList, refetchClubList } = useClubList(department);
   const [refreshing, setRefreshing] = useState(false);
 
+  const handleRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await refetchClubList();
+    setRefreshing(false);
+  }, [refetchClubList]);
+
+  useEffect(() => {
+    let mounted = true;
+    const loadInitialData = async () => {
+      if (mounted) {
+        await refetchClubList();
+      }
+    };
+    loadInitialData();
+    return () => {
+      mounted = false;
+    };
+  }, [refetchClubList]);
+
   return (
     <>
       <FlatList
         style={{ flex: 1 }}
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={() => {
-              setRefreshing(true);
-              refetchClubList().then(() => setRefreshing(false));
-            }}
-          />
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
         data={clubList}
         ItemSeparatorComponent={() => <Spacer $height={12} />}

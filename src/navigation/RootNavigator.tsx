@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import {
-  CardStyleInterpolators,
-  createStackNavigator,
-} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomNavigation from './BottomNavigation';
 import LoginScreen from '@screens/LoginScreen';
@@ -17,10 +14,6 @@ import { useTheme } from 'styled-components/native';
 import MadebyScreen from '@screens/MadebyScreen';
 import OpenSourceLicenseScreen from '@/screens/OpenSourceLicenseScreen';
 import OpenSourceLicenseDetailScreen from '@/screens/OpenSourceLicenseDetail';
-import { useEffect, useState } from 'react';
-import { getUser } from '@lib/api/user';
-import BootSplash from 'react-native-bootsplash';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -40,13 +33,11 @@ const Stack = createStackNavigator<RootStackParamList>();
 interface RootNavigatorProps {
   logincheck: boolean | null;
 }
-const RootNavigator = ({ logincheck }:RootNavigatorProps) => {
+
+const RootNavigator = ({ logincheck }: RootNavigatorProps) => {
   const { theme } = useAppTheme();
   const { colors } = useTheme();
 
-  if (logincheck === null) {
-    return null;
-  }
   return (
     <>
       <StatusBar
@@ -55,20 +46,11 @@ const RootNavigator = ({ logincheck }:RootNavigatorProps) => {
         barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
       />
       <Stack.Navigator
+        id={undefined}
         initialRouteName={logincheck ? 'Tab' : 'Login'}
         screenOptions={{
           headerShown: false,
-          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          transitionSpec: {
-            open: {
-              animation: 'timing',
-              config: { duration: 300 },
-            },
-            close: {
-              animation: 'timing',
-              config: { duration: 300 },
-            },
-          },
+          presentation: 'card',
         }}
       >
         <Stack.Screen
