@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import LayoutWithHeader from '@/components/layout/LayoutWithHeader';
 import styled, { useTheme } from 'styled-components/native';
 import Typography from '@components/typography';
 import { ScrollView } from 'react-native-gesture-handler';
 import useMealWeek from '@/hooks/useMealWeek';
+import { Column, Row } from '@components/atomic';
+import { SkeletonContent } from '@components/skeleton/SkeletonContent';
 
 const MealScreen = () => {
+  return (
+    <LayoutWithHeader title="급식" showBack>
+      <Container>
+        <Suspense fallback={<MealContent.Skeleton />}>
+          <MealContent />
+        </Suspense>
+      </Container>
+    </LayoutWithHeader>
+  );
+};
+
+const MealContent = () => {
   const { mealWeek } = useMealWeek();
   const { colors } = useTheme();
-
   const [selectedDayIndex] = useState(0);
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
-    const month = date.getMonth() + 1; // getMonth는 0부터 시작하므로 +1 해줍니다.
+    const month = date.getMonth() + 1;
     let day = date.getDate();
     return `${month}월 ${day}일`;
   };
@@ -25,70 +38,103 @@ const MealScreen = () => {
   };
 
   return (
-    <LayoutWithHeader title="급식" showBack>
-      <Container>
-        <DateContainer>
-          <Typography.Title $color={colors.gray80}>
-            {formatDate(mealWeek[0].date)} ~{' '}
-            {formatDate(mealWeek.slice(-1)[0].date)}
-          </Typography.Title>
-        </DateContainer>
-        <WeekContainer>
-          {mealWeek.map((lunch, index) => (
-            <DayContainer key={index} selected={selectedDayIndex === index}>
-              <Typography.Body
-                $color={
-                  selectedDayIndex === index ? colors.gray10 : colors.gray90
-                }
-              >
-                {getDayOfWeek(lunch.date)}
-              </Typography.Body>
-              <Typography.Caption
-                $color={
-                  selectedDayIndex === index ? colors.gray10 : colors.gray90
-                }
-              >
-                {formatDate2(lunch.date)}
-              </Typography.Caption>
-            </DayContainer>
-          ))}
-        </WeekContainer>
-        <ScrollView
-          style={{
-            width: '100%',
-          }}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            alignItems: 'center',
-            gap: 12,
-            borderRadius: 8,
-            paddingBottom: 42,
-          }}
-        >
-          {mealWeek.map((lunch) => (
-            <MenuContainer>
-              <Typography.Label $color={colors.gray90}>
-                {formatDate(lunch.date)} 점심
-              </Typography.Label>
-              <MenuList>
-                {lunch.meals.map((item) => (
-                  <MenuInfo>
-                    <Typography.Body $color={colors.gray80}>
-                      {item.meal}
-                    </Typography.Body>
-                    <Typography.Body $color={colors.gray60}>
-                      {item.code}
-                    </Typography.Body>
-                  </MenuInfo>
-                ))}
-              </MenuList>
-            </MenuContainer>
-          ))}
-        </ScrollView>
-      </Container>
-    </LayoutWithHeader>
+    <>
+      <DateContainer>
+        <Typography.Title $color={colors.gray80}>
+          {formatDate(mealWeek[0].date)} ~{' '}
+          {formatDate(mealWeek.slice(-1)[0].date)}
+        </Typography.Title>
+      </DateContainer>
+      <WeekContainer>
+        {mealWeek.map((lunch, index) => (
+          <DayContainer key={index} selected={selectedDayIndex === index}>
+            <Typography.Body
+              $color={
+                selectedDayIndex === index ? colors.gray10 : colors.gray90
+              }
+            >
+              {getDayOfWeek(lunch.date)}
+            </Typography.Body>
+            <Typography.Caption
+              $color={
+                selectedDayIndex === index ? colors.gray10 : colors.gray90
+              }
+            >
+              {formatDate2(lunch.date)}
+            </Typography.Caption>
+          </DayContainer>
+        ))}
+      </WeekContainer>
+      <ScrollView
+        style={{
+          width: '100%',
+        }}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          alignItems: 'center',
+          gap: 12,
+          borderRadius: 8,
+          paddingBottom: 42,
+        }}
+      >
+        {mealWeek.map((lunch) => (
+          <MenuContainer>
+            <Typography.Label $color={colors.gray90}>
+              {formatDate(lunch.date)} 점심
+            </Typography.Label>
+            <MenuList>
+              {lunch.meals.map((item) => (
+                <MenuInfo>
+                  <Typography.Body $color={colors.gray80}>
+                    {item.meal}
+                  </Typography.Body>
+                  <Typography.Body $color={colors.gray60}>
+                    {item.code}
+                  </Typography.Body>
+                </MenuInfo>
+              ))}
+            </MenuList>
+          </MenuContainer>
+        ))}
+      </ScrollView>
+    </>
   );
 };
+
+const Skeleton = () => {
+  return (
+    <>
+      <DateContainer>
+        <SkeletonContent $width={200} $height={28} />
+      </DateContainer>
+      <WeekContainer>
+        {[...Array(5)].map((_, i) => (
+          <Column key={i} $alignItems="center" $gap={4} style={{ flex: 1 }}>
+            <SkeletonContent $width={20} $height={20} />
+            <SkeletonContent $width={16} $height={16} />
+          </Column>
+        ))}
+      </WeekContainer>
+      <Column $gap={12} $fill>
+        {[...Array(3)].map((_, i) => (
+          <MenuContainer key={i}>
+            <SkeletonContent $width={120} $height={20} />
+            <Column $gap={8}>
+              {[...Array(4)].map((_, j) => (
+                <Row key={j} $gap={8}>
+                  <SkeletonContent $width={160} $height={16} />
+                  <SkeletonContent $width={60} $height={16} />
+                </Row>
+              ))}
+            </Column>
+          </MenuContainer>
+        ))}
+      </Column>
+    </>
+  );
+};
+
+MealContent.Skeleton = Skeleton;
 
 const getDayOfWeek = (dateString: string): string => {
   const days = ['일', '월', '화', '수', '목', '금', '토'];
@@ -144,9 +190,7 @@ const DayContainer = styled.View<{ selected: boolean }>`
   border-radius: 4px;
   align-items: center;
   background-color: ${({ theme, selected }) =>
-    selected
-      ? theme.colors.gray90
-      : theme.colors.gray10}; // 선택된 요일일 때 색 변경
+    selected ? theme.colors.gray90 : theme.colors.gray10};
 `;
 
 export default MealScreen;
