@@ -15,9 +15,11 @@ const useBottomSheet = () => {
       },
       onPanResponderRelease: (event, gestureState) => {
         if (gestureState.dy > 0 && gestureState.vy > 1) {
+          console.log("test");
           close.start();
         } else {
           open.start();
+          console.log("test");
         }
       },
     }),

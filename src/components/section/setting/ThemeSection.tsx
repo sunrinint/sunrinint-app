@@ -27,7 +27,7 @@ const ThemeSection = () => {
     }
   };
   const openBottomSheet = () => {
-    overlay.open(
+      overlay.open(
       <SelectBottomSheet
         title={'테마 선택'}
         data={[

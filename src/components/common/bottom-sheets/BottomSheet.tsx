@@ -50,7 +50,8 @@ const BottomSheet = ({
         onChange,
         handler,
         onConfirm: () => {
-          close.start(onConfirm);
+          onConfirm();
+          close.start(overlay.close);
         },
       }}
     >
