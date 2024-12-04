@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import { BackHandler, Alert } from 'react-native';
 
 import BottomNavigation from './BottomNavigation';
 import LoginScreen from '@screens/LoginScreen';
@@ -15,7 +16,8 @@ import MadebyScreen from '@screens/MadebyScreen';
 import OpenSourceLicenseScreen from '@/screens/OpenSourceLicenseScreen';
 import OpenSourceLicenseDetailScreen from '@/screens/OpenSourceLicenseDetail';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { useNavigationState } from '@react-navigation/native';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -38,6 +40,7 @@ const RootNavigator = () => {
   const [initialRoute, setInitialRoute] =
     useState<keyof RootStackParamList>('Login');
   const [isLoading, setIsLoading] = useState(true);
+  const navigation = useNavigationState((state) => state);
 
   useLayoutEffect(() => {
     const checkAuth = async () => {
@@ -62,6 +65,22 @@ const RootNavigator = () => {
     checkAuth();
   }, []);
 
+  useEffect(() => {
+    const backAction = () => {
+      if (navigation.index === 0) {
+        return true;
+      }
+      return false;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, [navigation]);
+
   if (!isLoading) {
     return (
       <>
@@ -76,6 +95,7 @@ const RootNavigator = () => {
           screenOptions={{
             headerShown: false,
             presentation: 'card',
+            gestureEnabled: false,
           }}
         >
           <Stack.Screen

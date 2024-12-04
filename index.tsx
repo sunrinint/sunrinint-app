@@ -34,7 +34,7 @@ const App = () => {
     BootSplash.hide();
   };
 
-  const { theme } = useAppTheme();
+  const { theme, themeMode } = useAppTheme();
 
   const palette = { colors: theme === 'light' ? light : dark };
   return (

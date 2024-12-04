@@ -140,7 +140,7 @@ const LoginScreen = ({ navigation }) => {
             activeScale={0.96}
             onPress={() =>
               login()
-                .then(() => navigation.navigate('Tab'))
+                .then(() => navigation.replace('Tab'))
                 .catch((e) => console.log(e))
             }
           >

@@ -15,7 +15,7 @@ const BackCard = () => {
   const { theme } = useAppTheme();
   return (
     <Container style={styles[theme]}>
-      <Typography.Body $color={colors.gray70}>
+      <Typography.Body $center $color={colors.gray70}>
         선린인터넷고등학교 모바일 학생증
       </Typography.Body>
       <ImageContainer source={{ uri: user.profileImage }} />
@@ -37,7 +37,9 @@ const BackCard = () => {
         <Typography.SemiBody $color={colors.gray70}>
           위 사람은 본교 학생임을 증명함.
         </Typography.SemiBody>
-        <Typography.Body $color={colors.gray70}>{pass.date}</Typography.Body>
+        <Typography.Body $center $color={colors.gray70}>
+          {pass.date}
+        </Typography.Body>
       </Column>
       <Svg />
     </Container>
@@ -58,7 +60,7 @@ const Svg = () => {
         `}
         style={{
           position: 'absolute',
-          zIndex: -1,
+          zIndex: 1,
           top: 0,
           left: 0,
         }}
@@ -79,7 +81,7 @@ const Svg = () => {
         `}
         style={{
           position: 'absolute',
-          zIndex: -1,
+          zIndex: 1,
           top: 36,
           right: 0,
         }}

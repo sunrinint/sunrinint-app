@@ -26,6 +26,7 @@ const SchoolCardScreen = () => {
           gap: 12,
           justifyContent: 'center',
           alignItems: 'center',
+          paddingHorizontal: 16,
         }}
       >
         <FlipCard

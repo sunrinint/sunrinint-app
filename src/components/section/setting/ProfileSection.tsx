@@ -65,7 +65,7 @@ const ProfileSection = () => {
                   await AsyncStorage.removeItem('access');
                   await AsyncStorage.removeItem('refresh');
                   overlay.close();
-                  navigatoin.navigate('Login');
+                  navigatoin.replace('Login');
                 }}
               >
                 <Typography.SemiLabel $color={light.gray10}>
