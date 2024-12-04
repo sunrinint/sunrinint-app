@@ -1,11 +1,17 @@
 import React, { ReactNode, useContext, useEffect } from 'react';
-import { Animated, PanResponderInstance, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Spacer, Wrapper } from '@components/atomic';
 import styled, { useTheme } from 'styled-components/native';
 import Typography from '@components/typography';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useBottomSheet from '@hooks/useBottomSheet';
 import useOverlay from '@hooks/useOverlay';
+import Animated, {
+  runOnJS,
+  SharedValue,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
+import { GestureDetector, PanGesture } from 'react-native-gesture-handler';
 
 interface Props {
   title?: string;
@@ -15,7 +21,12 @@ interface Props {
 }
 
 interface BottomSheetContextProps extends Props {
-  handler: PanResponderInstance;
+  gesture: PanGesture;
+  animationValues: {
+    opacity: SharedValue<number>;
+    translateY: SharedValue<number>;
+  };
+  onConfirm?: () => void;
 }
 
 interface BottomSheetProps extends Props {
@@ -26,7 +37,11 @@ const BottomSheetContext = React.createContext<BottomSheetContextProps>({
   title: '',
   value: '',
   onChange: () => {},
-  handler: {} as PanResponderInstance,
+  gesture: {} as PanGesture,
+  animationValues: {
+    opacity: { value: 0 } as SharedValue<number>,
+    translateY: { value: 0 } as SharedValue<number>,
+  },
 });
 
 const BottomSheet = ({
@@ -37,10 +52,10 @@ const BottomSheet = ({
   children,
 }: BottomSheetProps) => {
   const { bottom } = useSafeAreaInsets();
-  const { open, close, animationVale, handler } = useBottomSheet();
+  const { open, close, animationValues, gesture } = useBottomSheet();
   const overlay = useOverlay();
   useEffect(() => {
-    open.start();
+    open();
   }, []);
   return (
     <BottomSheetContext.Provider
@@ -48,34 +63,37 @@ const BottomSheet = ({
         title,
         value,
         onChange,
-        handler,
+        animationValues,
+        gesture,
         onConfirm: () => {
-          { onConfirm && onConfirm(); }
-          close.start(overlay.close);
+          onConfirm?.();
+          close();
+          overlay.close();
         },
       }}
     >
       <Overlay
         style={{
-          opacity: animationVale.opacity,
+          opacity: animationValues.opacity,
         }}
       >
         <Pressable
           onPress={() => {
-            close.start(overlay.close);
+            close();
+            runOnJS(overlay.close)();
           }}
           style={{
             flex: 1,
           }}
         />
         <Container
-          style={{
+          style={useAnimatedStyle(() => ({
             transform: [
               {
-                translateY: animationVale.translateY,
+                translateY: animationValues.translateY.value,
               },
             ],
-          }}
+          }))}
         >
           {children}
           <Spacer $height={bottom} />
@@ -116,31 +134,33 @@ const Title = () => {
 
 const Handler = () => {
   const { colors } = useTheme();
-  const { handler } = useContext(BottomSheetContext);
+  const { gesture } = useContext(BottomSheetContext);
+
   return (
     <>
-      <View
-        style={{
-          display: 'flex',
-          alignSelf: 'center',
-          paddingHorizontal: 12,
-          paddingVertical: 12,
-          position: 'absolute',
-          top: 4,
-          zIndex: 100,
-        }}
-        {...handler.panHandlers}
-      >
+      <GestureDetector gesture={gesture}>
         <View
           style={{
-            width: 64,
-            height: 4,
+            display: 'flex',
             alignSelf: 'center',
-            borderRadius: 10,
-            backgroundColor: colors.gray30,
+            paddingHorizontal: 12,
+            paddingVertical: 12,
+            position: 'absolute',
+            top: 4,
+            zIndex: 100,
           }}
-        />
-      </View>
+        >
+          <View
+            style={{
+              width: 64,
+              height: 4,
+              alignSelf: 'center',
+              borderRadius: 10,
+              backgroundColor: colors.gray30,
+            }}
+          />
+        </View>
+      </GestureDetector>
       <Spacer $height={4} />
     </>
   );

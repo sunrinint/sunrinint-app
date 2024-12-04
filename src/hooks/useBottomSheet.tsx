@@ -1,68 +1,72 @@
-import { Animated, PanResponder, useWindowDimensions } from 'react-native';
-import { useRef } from 'react';
+import { useCallback } from 'react';
+import { useWindowDimensions } from 'react-native';
+import {
+  useSharedValue,
+  withTiming,
+  useAnimatedStyle,
+  Easing,
+  runOnJS,
+} from 'react-native-reanimated';
+import { Gesture } from 'react-native-gesture-handler';
+import useOverlay from './useOverlay';
 
 const useBottomSheet = () => {
+  const overlay = useOverlay();
   const { height } = useWindowDimensions();
-  const opacityAnimation = useRef(new Animated.Value(0)).current;
-  const animationY = useRef(new Animated.Value(height)).current;
-  const panResponders = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: (event, gestureState) => {
-        if (gestureState.dy > 0) {
-          animationY.setValue(gestureState.dy);
-        }
-      },
-      onPanResponderRelease: (event, gestureState) => {
-        if (gestureState.dy > 0 && gestureState.vy > 1) {
-          console.log("test");
-          close.start();
-        } else {
-          open.start();
-          console.log("test");
-        }
-      },
-    }),
-  ).current;
-  const open = Animated.parallel([
-    Animated.timing(animationY, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: false,
-    }),
-    Animated.timing(opacityAnimation, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: false,
-    }),
-  ]);
-  const close = Animated.parallel([
-    Animated.timing(animationY, {
-      toValue: height,
-      duration: 300,
-      useNativeDriver: false,
-    }),
-    Animated.timing(opacityAnimation, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: false,
-    }),
-  ]);
 
-  const translateY = animationY;
-  const opacity = opacityAnimation.interpolate({
-    inputRange: [0, 0.5],
-    outputRange: [0, 1],
-  });
+  // Shared values for animation
+  const translateY = useSharedValue(height);
+  const opacity = useSharedValue(0);
+
+  // Callback to handle closing the bottom sheet
+  const handleClose = useCallback(() => {
+    translateY.value = withTiming(height, { duration: 400 });
+    opacity.value = withTiming(0, { duration: 300 });
+    overlay.close();
+  }, [height, translateY, opacity]);
+
+  // Callback to handle opening the bottom sheet
+  const handleOpen = useCallback(() => {
+    translateY.value = withTiming(0, {
+      duration: 400,
+      easing: Easing.out(Easing.ease),
+    });
+    opacity.value = withTiming(1, { duration: 300 });
+  }, [translateY, opacity]);
+
+  // Gesture handler
+  const gesture = Gesture.Pan()
+    .onUpdate((event) => {
+      'worklet';
+      if (event.translationY > 0) {
+        translateY.value = event.translationY;
+      }
+    })
+    .onEnd((event) => {
+      'worklet';
+      if (event.translationY > 50 || event.velocityY > 1000) {
+        runOnJS(handleClose)();
+      } else {
+        translateY.value = withTiming(0, { duration: 300 });
+      }
+    });
+
+  // Animated styles
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: translateY.value }],
+    opacity: opacity.value,
+  }));
 
   return {
-    open,
-    close,
-    animationVale: {
+    open: handleOpen,
+    close: handleClose,
+    animationValues: {
       translateY,
       opacity,
     },
-    handler: panResponders,
+    gesture,
+    animatedStyle,
   };
 };
+
 export default useBottomSheet;

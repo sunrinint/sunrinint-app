@@ -38,7 +38,6 @@ const CustomPressable = ({
     opacity.value = withTiming(0.6, {
       duration: 150,
       easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-      delay: 50,
     });
   };
 
