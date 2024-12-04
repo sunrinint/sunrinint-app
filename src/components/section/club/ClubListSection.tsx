@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import useClubList from '@hooks/useClubList';
 import { ClubType } from '@lib/type/Club';
 import { FlatList, RefreshControl } from 'react-native';

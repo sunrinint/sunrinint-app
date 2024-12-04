@@ -63,7 +63,7 @@ const FrontCard = ({ style }: { style?: any }) => {
             `}
           style={{
             position: 'absolute',
-            zIndex: -1,
+            zIndex: 1,
             top: 31,
             right: 0,
           }}
