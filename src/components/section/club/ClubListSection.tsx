@@ -32,6 +32,18 @@ const ClubListSection = ({ department }: Props) => {
     };
   }, [refetchClubList]);
 
+  const renderItem = useCallback(
+    ({ item, index }) => (
+      <>
+        <Suspense fallback={<ClubCard.Skeleton />}>
+          <ClubCard id={item.id} />
+        </Suspense>
+        {index === clubList.length - 1 && <Spacer $height={72} />}
+      </>
+    ),
+    [clubList.length],
+  );
+
   return (
     <>
       <FlatList
@@ -42,14 +54,7 @@ const ClubListSection = ({ department }: Props) => {
         }
         data={clubList}
         ItemSeparatorComponent={() => <Spacer $height={12} />}
-        renderItem={({ item, index }) => (
-          <>
-            <Suspense fallback={<ClubCard.Skeleton />}>
-              <ClubCard id={item.id} />
-            </Suspense>
-            {index === clubList.length - 1 && <Spacer $height={72} />}
-          </>
-        )}
+        renderItem={renderItem}
       />
     </>
   );

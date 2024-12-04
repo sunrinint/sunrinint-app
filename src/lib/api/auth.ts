@@ -9,9 +9,18 @@ export const login = async () => {
     const res = await defaultClient.post('auth/app/google', {
       idToken: idToken,
     });
-    return AsyncStorage.setItem('refresh', res.data.refreshToken);
+    AsyncStorage.setItem('refresh', res.data.refreshToken);
+    const refreshRes = await defaultClient.get('auth/refresh', {
+      headers: {
+        Cookie: `Refresh=${res.data.refreshToken};`,
+      },
+    });
+    AsyncStorage.setItem('access', refreshRes.data.accessToken);
   } catch (error) {
-    console.error("Server error:", error.response ? error.response.data : error.message); // Log only the server error
+    console.error(
+      'Server error:',
+      error.response ? error.response.data : error.message,
+    ); // Log only the server error
     throw error;
   }
 };
