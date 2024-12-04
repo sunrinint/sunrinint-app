@@ -39,8 +39,8 @@ const App = () => {
 
   const onReady = () => {
     const checkUser = async () => {
-      const accessToken = await AsyncStorage.getItem('access');
-      if (accessToken !== null) {
+      const refreshToken = await AsyncStorage.getItem('refresh');
+      if (refreshToken !== null) {
         const user = await getUser().catch(() => {
           setLogincheck(false);
           BootSplash.hide();
