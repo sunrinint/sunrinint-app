@@ -8,7 +8,6 @@ import CustomPressable from './CustomPressable';
 import Animated, {
   useAnimatedStyle,
   withTiming,
-  useSharedValue,
 } from 'react-native-reanimated';
 
 interface NoticeProps {
@@ -19,7 +18,6 @@ const Notice = ({ uuid }: NoticeProps) => {
   const { colors } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const { notice } = useNotice(uuid);
-  const animatedHeight = useSharedValue(0);
 
   const contentStyle = useAnimatedStyle(() => {
     return {
@@ -54,11 +52,13 @@ const Notice = ({ uuid }: NoticeProps) => {
             />
           </IconBox>
         </NoticeTop>
-        <Animated.View style={contentStyle}>
-          <Typography.Body $color={colors.gray80}>
-            {notice.content}
-          </Typography.Body>
-        </Animated.View>
+        {isOpen && (
+          <Animated.View style={contentStyle}>
+            <Typography.Body $color={colors.gray80}>
+              {notice.content}
+            </Typography.Body>
+          </Animated.View>
+        )}
       </NoticeLayout>
     </CustomPressable>
   );
