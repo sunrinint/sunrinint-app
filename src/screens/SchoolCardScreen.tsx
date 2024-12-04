@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import LayoutWithHeader from '@components/layout/LayoutWithHeader';
-import { Column } from '@components/atomic';
-import SchoolCard from '@components/common/school-card';
 import Typography from '@components/typography';
 import styled, { useTheme } from 'styled-components/native';
 import { SvgXml } from 'react-native-svg';
-import { Spacer } from '@components/atomic/Spacer';
-import {
-  Directions,
-  FlingGestureHandler,
-  State,
-} from 'react-native-gesture-handler';
 import { View } from 'react-native';
+import { useSharedValue } from 'react-native-reanimated';
+import FlipCard, { FrontCard, BackCard } from '@components/common/school-card';
+import CustomPressable from '@/components/common/CustomPressable';
 
 const SchoolCardScreen = () => {
   const { colors } = useTheme();
-  const [isBack, setIsBack] = useState(false);
+  const isFlipped = useSharedValue(false);
+  const [isFlippedState, setIsFlippedState] = useState(false);
+
+  const handleFlip = () => {
+    isFlipped.value = !isFlipped.value;
+    setIsFlippedState(!isFlippedState);
+  };
+
   return (
     <LayoutWithHeader title="학생증">
       <View
@@ -26,30 +28,26 @@ const SchoolCardScreen = () => {
           alignItems: 'center',
         }}
       >
-        <FlingGestureHandler
-          /* eslint-disable-next-line no-bitwise */
-          direction={Directions.RIGHT | Directions.LEFT}
-          onHandlerStateChange={({ nativeEvent }) => {
-            if (nativeEvent.state === State.ACTIVE) {
-              setIsBack(!isBack);
-            }
+        <FlipCard
+          cardStyle={{
+            alignSelf: 'center',
+            width: '100%',
+            maxWidth: 380,
+            height: 424,
+            borderRadius: 16,
           }}
-        >
-          <View
-            style={{
-              width: '100%',
-              alignItems: 'center',
-            }}
-          >
-            <SchoolCard isBack={isBack} />
-          </View>
-        </FlingGestureHandler>
-        <Button onPress={() => setIsBack(!isBack)}>
-          <Typography.Body $color={colors.gray80}>
-            학생증 {isBack ? '앞면' : '뒷면'} 보기
-          </Typography.Body>
-          <SvgXml
-            xml={`
+          RegularContent={<FrontCard />}
+          FlippedContent={<BackCard />}
+          isFlipped={isFlipped}
+        />
+
+        <CustomPressable onPress={handleFlip}>
+          <Button>
+            <Typography.Body $color={colors.gray80}>
+              학생증 {!isFlippedState ? '뒷면' : '앞면'} 보기
+            </Typography.Body>
+            <SvgXml
+              xml={`
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_1488_1958" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
                   <rect width="16" height="16" fill="#D9D9D9"/>
@@ -59,14 +57,15 @@ const SchoolCardScreen = () => {
                 </g>
               </svg>
             `}
-          />
-        </Button>
+            />
+          </Button>
+        </CustomPressable>
       </View>
     </LayoutWithHeader>
   );
 };
 
-const Button = styled.Pressable`
+const Button = styled.View`
   background-color: ${(props) => props.theme.colors.gray10};
   padding: 8px 16px;
   border-radius: 96px;

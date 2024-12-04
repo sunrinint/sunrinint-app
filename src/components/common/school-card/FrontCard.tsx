@@ -1,15 +1,15 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import Typography from '@components/typography';
 import { Column } from '@components/atomic';
 import { SvgXml } from 'react-native-svg';
 import Barcode from '@components/common/Barcode';
-import { Animated } from 'react-native';
 import useAppTheme from '@/hooks/useAppTheme';
 import useUser from '@hooks/useUser';
 import usePass from '@hooks/usePass';
 
-const FrontCard = ({ style }: { style?: any }) => {
+const FrontCard = () => {
   const { colors } = useTheme();
   const { theme } = useAppTheme();
   const { pass } = usePass();
@@ -22,7 +22,7 @@ const FrontCard = ({ style }: { style?: any }) => {
   };
 
   return (
-    <Container style={style}>
+    <Container style={styles[theme]}>
       <InfoContainer
         style={{
           backgroundColor: theme === 'light' ? colors.gray90 : colors.gray30,
@@ -77,14 +77,21 @@ const FrontCard = ({ style }: { style?: any }) => {
   );
 };
 
-const Container = styled(Animated.View)`
+const styles = StyleSheet.create({
+  light: {
+    boxShadow: '0px 16px 20px 0px rgba(90, 105, 125, 0.12)',
+  },
+  dark: {
+    boxShadow: '0px 16px 20px 0px rgba(15, 17, 18, 0.12);',
+  },
+});
+
+const Container = styled.View`
+  flex: 1;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 380px;
   border-radius: 8px;
   background-color: ${(props) => props.theme.colors.gray10};
-  height: 424px;
 `;
 
 const InfoContainer = styled.View`

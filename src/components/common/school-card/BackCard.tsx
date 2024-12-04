@@ -3,16 +3,18 @@ import { Column, Row } from '@components/atomic';
 import Typography from '@components/typography';
 import { SvgXml } from 'react-native-svg';
 import React from 'react';
-import { Animated } from 'react-native';
 import useUser from '@hooks/useUser';
 import usePass from '@hooks/usePass';
+import { StyleSheet } from 'react-native';
+import useAppTheme from '@/hooks/useAppTheme';
 
-const BackCard = ({ style }: { style?: any }) => {
+const BackCard = () => {
   const { colors } = useTheme();
   const { user } = useUser();
   const { pass } = usePass();
+  const { theme } = useAppTheme();
   return (
-    <Container style={style}>
+    <Container style={styles[theme]}>
       <Typography.Body $color={colors.gray70}>
         선린인터넷고등학교 모바일 학생증
       </Typography.Body>
@@ -86,15 +88,21 @@ const Svg = () => {
   );
 };
 
-const Container = styled(Animated.View)`
+const styles = StyleSheet.create({
+  light: {
+    boxShadow: '0px 16px 20px 0px rgba(90, 105, 125, 0.12)',
+  },
+  dark: {
+    boxShadow: '0px 16px 20px 0px rgba(15, 17, 18, 0.12);',
+  },
+});
+const Container = styled.View`
+  flex: 1;
   display: flex;
   flex-direction: column;
   background: ${(props) => props.theme.colors.gray10};
-  width: 100%;
-  max-width: 380px;
   border-radius: 8px;
   padding: 20px;
-  height: 424px;
   align-items: center;
   justify-content: space-between;
 `;
