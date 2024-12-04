@@ -9,6 +9,7 @@ import useOverlay from '@hooks/useOverlay';
 import useAppTheme from '@hooks/useAppTheme';
 import styled, { useTheme } from 'styled-components/native';
 import { InfoCard } from '@components/section/setting/styles';
+import CustomPressable from '@/components/common/CustomPressable';
 
 const Container = styled.View``;
 const ThemeSection = () => {
@@ -43,7 +44,7 @@ const ThemeSection = () => {
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={openBottomSheet}>
+    <CustomPressable activeScale={0.98} onPress={openBottomSheet}>
       <InfoCard>
         <Container>
           <Row
@@ -64,7 +65,7 @@ const ThemeSection = () => {
           </Row>
         </Container>
       </InfoCard>
-    </TouchableOpacity>
+    </CustomPressable>
   );
 };
 

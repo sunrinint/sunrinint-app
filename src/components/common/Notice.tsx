@@ -4,6 +4,12 @@ import Typography from '../typography';
 import ArrowDown from '@assets/icons/down.svg';
 import useNotice from '@hooks/useNotice';
 import { View } from 'react-native';
+import CustomPressable from './CustomPressable';
+import Animated, {
+  useAnimatedStyle,
+  withTiming,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 interface NoticeProps {
   uuid: string;
@@ -13,29 +19,48 @@ const Notice = ({ uuid }: NoticeProps) => {
   const { colors } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const { notice } = useNotice(uuid);
+  const animatedHeight = useSharedValue(0);
+
+  const contentStyle = useAnimatedStyle(() => {
+    return {
+      maxHeight: withTiming(isOpen ? 500 : 0, {
+        duration: 300,
+      }),
+      opacity: withTiming(isOpen ? 1 : 0, {
+        duration: 300,
+      }),
+      overflow: 'hidden',
+    };
+  });
+
   return (
-    <NoticeLayout onPress={() => setIsOpen(!isOpen)}>
-      <NoticeTop>
-        <NoticeTopLeft>
-          <Typography.SemiLabel $color={colors.gray90}>
-            {notice.title}
-          </Typography.SemiLabel>
-          <Typography.Caption $color={colors.gray60}>
-            {notice.createdAt.substring(0, 10)}
-          </Typography.Caption>
-        </NoticeTopLeft>
-        <IconBox>
-          <ArrowDown fill={colors.gray80} />
-        </IconBox>
-      </NoticeTop>
-      {isOpen ? (
-        <Typography.Body $color={colors.gray80}>
-          {notice.content}
-        </Typography.Body>
-      ) : (
-        <></>
-      )}
-    </NoticeLayout>
+    <CustomPressable activeScale={0.99} onPress={() => setIsOpen(!isOpen)}>
+      <NoticeLayout>
+        <NoticeTop>
+          <NoticeTopLeft>
+            <Typography.SemiLabel $color={colors.gray90}>
+              {notice.title}
+            </Typography.SemiLabel>
+            <Typography.Caption $color={colors.gray60}>
+              {notice.createdAt.substring(0, 10)}
+            </Typography.Caption>
+          </NoticeTopLeft>
+          <IconBox>
+            <ArrowDown
+              style={{
+                transform: [{ rotate: isOpen ? '180deg' : '0deg' }],
+              }}
+              fill={colors.gray80}
+            />
+          </IconBox>
+        </NoticeTop>
+        <Animated.View style={contentStyle}>
+          <Typography.Body $color={colors.gray80}>
+            {notice.content}
+          </Typography.Body>
+        </Animated.View>
+      </NoticeLayout>
+    </CustomPressable>
   );
 };
 
@@ -90,9 +115,7 @@ const IconBox = styled.View`
   align-items: center;
 `;
 
-const NoticeLayout = styled.TouchableOpacity.attrs({
-  activeOpacity: 0.6,
-})`
+const NoticeLayout = styled.View`
   display: flex;
   padding: 20px;
   flex-direction: column;

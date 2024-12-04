@@ -7,6 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 import useNoticeList from '@hooks/useNoticeList';
+import CustomPressable from '@/components/common/CustomPressable';
+import { View } from 'react-native';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
@@ -15,22 +17,27 @@ const NoticeSection = () => {
   const { colors } = useTheme();
   const { noticeList } = useNoticeList();
   return (
-    <Card.CardContainer
+    <CustomPressable
+      activeScale={0.98}
       onPress={() => {
         navigation.navigate('Notice');
       }}
     >
-      <Card.CardTop>
-        <NoticeRow>
-          <IconBox>
-            <NoticeIcon fill={colors.gray90} />
-          </IconBox>
-          <Typography.SemiBody $color={colors.gray90}>
-            {noticeList[0]?.title ?? '공지사항이 없습니다.'}
-          </Typography.SemiBody>
-        </NoticeRow>
-      </Card.CardTop>
-    </Card.CardContainer>
+      <View style={{ width: '100%' }}>
+        <Card.CardContainer>
+          <Card.CardTop>
+            <NoticeRow>
+              <IconBox>
+                <NoticeIcon fill={colors.gray90} />
+              </IconBox>
+              <Typography.SemiBody $color={colors.gray90}>
+                {noticeList[0]?.title ?? '공지사항이 없습니다.'}
+              </Typography.SemiBody>
+            </NoticeRow>
+          </Card.CardTop>
+        </Card.CardContainer>
+      </View>
+    </CustomPressable>
   );
 };
 

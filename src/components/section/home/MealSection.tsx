@@ -8,6 +8,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { Column, Row } from '@components/atomic';
 import { SkeletonContent } from '@components/skeleton/SkeletonContent';
 import useMeal from '@/hooks/useMeal';
+import CustomPressable from '@/components/common/CustomPressable';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
@@ -18,21 +19,24 @@ const MealSection = () => {
   const [_, month, day] = meal.date.split('-');
 
   return (
-    <Card.CardContainer
+    <CustomPressable
+      activeScale={0.98}
       onPress={() => {
         navigation.navigate('Meal');
       }}
     >
-      <Card.CardTop>
-        <Typography.SemiLabel $color={colors.gray80}>
-          {month}월 {day}일 점심
-        </Typography.SemiLabel>
-      </Card.CardTop>
+      <Card.CardContainer>
+        <Card.CardTop>
+          <Typography.SemiLabel $color={colors.gray80}>
+            {month}월 {day}일 점심
+          </Typography.SemiLabel>
+        </Card.CardTop>
 
-      <Typography.Body $color={colors.gray80}>
-        {meal.meals.map((v) => v.meal).join(', ')}
-      </Typography.Body>
-    </Card.CardContainer>
+        <Typography.Body $color={colors.gray80}>
+          {meal.meals.map((v) => v.meal).join(', ')}
+        </Typography.Body>
+      </Card.CardContainer>
+    </CustomPressable>
   );
 };
 

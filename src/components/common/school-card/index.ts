@@ -1,6 +1,6 @@
-import SchoolCard from './SchoolCard';
+import { FlipCard } from './FlipCard';
 import FrontCard from './FrontCard';
 import BackCard from './BackCard';
 
 export { FrontCard, BackCard };
-export default SchoolCard;
+export default FlipCard;

@@ -16,6 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import useUpdateUser from '@hooks/useUpdateUser';
 import ImagePicker from 'react-native-image-crop-picker';
 import { uploadImage } from '@lib/api/upload';
+import CustomPressable from '@/components/common/CustomPressable';
 
 const ProfileSection = () => {
   const { user } = useUser();
@@ -79,7 +80,7 @@ const ProfileSection = () => {
   };
 
   return (
-    <Column $padding={[12, 0]} $alignItems={'center'}>
+    <Column $padding={[10, 0]} $alignItems={'center'}>
       <ImageContainer source={{ uri: user.profileImage }} />
       <Spacer $height={24} />
       <Typography.LargeTitle $color={colors.gray80}>
@@ -89,21 +90,17 @@ const ProfileSection = () => {
       <Typography.Body $color={colors.gray60}>{user.email}</Typography.Body>
       <Spacer $height={16} />
       <Row $justifyContent={'center'} $gap={8}>
-        <Button
-          fullWidth
-          height={44}
-          radius={999}
-          level={10}
+        <CustomPressable
+          style={{ flex: 1 }}
+          activeScale={0.96}
           onPress={openModal}
         >
-          <Typography.Body $color={colors.gray70}>로그아웃</Typography.Body>
-          <Logout fill={colors.gray80} />
-        </Button>
-        <Button
-          fullWidth
-          height={44}
-          radius={999}
-          level={10}
+          <Button fullWidth height={44} radius={999} level={10}>
+            <Typography.Body $color={colors.gray70}>로그아웃</Typography.Body>
+            <Logout fill={colors.gray80} />
+          </Button>
+        </CustomPressable>
+        <CustomPressable
           onPress={() => {
             ImagePicker.openPicker({
               mediaType: 'photo',
@@ -119,10 +116,14 @@ const ProfileSection = () => {
               })
               .catch((err) => console.log(err));
           }}
+          style={{ flex: 1 }}
+          activeScale={0.96}
         >
-          <Typography.Body $color={colors.gray70}>사진 수정</Typography.Body>
-          <Edit fill={colors.gray80} />
-        </Button>
+          <Button fullWidth height={44} radius={999} level={10}>
+            <Typography.Body $color={colors.gray70}>사진 수정</Typography.Body>
+            <Edit fill={colors.gray80} />
+          </Button>
+        </CustomPressable>
       </Row>
     </Column>
   );

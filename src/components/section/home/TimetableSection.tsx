@@ -6,10 +6,16 @@ import { RootStackParamList } from '@navigation/RootNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Column, Row } from '@components/atomic';
 import Typography from '@components/typography';
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import useTimetable from '@hooks/useTimetable';
 import { SkeletonContent } from '@components/skeleton/SkeletonContent';
 import useScheduleState from '@hooks/useScheduleState';
+import CustomPressable from '@/components/common/CustomPressable';
 
 type tabScreenProp = StackNavigationProp<RootStackParamList, 'Tab'>;
 
@@ -27,59 +33,62 @@ const TimeTableSection = () => {
 
   const { state } = useScheduleState();
   return (
-    <Card.CardContainer
+    <CustomPressable
+      activeScale={0.98}
       onPress={() => {
         navigation.navigate('TimeTable');
       }}
     >
-      <Card.CardTop>
-        <Column $gap={2}>
-          {state === 'DURING_CLASSES' ? (
-            <Typography.SemiLabel $color={colors.gray90}>
-              {`${timetable.period}교시,`}{' '}
-              <Typography.SemiLabel $color={colors.highlight}>
-                {currentTime.subject}
+      <Card.CardContainer>
+        <Card.CardTop>
+          <Column $gap={2}>
+            {state === 'DURING_CLASSES' ? (
+              <Typography.SemiLabel $color={colors.gray90}>
+                {`${timetable.period}교시,`}{' '}
+                <Typography.SemiLabel $color={colors.highlight}>
+                  {currentTime.subject}
+                </Typography.SemiLabel>
+                시간
               </Typography.SemiLabel>
-              시간
-            </Typography.SemiLabel>
-          ) : (
-            <Typography.Label $bold $color={colors.gray90}>
-              {state === 'BEFORE_CLASSES' && '현재는 등교 전입니다'}
-              {state === 'AFTER_SCHOOL' && '방과 후'}
-            </Typography.Label>
-          )}
-          <Typography.Body $color={colors.gray60}>
-            {state === 'DURING_CLASSES' &&
-              `${currentTime.room ? currentTime.room + ' ' : ''}${currentTime.teacher} 선생님`}
-            {state === 'BEFORE_CLASSES' && '등교시간 : 8시 30분'}
-            {(state === 'AFTER_SCHOOL' || state === 'WEEKEND_OR_HOLIDAY') &&
-              '현재는 수업시간이 아닙니다'}
-          </Typography.Body>
-        </Column>
-      </Card.CardTop>
-      {state !== 'WEEKEND_OR_HOLIDAY' && (
-        <>
-          <Row $gap={4} $fill>
-            {timetable.timetable.map(
-              (item, index) =>
-                item &&
-                typeof item !== 'number' && (
-                  <PeriodItem
-                    key={index}
-                    period={index}
-                    currentPeriod={timetable.period}
-                    subject={item.subject}
-                  />
-                ),
+            ) : (
+              <Typography.Label $bold $color={colors.gray90}>
+                {state === 'BEFORE_CLASSES' && '현재는 등교 전입니다'}
+                {state === 'AFTER_SCHOOL' && '방과 후'}
+              </Typography.Label>
             )}
-          </Row>
-          <TimeProgress
-            start={timetable.timeOfDay[0]}
-            end={timetable.timeOfDay.slice(-1)[0]}
-          />
-        </>
-      )}
-    </Card.CardContainer>
+            <Typography.Body $color={colors.gray60}>
+              {state === 'DURING_CLASSES' &&
+                `${currentTime.room ? currentTime.room + ' ' : ''}${currentTime.teacher} 선생님`}
+              {state === 'BEFORE_CLASSES' && '등교시간 : 8시 30분'}
+              {(state === 'AFTER_SCHOOL' || state === 'WEEKEND_OR_HOLIDAY') &&
+                '현재는 수업시간이 아닙니다'}
+            </Typography.Body>
+          </Column>
+        </Card.CardTop>
+        {state !== 'WEEKEND_OR_HOLIDAY' && (
+          <>
+            <Row $gap={4} $fill>
+              {timetable.timetable.map(
+                (item, index) =>
+                  item &&
+                  typeof item !== 'number' && (
+                    <PeriodItem
+                      key={index}
+                      period={index}
+                      currentPeriod={timetable.period}
+                      subject={item.subject}
+                    />
+                  ),
+              )}
+            </Row>
+            <TimeProgress
+              start={timetable.timeOfDay[0]}
+              end={timetable.timeOfDay.slice(-1)[0]}
+            />
+          </>
+        )}
+      </Card.CardContainer>
+    </CustomPressable>
   );
 };
 
@@ -101,7 +110,8 @@ const PeriodItem = ({ period, subject, currentPeriod }: ItemProps) => {
         $color={isCurrent ? colors.highlight : colors.gray90}
         $bold={isCurrent}
       >
-        {subject[0] + subject[1]}{subject.length > 2 ? subject[3] : ''}
+        {subject[0] + subject[1]}
+        {subject.length > 2 ? subject[3] : ''}
       </Typography.Body>
     </Column>
   );

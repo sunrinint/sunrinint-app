@@ -9,6 +9,7 @@ import { SvgXml } from 'react-native-svg';
 import Button from '@/components/common/Button';
 import useOverlay from '@/hooks/useOverlay';
 import { login } from '@lib/api/auth';
+import CustomPressable from '@/components/common/CustomPressable';
 
 const LoginScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -52,18 +53,18 @@ const LoginScreen = ({ navigation }) => {
                 </Typography.Body>
               </Column>
             </Column>
-            <Button
-              level={80}
-              radius={4}
+            <CustomPressable
+              activeScale={0.96}
               onPress={() => {
                 overlay.close();
               }}
-              height={56}
             >
-              <Typography.SemiLabel $color={colors.gray10}>
-                시도해볼게요!
-              </Typography.SemiLabel>
-            </Button>
+              <Button level={80} radius={4} height={56}>
+                <Typography.SemiLabel $color={colors.gray10}>
+                  시도해볼게요!
+                </Typography.SemiLabel>
+              </Button>
+            </CustomPressable>
           </View>
         </View>
       </ModalOverlay>,
@@ -127,33 +128,29 @@ const LoginScreen = ({ navigation }) => {
             gap: 12,
           }}
         >
-          <Button
-            level={30}
-            width={186}
-            height={44}
-            radius={96}
-            onPress={openModal}
-          >
-            <Typography.Body $color={colors.gray80}>
-              로그인에 문제가 있나요?
-            </Typography.Body>
-          </Button>
-          <Button
-            fullWidth
-            height={56}
-            radius={12}
-            level={80}
+          <CustomPressable activeScale={0.96} onPress={openModal}>
+            <Button level={30} width={186} height={44} radius={96}>
+              <Typography.Body $color={colors.gray80}>
+                로그인에 문제가 있나요?
+              </Typography.Body>
+            </Button>
+          </CustomPressable>
+          <CustomPressable
+            style={{ flex: 1, width: '100%' }}
+            activeScale={0.96}
             onPress={() =>
               login()
                 .then(() => navigation.navigate('Tab'))
                 .catch((e) => console.log(e))
             }
           >
-            <GoogleLogo />
-            <Typography.SemiLabel $color={colors.gray10}>
-              학교 구글 계정으로 로그인
-            </Typography.SemiLabel>
-          </Button>
+            <Button fullWidth height={56} radius={12} level={80}>
+              <GoogleLogo />
+              <Typography.SemiLabel $color={colors.gray10}>
+                학교 구글 계정으로 로그인
+              </Typography.SemiLabel>
+            </Button>
+          </CustomPressable>
         </View>
       </View>
     </SafeAreaView>
