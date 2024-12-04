@@ -35,9 +35,7 @@ const ClubListSection = ({ department }: Props) => {
   const renderItem = useCallback(
     ({ item, index }) => (
       <>
-        <Suspense fallback={<ClubCard.Skeleton />}>
-          <ClubCard id={item.id} />
-        </Suspense>
+        <ClubCard id={item.id} />
         {index === clubList.length - 1 && <Spacer $height={72} />}
       </>
     ),

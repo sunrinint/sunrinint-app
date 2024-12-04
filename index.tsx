@@ -1,14 +1,10 @@
-/**
- * @format
- */
-
 import { AppRegistry } from 'react-native';
 import { name as appName } from './app.json';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { RecoilRoot } from 'recoil';
 import RootNavigator from './src/navigation/RootNavigator';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { dark, light } from '@/theme';
 import BootSplash from 'react-native-bootsplash';
@@ -16,8 +12,6 @@ import OverlayContext from '@/lib/overlay/OverlayContext';
 import useAppTheme from '@hooks/useAppTheme';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { GOOGLE_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from '@env';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getUser } from '@lib/api/user';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const queryClient = new QueryClient({
@@ -29,7 +23,6 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const [logincheck, setLogincheck] = useState<boolean | null>(null);
   useEffect(() => {
     GoogleSignin.configure({
       iosClientId: GOOGLE_IOS_CLIENT_ID,
@@ -38,21 +31,7 @@ const App = () => {
   }, []);
 
   const onReady = () => {
-    const checkUser = async () => {
-      const refreshToken = await AsyncStorage.getItem('refresh');
-      if (refreshToken !== null) {
-        const user = await getUser().catch(() => {
-          setLogincheck(false);
-          BootSplash.hide();
-        });
-        setLogincheck(!!user);
-        BootSplash.hide();
-      } else {
-        setLogincheck(false);
-        BootSplash.hide();
-      }
-    };
-    checkUser();
+    BootSplash.hide();
   };
 
   const { theme } = useAppTheme();
@@ -76,7 +55,7 @@ const App = () => {
                 }}
                 onReady={onReady}
               >
-                <RootNavigator logincheck={logincheck} />
+                <RootNavigator />
               </NavigationContainer>
             </OverlayContext>
           </ThemeProvider>
