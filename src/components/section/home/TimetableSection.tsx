@@ -101,7 +101,7 @@ const PeriodItem = ({ period, subject, currentPeriod }: ItemProps) => {
         $color={isCurrent ? colors.highlight : colors.gray90}
         $bold={isCurrent}
       >
-        {subject}
+        {subject[0] + subject[1]}{subject.length > 2 ? subject[3] : ''}
       </Typography.Body>
     </Column>
   );

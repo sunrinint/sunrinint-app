@@ -6,7 +6,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 import useMealWeek from '@/hooks/useMealWeek';
 import { Column, Row } from '@components/atomic';
 import { SkeletonContent } from '@components/skeleton/SkeletonContent';
-
+import MealArrowRight from '@assets/icons/meal_arrow_right.svg';
+import MealArrowLeft from '@assets/icons/meal_arrow_left.svg';
+import IconBox from '@components/atomic/IconBox';
 const MealScreen = () => {
   return (
     <LayoutWithHeader title="급식" showBack>
@@ -18,11 +20,20 @@ const MealScreen = () => {
     </LayoutWithHeader>
   );
 };
-
 const MealContent = () => {
-  const { mealWeek } = useMealWeek();
+  const [page, setPage] = useState(0);
+  const [prevPage, setPrevPage] = useState(0); // 이전 페이지 상태를 저장
+  const { mealWeek } = useMealWeek(page);
   const { colors } = useTheme();
   const [selectedDayIndex] = useState(0);
+
+  React.useEffect(() => {
+    if (mealWeek.length === 0) {
+      setPage(prevPage);
+    } else {
+      setPrevPage(page);
+    }
+  }, [mealWeek]);
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
@@ -40,10 +51,27 @@ const MealContent = () => {
   return (
     <>
       <DateContainer>
+        <IconBox
+          onPress={() => {
+            setPage(page - 1);
+          }}
+        >
+          <MealArrowLeft />
+        </IconBox>
         <Typography.Title $color={colors.gray80}>
-          {formatDate(mealWeek[0].date)} ~{' '}
-          {formatDate(mealWeek.slice(-1)[0].date)}
+          {mealWeek.length > 0
+            ? `${formatDate(mealWeek[0].date)} ~ ${formatDate(
+              mealWeek.slice(-1)[0].date
+            )}`
+            : '데이터 없음'}
         </Typography.Title>
+        <IconBox
+          onPress={() => {
+            setPage(page + 1);
+          }}
+        >
+          <MealArrowRight />
+        </IconBox>
       </DateContainer>
       <WeekContainer>
         {mealWeek.map((lunch, index) => (
@@ -77,14 +105,14 @@ const MealContent = () => {
           paddingBottom: 42,
         }}
       >
-        {mealWeek.map((lunch, index) => (
-          <MenuContainer key={index}>
+        {mealWeek.map((lunch, idx) => (
+          <MenuContainer key={idx}>
             <Typography.Label $color={colors.gray90}>
               {formatDate(lunch.date)} 점심
             </Typography.Label>
             <MenuList>
-              {lunch.meals.map((item, mealIndex) => (
-                <MenuInfo key={mealIndex}>
+              {lunch.meals.map((item, itemIdx) => (
+                <MenuInfo key={itemIdx}>
                   <Typography.Body $color={colors.gray80}>
                     {item.meal}
                   </Typography.Body>
@@ -100,6 +128,7 @@ const MealContent = () => {
     </>
   );
 };
+
 
 const Skeleton = () => {
   return (
@@ -143,6 +172,11 @@ const getDayOfWeek = (dateString: string): string => {
 };
 
 const DateContainer = styled.View`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
   padding: 4px 0px;
 `;
 

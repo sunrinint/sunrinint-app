@@ -1,6 +1,7 @@
 import Meal from '@lib/type/Meal';
 import mealClient from '../client/mealClient';
 import MealResponse from '../type/MealResponse';
+import { format } from 'date-fns';
 
 export const getMeal = async () => {
   try {
@@ -27,8 +28,27 @@ export const getMeal = async () => {
   }
 };
 
-export const getMealWeek = async () => {
-  const res = await mealClient.get<MealResponse<Meal[]>>('/meal/week');
+export const getMealWeek = async (weekOffset = 0) => {
+  const today = new Date();
+
+  const currentWeekMonday = new Date(today);
+  currentWeekMonday.setDate(today.getDate() - today.getDay() + 1);
+
+  const targetMonday = new Date(currentWeekMonday);
+  targetMonday.setDate(currentWeekMonday.getDate() + weekOffset * 7);
+
+  const targetFriday = new Date(targetMonday);
+  targetFriday.setDate(targetMonday.getDate() + 4);
+
+  const dateFrom = format(targetMonday, 'yyyy-MM-dd');
+  const dateTo = format(targetFriday, 'yyyy-MM-dd');
+  const res = await mealClient.get<MealResponse<Meal[]>>('/meal/period', {
+    params: {
+      date_from: dateFrom,
+      date_to: dateTo,
+    },
+  });
+
   if (res.data.success === true) {
     if (res.data.data) {
       const mealList = res.data.data;
