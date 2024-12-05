@@ -13,8 +13,8 @@ const ServiceInfoSection = () => {
           서비스 정보
         </Typography.SemiLabel>
       </Box>
-      <Card title={'빌드 날짜'} context={'24년 12월 4일'} />
-      <Card title={'Int 버전'} context={'v1.4'} />
+      <Card title={'빌드 날짜'} context={'24년 12월 5일'} />
+      <Card title={'Int 버전'} context={'v1.05'} />
     </InfoCard>
   );
 };
