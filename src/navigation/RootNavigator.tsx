@@ -1,8 +1,6 @@
 import * as React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import { BackHandler, Alert } from 'react-native';
-
 import BottomNavigation from './BottomNavigation';
 import LoginScreen from '@screens/LoginScreen';
 import ClassScreen from '@screens/ClassScreen';
@@ -15,9 +13,6 @@ import { useTheme } from 'styled-components/native';
 import MadebyScreen from '@screens/MadebyScreen';
 import OpenSourceLicenseScreen from '@/screens/OpenSourceLicenseScreen';
 import OpenSourceLicenseDetailScreen from '@/screens/OpenSourceLicenseDetail';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { useNavigationState } from '@react-navigation/native';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -34,103 +29,58 @@ export type RootStackParamList = {
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-const RootNavigator = () => {
+const RootNavigator = ({ login }: { login: boolean }) => {
   const { theme } = useAppTheme();
   const { colors } = useTheme();
-  const [initialRoute, setInitialRoute] =
-    useState<keyof RootStackParamList>('Login');
-  const [isLoading, setIsLoading] = useState(true);
-  const navigation = useNavigationState((state) => state);
 
-  useLayoutEffect(() => {
-    const checkAuth = async () => {
-      try {
-        setIsLoading(true);
-        const [refreshToken, accessToken] = await Promise.all([
-          AsyncStorage.getItem('refresh'),
-          AsyncStorage.getItem('access'),
-        ]);
-
-        if (refreshToken && accessToken) {
-          setInitialRoute('Tab');
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error('Auth check failed:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkAuth();
-  }, []);
-
-  useEffect(() => {
-    const backAction = () => {
-      if (navigation.index === 0) {
-        return true;
-      }
-      return false;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-
-    return () => backHandler.remove();
-  }, [navigation]);
-
-  if (!isLoading) {
-    return (
-      <>
-        <StatusBar
-          translucent
-          backgroundColor={colors.gray20}
-          barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
-        />
-        <Stack.Navigator
-          id={undefined}
-          initialRouteName={initialRoute}
-          screenOptions={{
+  return (
+    <>
+      <StatusBar
+        translucent
+        backgroundColor={colors.gray20}
+        barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
+      />
+      <Stack.Navigator
+        id={undefined}
+        initialRouteName={login ? 'Tab' : 'Login'}
+        screenOptions={{
+          headerShown: false,
+          presentation: 'card',
+          gestureEnabled: false,
+        }}
+      >
+        <Stack.Screen
+          name="Tab"
+          component={BottomNavigation}
+          options={{
             headerShown: false,
-            presentation: 'card',
             gestureEnabled: false,
           }}
-        >
-          <Stack.Screen
-            name="Tab"
-            component={BottomNavigation}
-            options={{
-              headerShown: false,
-              gestureEnabled: false,
-            }}
-          />
-          <Stack.Screen
-            name={'Login'}
-            component={LoginScreen}
-            options={{
-              headerShown: false,
-              gestureEnabled: false,
-            }}
-          />
-          <Stack.Screen name={'Class'} component={ClassScreen} />
-          <Stack.Screen name={'Meal'} component={MealScreen} />
-          <Stack.Screen name={'TimeTable'} component={TimetableScreen} />
-          <Stack.Screen name={'Notice'} component={NoticeScreen} />
-          <Stack.Screen name={'Madeby'} component={MadebyScreen} />
-          <Stack.Screen
-            name={'OpenSourceLicense'}
-            component={OpenSourceLicenseScreen}
-          />
-          <Stack.Screen
-            name={'OpenSourceLicenseDetail'}
-            component={OpenSourceLicenseDetailScreen}
-          />
-        </Stack.Navigator>
-      </>
-    );
-  }
+        />
+        <Stack.Screen
+          name={'Login'}
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+            gestureEnabled: false,
+          }}
+        />
+        <Stack.Screen name={'Class'} component={ClassScreen} />
+        <Stack.Screen name={'Meal'} component={MealScreen} />
+        <Stack.Screen name={'TimeTable'} component={TimetableScreen} />
+        <Stack.Screen name={'Notice'} component={NoticeScreen} />
+        <Stack.Screen name={'Madeby'} component={MadebyScreen} />
+        <Stack.Screen
+          name={'OpenSourceLicense'}
+          component={OpenSourceLicenseScreen}
+        />
+        <Stack.Screen
+          name={'OpenSourceLicenseDetail'}
+          component={OpenSourceLicenseDetailScreen}
+        />
+      </Stack.Navigator>
+    </>
+  );
 };
 
 export default RootNavigator;
