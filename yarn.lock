@@ -4402,13 +4402,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colord@npm:2.9.2":
-  version: 2.9.2
-  resolution: "colord@npm:2.9.2"
-  checksum: 10c0/ff2de0fa956526abfc6d08ddb5696b09659fac26dc40917e7eed006689cc5181447fad819ccef3b8e73cbe1be056074b1422a2a84831515678022cbc49cc699c
-  languageName: node
-  linkType: hard
-
 "colorette@npm:^1.0.7":
   version: 1.4.0
   resolution: "colorette@npm:1.4.0"
@@ -9325,18 +9318,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-shadow-2@npm:^7.0.8":
-  version: 7.1.1
-  resolution: "react-native-shadow-2@npm:7.1.1"
-  dependencies:
-    colord: "npm:2.9.2"
-  peerDependencies:
-    react-native: "*"
-    react-native-svg: ">=12.1.0"
-  checksum: 10c0/279dc8da38528939e8067bf2e724840ea9a5bf490a1abb27bf58b03d01f9bc20622fbffe3e937550a076609c267961bbfbd1bc26b1218074ac2d34b73fc5b651
-  languageName: node
-  linkType: hard
-
 "react-native-splash-screen@npm:^3.3.0":
   version: 3.3.0
   resolution: "react-native-splash-screen@npm:3.3.0"
@@ -10579,7 +10560,6 @@ __metadata:
     react-native-reanimated: "npm:^3.16.3"
     react-native-safe-area-context: "npm:^4.12.0"
     react-native-screens: "npm:^4.3.0"
-    react-native-shadow-2: "npm:^7.0.8"
     react-native-splash-screen: "npm:^3.3.0"
     react-native-svg: "npm:^15.8.0"
     react-native-svg-transformer: "npm:^1.3.0"

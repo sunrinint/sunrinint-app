@@ -9,6 +9,7 @@ import Animated, {
 
 interface CustomPressableProps {
   children: React.ReactNode;
+  valid?: boolean;
   onPress?: () => void;
   activeScale?: number;
   style?: StyleProp<ViewStyle>;
@@ -18,6 +19,7 @@ const CustomPressable = ({
   children,
   onPress,
   activeScale = 0.97,
+  valid = true,
   style,
 }: CustomPressableProps) => {
   const scale = useSharedValue(1);
@@ -56,6 +58,7 @@ const CustomPressable = ({
   return (
     <Pressable
       style={style}
+      disabled={!valid}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       onPress={onPress}
