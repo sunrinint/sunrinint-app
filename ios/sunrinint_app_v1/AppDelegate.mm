@@ -15,6 +15,11 @@
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
+- (void)customizeRootView:(RCTRootView *)rootView {
+  [super customizeRootView:rootView];
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // ⬅️ initialize the splash screen
+}
+
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
   return [self bundleURL];
@@ -37,7 +42,6 @@
                                            initProps:initProps];
 
   [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
-
   return rootView;
 }
 

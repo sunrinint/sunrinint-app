@@ -1591,7 +1591,7 @@ PODS:
     - React-logger (= 0.76.3)
     - React-perflogger (= 0.76.3)
     - React-utils (= 0.76.3)
-  - RNBootSplash (5.5.3):
+  - RNBootSplash (6.3.4):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2149,7 +2149,7 @@ SPEC CHECKSUMS:
   React-utils: ee370a52b08a000963af1a60c31e6c87a70620a5
   ReactCodegen: 5148a0102fc8f0a1f9b05d955da886b44447679d
   ReactCommon: b8485556b596ef2f44f59bc586113bda138fb804
-  RNBootSplash: e661cc5a267e8aeceebd810d5c2dfa92a3135180
+  RNBootSplash: 6095c143671943fe788298049c7b1ed2906cd724
   RNCAsyncStorage: 2edc69cf6db9299363a11477668b7f452f2cb4a6
   RNGestureHandler: e1dcb274c17ca0680a04d7ff357e35e37c384185
   RNGoogleSignin: b8f09e3ec56e09497e1e53b0ff66d5a45916c6b1

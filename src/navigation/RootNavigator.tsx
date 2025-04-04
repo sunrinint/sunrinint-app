@@ -1,18 +1,18 @@
-import * as React from 'react';
-
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar, View } from 'react-native';
+
 import BottomNavigation from './BottomNavigation';
 import LoginScreen from '@screens/LoginScreen';
 import ClassScreen from '@screens/ClassScreen';
 import MealScreen from '@/screens/MealScreen';
 import TimetableScreen from '@screens/TimetableScreen';
 import NoticeScreen from '@/screens/NoticeScreen';
-import { StatusBar } from 'react-native';
-import useAppTheme from '@/hooks/useAppTheme';
-import { useTheme } from 'styled-components/native';
 import MadebyScreen from '@screens/MadebyScreen';
 import OpenSourceLicenseScreen from '@/screens/OpenSourceLicenseScreen';
 import OpenSourceLicenseDetailScreen from '@/screens/OpenSourceLicenseDetail';
+import useAppTheme from '@/hooks/useAppTheme';
+import { useTheme } from 'styled-components/native';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -29,9 +29,14 @@ export type RootStackParamList = {
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-const RootNavigator = ({ login }: { login: boolean }) => {
+const RootNavigator = ({ login }: { login: boolean | null }) => {
   const { theme } = useAppTheme();
   const { colors } = useTheme();
+
+  // 아직 로그인 체크 중이면 아무것도 렌더링하지 않음 (Splash 그대로 유지)
+  if (login === null) {
+    return <View style={{ flex: 1, backgroundColor: colors.gray20 }} />;
+  }
 
   return (
     <>
@@ -41,7 +46,6 @@ const RootNavigator = ({ login }: { login: boolean }) => {
         barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
       />
       <Stack.Navigator
-        id={undefined}
         initialRouteName={login ? 'Tab' : 'Login'}
         screenOptions={{
           headerShown: false,
@@ -49,35 +53,15 @@ const RootNavigator = ({ login }: { login: boolean }) => {
           gestureEnabled: false,
         }}
       >
-        <Stack.Screen
-          name="Tab"
-          component={BottomNavigation}
-          options={{
-            headerShown: false,
-            gestureEnabled: false,
-          }}
-        />
-        <Stack.Screen
-          name={'Login'}
-          component={LoginScreen}
-          options={{
-            headerShown: false,
-            gestureEnabled: false,
-          }}
-        />
-        <Stack.Screen name={'Class'} component={ClassScreen} />
-        <Stack.Screen name={'Meal'} component={MealScreen} />
-        <Stack.Screen name={'TimeTable'} component={TimetableScreen} />
-        <Stack.Screen name={'Notice'} component={NoticeScreen} />
-        <Stack.Screen name={'Madeby'} component={MadebyScreen} />
-        <Stack.Screen
-          name={'OpenSourceLicense'}
-          component={OpenSourceLicenseScreen}
-        />
-        <Stack.Screen
-          name={'OpenSourceLicenseDetail'}
-          component={OpenSourceLicenseDetailScreen}
-        />
+        <Stack.Screen name="Tab" component={BottomNavigation} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Class" component={ClassScreen} />
+        <Stack.Screen name="Meal" component={MealScreen} />
+        <Stack.Screen name="TimeTable" component={TimetableScreen} />
+        <Stack.Screen name="Notice" component={NoticeScreen} />
+        <Stack.Screen name="Madeby" component={MadebyScreen} />
+        <Stack.Screen name="OpenSourceLicense" component={OpenSourceLicenseScreen} />
+        <Stack.Screen name="OpenSourceLicenseDetail" component={OpenSourceLicenseDetailScreen} />
       </Stack.Navigator>
     </>
   );

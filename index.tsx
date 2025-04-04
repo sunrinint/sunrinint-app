@@ -7,7 +7,7 @@ import RootNavigator from './src/navigation/RootNavigator';
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { dark, light } from '@/theme';
-import BootSplash from 'react-native-bootsplash';
+import BootSplash from "react-native-bootsplash";
 import OverlayContext from '@/lib/overlay/OverlayContext';
 import useAppTheme from '@hooks/useAppTheme';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
@@ -27,20 +27,18 @@ const queryClient = new QueryClient({
 const App = () => {
   const { theme } = useAppTheme();
 
-
+  const [loginCheck, setLoginCheck] = useState<boolean | null>(null);
   useEffect(() => {
-    console.log('🔥 theme changed to:', theme);
-  }, [theme]);
-  
-  const [loginCheck, setLoginCheck] = useState(false);
-  useEffect(() => {
+    onReady();
     GoogleSignin.configure({
       iosClientId: GOOGLE_IOS_CLIENT_ID,
       webClientId: GOOGLE_CLIENT_ID,
+      offlineAccess: true
     });
   }, []);
 
   const onReady = () => {
+    console.log('onReady')
     const checkUser = async () => {
       const refreshToken = await AsyncStorage.getItem('refresh');
       if (refreshToken !== null) {
@@ -48,7 +46,8 @@ const App = () => {
           setLoginCheck(false);
           BootSplash.hide();
         });
-        setLoginCheck(!!user);
+        console.log(!!user)
+        setLoginCheck(true);
         BootSplash.hide();
       } else {
         setLoginCheck(false);
@@ -59,6 +58,11 @@ const App = () => {
   };
 
   const palette = { colors: theme === 'light' ? light : dark };
+
+
+  useEffect(() => {
+    console.log('f ', loginCheck)
+  }, [loginCheck])
 
   return (
     <GestureHandlerRootView
