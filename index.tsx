@@ -25,6 +25,13 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
+  const { theme } = useAppTheme();
+
+
+  useEffect(() => {
+    console.log('🔥 theme changed to:', theme);
+  }, [theme]);
+  
   const [loginCheck, setLoginCheck] = useState(false);
   useEffect(() => {
     GoogleSignin.configure({
@@ -50,8 +57,6 @@ const App = () => {
     };
     checkUser();
   };
-
-  const { theme } = useAppTheme();
 
   const palette = { colors: theme === 'light' ? light : dark };
 

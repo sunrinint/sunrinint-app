@@ -19,6 +19,11 @@ const useUpdateUser = () => {
       });
       return { previousData };
     },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ['user']
+      })
+    }
   });
   return {
     updateUser: mutation.mutate,
